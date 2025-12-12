@@ -30,6 +30,12 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <!-- Spring Web 用于异常处理器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

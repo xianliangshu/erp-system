@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Exclude xingyun folder (临时注释以便查看参考代码)
+xingyun/

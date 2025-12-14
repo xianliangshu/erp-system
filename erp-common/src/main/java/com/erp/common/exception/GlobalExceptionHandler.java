@@ -17,15 +17,17 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理业务异常
+     * 返回HTTP 200,通过响应体的code字段标识错误
      */
     @ExceptionHandler(BusinessException.class)
     public Result<?> handleBusinessException(BusinessException e) {
-        log.error("业务异常: {}", e.getMessage(), e);
+        log.error("业务异常: {}", e.getMessage());
         return Result.error(e.getCode(), e.getMessage());
     }
 
     /**
      * 处理运行时异常
+     * 返回HTTP 200,通过响应体的code字段标识错误
      */
     @ExceptionHandler(RuntimeException.class)
     public Result<?> handleRuntimeException(RuntimeException e) {
@@ -35,6 +37,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理所有异常
+     * 返回HTTP 200,通过响应体的code字段标识错误
      */
     @ExceptionHandler(Exception.class)
     public Result<?> handleException(Exception e) {

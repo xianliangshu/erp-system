@@ -16,6 +16,7 @@
     <modules>
         <module>erp-common</module>
         <module>erp-system</module>
+        <module>erp-basedata</module>
         <module>erp-business</module>
         <module>erp-web</module>
     </modules>

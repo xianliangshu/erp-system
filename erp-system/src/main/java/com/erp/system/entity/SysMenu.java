@@ -117,4 +117,10 @@ public class SysMenu implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    /**
+     * 子菜单列表(非数据库字段)
+     */
+    @TableField(exist = false)
+    private java.util.List<SysMenu> children;
 }

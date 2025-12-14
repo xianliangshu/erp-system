@@ -5,6 +5,7 @@ import com.erp.system.entity.SysMenu;
 import com.erp.system.param.SysMenuQueryParam;
 import com.erp.system.service.ISysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -26,14 +27,34 @@ public class SysMenuController {
     private final ISysMenuService menuService;
 
     /**
-     * 查询菜单列表(树形结构)
+     * 查询菜单列表
      */
     @Operation(summary = "查询菜单列表", description = "根据条件查询菜单列表")
     @GetMapping("/list")
     public Result<List<SysMenu>> list(SysMenuQueryParam param) {
-        // 调用Service业务方法
         List<SysMenu> list = menuService.listQuery(param);
         return Result.success(list);
+    }
+
+    /**
+     * 获取菜单树
+     */
+    @Operation(summary = "获取菜单树", description = "获取菜单树形结构(顶级菜单列表)")
+    @GetMapping("/tree")
+    public Result<List<SysMenu>> getTree() {
+        List<SysMenu> tree = menuService.buildTree();
+        return Result.success(tree);
+    }
+
+    /**
+     * 获取当前用户菜单
+     */
+    @Operation(summary = "获取当前用户菜单", description = "获取当前登录用户的菜单列表")
+    @GetMapping("/user-menus")
+    public Result<List<SysMenu>> getUserMenus(
+            @Parameter(description = "用户ID", required = true) @RequestParam Long userId) {
+        List<SysMenu> menus = menuService.getUserMenus(userId);
+        return Result.success(menus);
     }
 
     /**

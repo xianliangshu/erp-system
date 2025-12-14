@@ -11,9 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2025-12-12
  */
 @SpringBootApplication
-@MapperScan("com.erp.system.mapper")
+@MapperScan({ "com.erp.system.mapper", "com.erp.basedata.mapper" })
 public class ErpApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ErpApplication.class, args);
     }

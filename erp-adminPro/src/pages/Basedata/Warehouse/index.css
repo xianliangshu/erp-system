@@ -1,0 +1,12 @@
+.warehouse-list-container {
+    padding: 24px;
+    background: #fff;
+    min-height: calc(100vh - 64px);
+}
+
+.search-bar {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 4px;
+}

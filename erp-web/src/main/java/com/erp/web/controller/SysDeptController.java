@@ -5,6 +5,7 @@ import com.erp.system.entity.SysDept;
 import com.erp.system.param.SysDeptQueryParam;
 import com.erp.system.service.ISysDeptService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,16 @@ public class SysDeptController {
         // 调用Service业务方法
         List<SysDept> list = deptService.listQuery(param);
         return Result.success(list);
+    }
+
+    /**
+     * 获取部门树
+     */
+    @Operation(summary = "获取部门树", description = "获取部门树形结构(顶级部门列表)")
+    @GetMapping("/tree")
+    public Result<List<SysDept>> getTree() {
+        List<SysDept> tree = deptService.buildTree();
+        return Result.success(tree);
     }
 
     /**
@@ -74,5 +85,16 @@ public class SysDeptController {
     public Result<Void> delete(@PathVariable Long id) {
         deptService.removeById(id);
         return Result.success();
+    }
+
+    /**
+     * 统计部门用户数量
+     */
+    @Operation(summary = "统计部门用户数量", description = "统计指定部门下的用户数量")
+    @GetMapping("/{id}/user-count")
+    public Result<Long> countDeptUsers(
+            @Parameter(description = "部门ID", required = true) @PathVariable Long id) {
+        long count = deptService.countDeptUsers(id);
+        return Result.success(count);
     }
 }

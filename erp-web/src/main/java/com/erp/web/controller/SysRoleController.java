@@ -3,12 +3,16 @@ package com.erp.web.controller;
 import com.erp.common.core.page.PageResult;
 import com.erp.common.core.result.Result;
 import com.erp.system.entity.SysRole;
+import com.erp.system.param.AssignMenusParam;
 import com.erp.system.param.SysRolePageParam;
 import com.erp.system.service.ISysRoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 角色管理Controller
@@ -73,5 +77,49 @@ public class SysRoleController {
     public Result<Void> delete(@PathVariable Long id) {
         roleService.removeById(id);
         return Result.success();
+    }
+
+    /**
+     * 分配菜单权限
+     */
+    @Operation(summary = "分配菜单权限", description = "为角色分配菜单权限")
+    @PostMapping("/{id}/menus")
+    public Result<Void> assignMenus(
+            @Parameter(description = "角色ID", required = true) @PathVariable Long id,
+            @RequestBody AssignMenusParam param) {
+        roleService.assignMenus(id, param.getMenuIds());
+        return Result.success();
+    }
+
+    /**
+     * 获取角色菜单
+     */
+    @Operation(summary = "获取角色菜单", description = "查询角色拥有的菜单ID列表")
+    @GetMapping("/{id}/menus")
+    public Result<List<Long>> getRoleMenus(
+            @Parameter(description = "角色ID", required = true) @PathVariable Long id) {
+        List<Long> menuIds = roleService.getRoleMenuIds(id);
+        return Result.success(menuIds);
+    }
+
+    /**
+     * 获取所有角色
+     */
+    @Operation(summary = "获取所有角色", description = "获取所有启用的角色(用于下拉选择)")
+    @GetMapping("/all")
+    public Result<List<SysRole>> getAllRoles() {
+        List<SysRole> roles = roleService.getAllRoles();
+        return Result.success(roles);
+    }
+
+    /**
+     * 统计角色用户数量
+     */
+    @Operation(summary = "统计角色用户数量", description = "统计指定角色下的用户数量")
+    @GetMapping("/{id}/user-count")
+    public Result<Long> countRoleUsers(
+            @Parameter(description = "角色ID", required = true) @PathVariable Long id) {
+        long count = roleService.countRoleUsers(id);
+        return Result.success(count);
     }
 }

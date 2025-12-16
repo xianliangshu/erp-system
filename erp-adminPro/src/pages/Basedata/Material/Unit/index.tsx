@@ -29,11 +29,9 @@ const UnitManagement: React.FC = () => {
                 name: searchName || undefined,
                 status: searchStatus,
             };
-            const res = await getUnitPage(params);
-            if (res.code === 200) {
-                setDataSource(res.data.records);
-                setTotal(res.data.total);
-            }
+            const data = await getUnitPage(params);
+            setDataSource(data.records);
+            setTotal(data.total);
         } catch (error) {
             message.error('加载数据失败');
         } finally {
@@ -82,11 +80,9 @@ const UnitManagement: React.FC = () => {
             content: '确定要删除这个单位吗?',
             onOk: async () => {
                 try {
-                    const res = await deleteUnit(id);
-                    if (res.code === 200) {
-                        message.success('删除成功');
-                        loadData();
-                    }
+                    await deleteUnit(id);
+                    message.success('删除成功');
+                    loadData();
                 } catch (error) {
                     message.error('删除失败');
                 }
@@ -99,19 +95,15 @@ const UnitManagement: React.FC = () => {
         try {
             const values = await form.validateFields();
             if (editingId) {
-                const res = await updateUnit(editingId, values);
-                if (res.code === 200) {
-                    message.success('更新成功');
-                    setModalVisible(false);
-                    loadData();
-                }
+                await updateUnit(editingId, values);
+                message.success('更新成功');
+                setModalVisible(false);
+                loadData();
             } else {
-                const res = await saveUnit(values);
-                if (res.code === 200) {
-                    message.success('新增成功');
-                    setModalVisible(false);
-                    loadData();
-                }
+                await saveUnit(values);
+                message.success('新增成功');
+                setModalVisible(false);
+                loadData();
             }
         } catch (error) {
             console.error(error);

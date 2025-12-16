@@ -92,7 +92,7 @@ public class XxxServiceImpl extends ServiceImpl<XxxMapper, XxxEntity>
 ```java
 @Tag(name = "模块名")
 @RestController
-@RequestMapping("/api/path")
+@RequestMapping("/path")
 @RequiredArgsConstructor
 public class XxxController {
     

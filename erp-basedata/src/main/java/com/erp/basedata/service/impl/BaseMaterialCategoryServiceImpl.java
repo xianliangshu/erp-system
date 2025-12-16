@@ -3,14 +3,15 @@ package com.erp.basedata.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.erp.basedata.entity.BaseMaterial;
 import com.erp.basedata.entity.BaseMaterialCategory;
 import com.erp.basedata.mapper.BaseMaterialCategoryMapper;
+import com.erp.basedata.mapper.BaseMaterialMapper;
 import com.erp.basedata.service.IBaseMaterialCategoryService;
 import com.erp.common.exception.BusinessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,12 @@ import java.util.stream.Collectors;
 @Service
 public class BaseMaterialCategoryServiceImpl extends ServiceImpl<BaseMaterialCategoryMapper, BaseMaterialCategory>
         implements IBaseMaterialCategoryService {
+
+    private final BaseMaterialMapper materialMapper;
+
+    public BaseMaterialCategoryServiceImpl(BaseMaterialMapper materialMapper) {
+        this.materialMapper = materialMapper;
+    }
 
     @Override
     public List<BaseMaterialCategory> getCategoryTree() {
@@ -107,7 +114,13 @@ public class BaseMaterialCategoryServiceImpl extends ServiceImpl<BaseMaterialCat
             throw new BusinessException("该分类下有子分类,不能删除");
         }
 
-        // 3. TODO: 检查是否有物料使用该分类
+        // 3. 检查是否有物料使用该分类
+        LambdaQueryWrapper<BaseMaterial> materialWrapper = new LambdaQueryWrapper<>();
+        materialWrapper.eq(BaseMaterial::getCategoryId, id);
+        long materialCount = materialMapper.selectCount(materialWrapper);
+        if (materialCount > 0) {
+            throw new BusinessException("该分类下有物料在使用,不能删除");
+        }
 
         // 4. 删除分类(逻辑删除)
         return super.removeById(id);

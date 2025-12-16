@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2025-12-14
  */
 @RestController
-@RequestMapping("/api/basedata/unit")
+@RequestMapping("/basedata/unit")
 @RequiredArgsConstructor
 public class BaseUnitController {
 

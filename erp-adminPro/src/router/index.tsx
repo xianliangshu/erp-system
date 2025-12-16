@@ -10,6 +10,7 @@ import WarehouseManagement from '@/pages/Basedata/Warehouse'
 import MaterialCategoryManagement from '@/pages/Basedata/Material/Category'
 import UnitManagement from '@/pages/Basedata/Material/Unit'
 import MaterialManagement from '@/pages/Basedata/Material/Info'
+import SupplierManagement from '@/pages/Basedata/Supplier'
 
 // 路由守卫组件
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: 'basedata/material/info',
                 element: <MaterialManagement />
+            },
+            {
+                path: 'basedata/supplier',
+                element: <SupplierManagement />
             }
         ]
     },

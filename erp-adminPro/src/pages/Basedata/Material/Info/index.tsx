@@ -32,11 +32,9 @@ const MaterialManagement: React.FC = () => {
     // 加载分类树
     const loadCategoryTree = async () => {
         try {
-            const res = await getCategoryTree();
-            if (res.code === 200) {
-                const tree = convertToTreeSelect(res.data);
-                setCategoryTree(tree);
-            }
+            const data = await getCategoryTree();
+            const tree = convertToTreeSelect(data);
+            setCategoryTree(tree);
         } catch (error) {
             console.error('加载分类树失败', error);
         }
@@ -45,10 +43,8 @@ const MaterialManagement: React.FC = () => {
     // 加载单位列表
     const loadUnitList = async () => {
         try {
-            const res = await getUnitList();
-            if (res.code === 200) {
-                setUnitList(res.data);
-            }
+            const data = await getUnitList();
+            setUnitList(data);
         } catch (error) {
             console.error('加载单位列表失败', error);
         }
@@ -80,11 +76,9 @@ const MaterialManagement: React.FC = () => {
                 categoryId: searchCategoryId,
                 status: searchStatus,
             };
-            const res = await getMaterialPage(params);
-            if (res.code === 200) {
-                setDataSource(res.data.records);
-                setTotal(res.data.total);
-            }
+            const data = await getMaterialPage(params);
+            setDataSource(data.records);
+            setTotal(data.total);
         } catch (error) {
             message.error('加载数据失败');
         } finally {
@@ -135,11 +129,9 @@ const MaterialManagement: React.FC = () => {
             content: '确定要删除这个物料吗?',
             onOk: async () => {
                 try {
-                    const res = await deleteMaterial(id);
-                    if (res.code === 200) {
-                        message.success('删除成功');
-                        loadData();
-                    }
+                    await deleteMaterial(id);
+                    message.success('删除成功');
+                    loadData();
                 } catch (error: any) {
                     message.error(error.message || '删除失败');
                 }
@@ -152,19 +144,15 @@ const MaterialManagement: React.FC = () => {
         try {
             const values = await form.validateFields();
             if (editingId) {
-                const res = await updateMaterial(editingId, values);
-                if (res.code === 200) {
-                    message.success('更新成功');
-                    setModalVisible(false);
-                    loadData();
-                }
+                await updateMaterial(editingId, values);
+                message.success('更新成功');
+                setModalVisible(false);
+                loadData();
             } else {
-                const res = await saveMaterial(values);
-                if (res.code === 200) {
-                    message.success('新增成功');
-                    setModalVisible(false);
-                    loadData();
-                }
+                await saveMaterial(values);
+                message.success('新增成功');
+                setModalVisible(false);
+                loadData();
             }
         } catch (error: any) {
             message.error(error.message || '操作失败');
@@ -384,19 +372,19 @@ const MaterialManagement: React.FC = () => {
                         </Select>
                     </Form.Item>
                     <Form.Item label="采购价格" name="purchasePrice" initialValue={0}>
-                        <InputNumber min={0} precision={2} style={{ width: '100%' }} addonAfter="元" />
+                        <InputNumber min={0} precision={2} style={{ width: '100%' }} placeholder="请输入采购价格" />
                     </Form.Item>
                     <Form.Item label="销售价格" name="salePrice" initialValue={0}>
-                        <InputNumber min={0} precision={2} style={{ width: '100%' }} addonAfter="元" />
+                        <InputNumber min={0} precision={2} style={{ width: '100%' }} placeholder="请输入销售价格" />
                     </Form.Item>
                     <Form.Item label="零售价格" name="retailPrice" initialValue={0}>
-                        <InputNumber min={0} precision={2} style={{ width: '100%' }} addonAfter="元" />
+                        <InputNumber min={0} precision={2} style={{ width: '100%' }} placeholder="请输入零售价格" />
                     </Form.Item>
                     <Form.Item label="最低库存" name="minStock" initialValue={0}>
-                        <InputNumber min={0} precision={2} style={{ width: '100%' }} />
+                        <InputNumber min={0} precision={2} style={{ width: '100%' }} placeholder="请输入最低库存" />
                     </Form.Item>
                     <Form.Item label="最高库存" name="maxStock" initialValue={0}>
-                        <InputNumber min={0} precision={2} style={{ width: '100%' }} />
+                        <InputNumber min={0} precision={2} style={{ width: '100%' }} placeholder="请输入最高库存" />
                     </Form.Item>
                     <Form.Item label="状态" name="status" initialValue={1}>
                         <Select>

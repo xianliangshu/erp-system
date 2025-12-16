@@ -33,7 +33,7 @@ request.interceptors.response.use(
 
         // 如果返回的状态码为200,说明接口请求成功
         if (data.code === 200) {
-            return data.data
+            return data.data as any
         }
 
         // 其他情况都当作错误处理

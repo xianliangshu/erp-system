@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.erp.basedata.dto.UnitPageParam;
+import com.erp.basedata.entity.BaseMaterial;
 import com.erp.basedata.entity.BaseUnit;
+import com.erp.basedata.mapper.BaseMaterialMapper;
 import com.erp.basedata.mapper.BaseUnitMapper;
 import com.erp.basedata.service.IBaseUnitService;
 import com.erp.common.exception.BusinessException;
@@ -23,6 +25,12 @@ import java.util.List;
 @Service
 public class BaseUnitServiceImpl extends ServiceImpl<BaseUnitMapper, BaseUnit>
         implements IBaseUnitService {
+
+    private final BaseMaterialMapper materialMapper;
+
+    public BaseUnitServiceImpl(BaseMaterialMapper materialMapper) {
+        this.materialMapper = materialMapper;
+    }
 
     @Override
     public Page<BaseUnit> getUnitPage(UnitPageParam param) {
@@ -109,7 +117,13 @@ public class BaseUnitServiceImpl extends ServiceImpl<BaseUnitMapper, BaseUnit>
             throw new BusinessException("单位不存在");
         }
 
-        // 2. TODO: 检查是否有物料使用该单位
+        // 2. 检查是否有物料使用该单位
+        LambdaQueryWrapper<BaseMaterial> materialWrapper = new LambdaQueryWrapper<>();
+        materialWrapper.eq(BaseMaterial::getUnitId, id);
+        long materialCount = materialMapper.selectCount(materialWrapper);
+        if (materialCount > 0) {
+            throw new BusinessException("该单位下有物料在使用,不能删除");
+        }
 
         // 3. 删除单位(逻辑删除)
         return super.removeById(id);

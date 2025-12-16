@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2025-12-14
  */
 @RestController
-@RequestMapping("/api/basedata/material-category")
+@RequestMapping("/basedata/material-category")
 @RequiredArgsConstructor
 public class BaseMaterialCategoryController {
 

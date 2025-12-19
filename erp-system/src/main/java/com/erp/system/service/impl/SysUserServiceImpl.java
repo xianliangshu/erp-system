@@ -120,8 +120,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 return super.updateById(user);
         }
 
+        @Override
         @Transactional(rollbackFor = Exception.class)
-        public boolean removeById(Long id) {
+        public boolean removeById(java.io.Serializable id) {
                 // 1. 检查用户是否存在
                 SysUser user = this.getById(id);
                 if (user == null) {

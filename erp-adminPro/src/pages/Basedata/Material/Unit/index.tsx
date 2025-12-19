@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, App } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { getUnitPage, saveUnit, updateUnit, deleteUnit } from '@/api/material/unit';
 
 const { Search } = Input;
 
 const UnitManagement: React.FC = () => {
+    const { modal } = App.useApp();
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState([]);
     const [total, setTotal] = useState(0);
@@ -75,9 +76,12 @@ const UnitManagement: React.FC = () => {
 
     // 删除
     const handleDelete = (id: number) => {
-        Modal.confirm({
+        modal.confirm({
             title: '确认删除',
+            icon: <ExclamationCircleOutlined />,
             content: '确定要删除这个单位吗?',
+            okText: '确定',
+            cancelText: '取消',
             onOk: async () => {
                 try {
                     await deleteUnit(id);

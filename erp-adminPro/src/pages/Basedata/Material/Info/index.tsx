@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, TreeSelect } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, TreeSelect, App } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { getMaterialPage, saveMaterial, updateMaterial, deleteMaterial } from '@/api/material/material';
 import { getCategoryTree } from '@/api/material/category';
 import { getUnitList } from '@/api/material/unit';
@@ -8,6 +8,7 @@ import { getUnitList } from '@/api/material/unit';
 const { Search } = Input;
 
 const MaterialManagement: React.FC = () => {
+    const { modal } = App.useApp();
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState([]);
     const [total, setTotal] = useState(0);
@@ -124,9 +125,12 @@ const MaterialManagement: React.FC = () => {
 
     // 删除
     const handleDelete = (id: number) => {
-        Modal.confirm({
+        modal.confirm({
             title: '确认删除',
+            icon: <ExclamationCircleOutlined />,
             content: '确定要删除这个物料吗?',
+            okText: '确定',
+            cancelText: '取消',
             onOk: async () => {
                 try {
                     await deleteMaterial(id);

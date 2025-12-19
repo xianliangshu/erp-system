@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, Row, Col } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, Row, Col, App } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { getSupplierPage, saveSupplier, updateSupplier, deleteSupplier } from '@/api/basedata/supplier';
 
 const { Search } = Input;
 const { TextArea } = Input;
 
 const SupplierManagement: React.FC = () => {
+    const { modal } = App.useApp();
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState([]);
     const [total, setTotal] = useState(0);
@@ -84,9 +85,12 @@ const SupplierManagement: React.FC = () => {
 
     // 删除
     const handleDelete = (id: number) => {
-        Modal.confirm({
+        modal.confirm({
             title: '确认删除',
+            icon: <ExclamationCircleOutlined />,
             content: '确定要删除这个供应商吗?',
+            okText: '确定',
+            cancelText: '取消',
             onOk: async () => {
                 try {
                     await deleteSupplier(id);

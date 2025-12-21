@@ -80,3 +80,10 @@ export const setDefaultWarehouse = (id: number) => {
 export const getAllWarehouses = () => {
     return request.get<Warehouse[]>('/basedata/warehouse/all')
 }
+
+/**
+ * 获取所有启用的仓库列表 (别名，用于兼容)
+ */
+export const getWarehouseList = () => {
+    return request.get<Warehouse[]>('/basedata/warehouse/list')
+}

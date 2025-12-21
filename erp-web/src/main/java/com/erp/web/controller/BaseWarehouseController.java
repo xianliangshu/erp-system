@@ -99,4 +99,13 @@ public class BaseWarehouseController {
         List<BaseWarehouse> list = warehouseService.getAllEnabledWarehouses();
         return Result.success(list);
     }
+
+    /**
+     * 获取所有启用的仓库列表 (别名)
+     */
+    @Operation(summary = "获取所有启用仓库列表", description = "查询所有状态为启用的仓库列表")
+    @GetMapping("/list")
+    public Result<List<BaseWarehouse>> getList() {
+        return getAllEnabled();
+    }
 }

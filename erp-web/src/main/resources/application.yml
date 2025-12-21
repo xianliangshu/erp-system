@@ -34,7 +34,7 @@ mybatis-plus:
   # Mapper XML文件位置
   mapper-locations: classpath*:/mapper/**/*.xml
   # 实体类包路径
-  type-aliases-package: com.erp.system.entity,com.erp.basedata.entity
+  type-aliases-package: com.erp.*.entity
   configuration:
     # 开启驼峰命名转换
     map-underscore-to-camel-case: true

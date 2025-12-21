@@ -11,6 +11,13 @@ import MaterialCategoryManagement from '@/pages/Basedata/Material/Category'
 import UnitManagement from '@/pages/Basedata/Material/Unit'
 import MaterialManagement from '@/pages/Basedata/Material/Info'
 import SupplierManagement from '@/pages/Basedata/Supplier'
+import CustomerManagement from '@/pages/Basedata/Customer'
+import BrandManagement from '@/pages/Basedata/Brand'
+import InventoryQuery from '@/pages/Business/Stock/Query'
+import PurchaseOrderList from '@/pages/Business/Purchase/Order/List'
+import PurchaseOrderForm from '@/pages/Business/Purchase/Order/Form'
+import PurchaseReceiptList from '@/pages/Business/Purchase/Receipt/List'
+import PurchaseReceiptForm from '@/pages/Business/Purchase/Receipt/Form'
 
 // 路由守卫组件
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -82,6 +89,42 @@ const router = createBrowserRouter([
             {
                 path: 'basedata/supplier',
                 element: <SupplierManagement />
+            },
+            {
+                path: 'basedata/customer',
+                element: <CustomerManagement />
+            },
+            {
+                path: 'basedata/brand',
+                element: <BrandManagement />
+            },
+            {
+                path: 'business/stock/query',
+                element: <InventoryQuery />
+            },
+            {
+                path: 'business/purchase/order',
+                element: <PurchaseOrderList />
+            },
+            {
+                path: 'business/purchase/order/add',
+                element: <PurchaseOrderForm />
+            },
+            {
+                path: 'business/purchase/order/edit/:id',
+                element: <PurchaseOrderForm />
+            },
+            {
+                path: 'business/purchase/receipt',
+                element: <PurchaseReceiptList />
+            },
+            {
+                path: 'business/purchase/receipt/add',
+                element: <PurchaseReceiptForm />
+            },
+            {
+                path: 'business/purchase/receipt/edit/:id',
+                element: <PurchaseReceiptForm />
             }
         ]
     },

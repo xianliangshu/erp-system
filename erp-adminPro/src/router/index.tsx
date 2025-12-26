@@ -16,8 +16,25 @@ import BrandManagement from '@/pages/Basedata/Brand'
 import InventoryQuery from '@/pages/Business/Stock/Query'
 import PurchaseOrderList from '@/pages/Business/Purchase/Order/List'
 import PurchaseOrderForm from '@/pages/Business/Purchase/Order/Form'
+import PurchaseOrderDetail from '@/pages/Business/Purchase/Order/Detail'
 import PurchaseReceiptList from '@/pages/Business/Purchase/Receipt/List'
 import PurchaseReceiptForm from '@/pages/Business/Purchase/Receipt/Form'
+import PurchaseReceiptDetail from '@/pages/Business/Purchase/Receipt/Detail'
+import PurchaseReturnList from '@/pages/Business/Purchase/Return/List'
+import PurchaseReturnForm from '@/pages/Business/Purchase/Return/Form'
+import PurchaseReturnDetail from '@/pages/Business/Purchase/Return/Detail'
+import SaleOrderList from '@/pages/Business/Sale/Order/List'
+import SaleOrderForm from '@/pages/Business/Sale/Order/Form'
+import SaleOrderDetail from '@/pages/Business/Sale/Order/Detail'
+import SaleDeliveryList from '@/pages/Business/Sale/Delivery/List'
+import SaleDeliveryForm from '@/pages/Business/Sale/Delivery/Form'
+import SaleDeliveryDetail from '@/pages/Business/Sale/Delivery/Detail'
+import SaleReturnList from '@/pages/Business/Sale/Return/List'
+import SaleReturnForm from '@/pages/Business/Sale/Return/Form'
+import SaleReturnDetail from '@/pages/Business/Sale/Return/Detail'
+import StockCheckList from '@/pages/Business/Stock/Check/List'
+import StockCheckForm from '@/pages/Business/Stock/Check/Form'
+import StockCheckDetail from '@/pages/Business/Stock/Check/Detail'
 
 // 路由守卫组件
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -115,6 +132,10 @@ const router = createBrowserRouter([
                 element: <PurchaseOrderForm />
             },
             {
+                path: 'business/purchase/order/detail/:id',
+                element: <PurchaseOrderDetail />
+            },
+            {
                 path: 'business/purchase/receipt',
                 element: <PurchaseReceiptList />
             },
@@ -125,6 +146,90 @@ const router = createBrowserRouter([
             {
                 path: 'business/purchase/receipt/edit/:id',
                 element: <PurchaseReceiptForm />
+            },
+            {
+                path: 'business/purchase/receipt/detail/:id',
+                element: <PurchaseReceiptDetail />
+            },
+            {
+                path: 'business/purchase/return',
+                element: <PurchaseReturnList />
+            },
+            {
+                path: 'business/purchase/return/add',
+                element: <PurchaseReturnForm />
+            },
+            {
+                path: 'business/purchase/return/edit/:id',
+                element: <PurchaseReturnForm />
+            },
+            {
+                path: 'business/purchase/return/detail/:id',
+                element: <PurchaseReturnDetail />
+            },
+            {
+                path: 'business/sale/order',
+                element: <SaleOrderList />
+            },
+            {
+                path: 'business/sale/order/add',
+                element: <SaleOrderForm />
+            },
+            {
+                path: 'business/sale/order/edit/:id',
+                element: <SaleOrderForm />
+            },
+            {
+                path: 'business/sale/order/detail/:id',
+                element: <SaleOrderDetail />
+            },
+            {
+                path: 'business/sale/delivery',
+                element: <SaleDeliveryList />
+            },
+            {
+                path: 'business/sale/delivery/add',
+                element: <SaleDeliveryForm />
+            },
+            {
+                path: 'business/sale/delivery/edit/:id',
+                element: <SaleDeliveryForm />
+            },
+            {
+                path: 'business/sale/delivery/detail/:id',
+                element: <SaleDeliveryDetail />
+            },
+            {
+                path: 'business/sale/return',
+                element: <SaleReturnList />
+            },
+            {
+                path: 'business/sale/return/add',
+                element: <SaleReturnForm />
+            },
+            {
+                path: 'business/sale/return/edit/:id',
+                element: <SaleReturnForm />
+            },
+            {
+                path: 'business/sale/return/detail/:id',
+                element: <SaleReturnDetail />
+            },
+            {
+                path: 'business/stock/check',
+                element: <StockCheckList />
+            },
+            {
+                path: 'business/stock/check/add',
+                element: <StockCheckForm />
+            },
+            {
+                path: 'business/stock/check/edit/:id',
+                element: <StockCheckForm />
+            },
+            {
+                path: 'business/stock/check/detail/:id',
+                element: <StockCheckDetail />
             }
         ]
     },

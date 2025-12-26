@@ -7,11 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 采购订单状态
+ * 销售订单状态
  */
 @Getter
 @AllArgsConstructor
-public enum PurchaseOrderStatus implements IEnum<Integer> {
+public enum SaleOrderStatus implements IEnum<Integer> {
 
     PENDING(0, "待审核"),
     APPROVED(1, "已审核"),

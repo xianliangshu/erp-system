@@ -1,12 +1,13 @@
 package com.erp.web.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.erp.business.entity.ProductStock;
 import com.erp.business.service.IProductStockService;
+import com.erp.business.vo.ProductStockVO;
 import com.erp.common.core.result.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,13 +21,14 @@ public class StockController {
     private final IProductStockService productStockService;
 
     /**
-     * 分页查询库存
+     * 分页查询库存（包含关联信息）
      */
     @GetMapping("/page")
-    public Result<Page<ProductStock>> page(Long current, Long size, Long scId, String productName) {
-        // 这里暂时简单实现，后续可以增加更复杂的关联查询（如商品名称、仓库名称等）
-        Page<ProductStock> page = new Page<>(current != null ? current : 1, size != null ? size : 10);
-        // TODO: 实现关联查询逻辑，目前仅返回基础数据
-        return Result.success(productStockService.page(page));
+    public Result<Page<ProductStockVO>> page(
+            @RequestParam(defaultValue = "1") Long current,
+            @RequestParam(defaultValue = "10") Long size,
+            @RequestParam(required = false) Long scId,
+            @RequestParam(required = false) String productName) {
+        return Result.success(productStockService.getStockPage(current, size, scId, productName));
     }
 }

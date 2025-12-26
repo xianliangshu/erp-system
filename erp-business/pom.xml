@@ -23,6 +23,11 @@
             <artifactId>erp-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.erp</groupId>
+            <artifactId>erp-basedata</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- MyBatis-Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>

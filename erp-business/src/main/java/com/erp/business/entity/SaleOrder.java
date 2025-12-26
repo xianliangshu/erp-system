@@ -1,0 +1,112 @@
+package com.erp.business.entity;
+
+import com.baomidou.mybatisplus.annotation.*;
+import com.erp.business.enums.SaleOrderStatus;
+import lombok.Data;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+/**
+ * 销售订单
+ */
+@Data
+@TableName("sale_order")
+public class SaleOrder implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    /**
+     * 订单编号
+     */
+    private String code;
+
+    /**
+     * 仓库ID
+     */
+    private Long scId;
+
+    /**
+     * 客户ID
+     */
+    private Long customerId;
+
+    /**
+     * 销售员ID
+     */
+    private Long salerId;
+
+    /**
+     * 预计发货日期
+     */
+    private LocalDate expectDeliveryDate;
+
+    /**
+     * 销售数量
+     */
+    private BigDecimal totalNum;
+
+    /**
+     * 销售金额
+     */
+    private BigDecimal totalAmount;
+
+    /**
+     * 状态
+     */
+    private SaleOrderStatus status;
+
+    /**
+     * 备注
+     */
+    private String description;
+
+    /**
+     * 审核人
+     */
+    private String approveBy;
+
+    /**
+     * 审核时间
+     */
+    private LocalDateTime approveTime;
+
+    /**
+     * 拒绝原因
+     */
+    private String refuseReason;
+
+    /**
+     * 创建者
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    /**
+     * 更新者
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String updateBy;
+
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    /**
+     * 逻辑删除
+     */
+    @TableLogic
+    private Integer deleted;
+}

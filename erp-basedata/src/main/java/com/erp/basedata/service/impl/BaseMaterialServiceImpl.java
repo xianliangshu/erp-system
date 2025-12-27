@@ -6,13 +6,21 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.erp.basedata.dto.MaterialPageParam;
 import com.erp.basedata.entity.BaseMaterial;
+import com.erp.basedata.entity.BaseMaterialCategory;
+import com.erp.basedata.entity.BaseUnit;
 import com.erp.basedata.mapper.BaseMaterialMapper;
+import com.erp.basedata.mapper.BaseMaterialCategoryMapper;
+import com.erp.basedata.mapper.BaseUnitMapper;
 import com.erp.basedata.service.IBaseMaterialService;
 import com.erp.common.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 物料信息Service实现类
@@ -21,8 +29,12 @@ import java.util.List;
  * @since 2025-12-14
  */
 @Service
+@RequiredArgsConstructor
 public class BaseMaterialServiceImpl extends ServiceImpl<BaseMaterialMapper, BaseMaterial>
         implements IBaseMaterialService {
+
+    private final BaseMaterialCategoryMapper categoryMapper;
+    private final BaseUnitMapper unitMapper;
 
     @Override
     public Page<BaseMaterial> getMaterialPage(MaterialPageParam param) {
@@ -35,7 +47,40 @@ public class BaseMaterialServiceImpl extends ServiceImpl<BaseMaterialMapper, Bas
                 .eq(param.getStatus() != null, BaseMaterial::getStatus, param.getStatus())
                 .orderByDesc(BaseMaterial::getCreateTime);
 
-        return this.page(page, wrapper);
+        Page<BaseMaterial> result = this.page(page, wrapper);
+
+        // 填充分类名称和单位名称
+        if (result.getRecords() != null && !result.getRecords().isEmpty()) {
+            // 收集所有分类ID和单位ID
+            Set<Long> categoryIds = result.getRecords().stream()
+                    .map(BaseMaterial::getCategoryId)
+                    .filter(id -> id != null)
+                    .collect(Collectors.toSet());
+            Set<Long> unitIds = result.getRecords().stream()
+                    .map(BaseMaterial::getUnitId)
+                    .filter(id -> id != null)
+                    .collect(Collectors.toSet());
+
+            // 批量查询分类和单位
+            Map<Long, String> categoryMap = categoryIds.isEmpty() ? Map.of()
+                    : categoryMapper.selectBatchIds(categoryIds).stream()
+                            .collect(Collectors.toMap(BaseMaterialCategory::getId, BaseMaterialCategory::getName));
+            Map<Long, String> unitMap = unitIds.isEmpty() ? Map.of()
+                    : unitMapper.selectBatchIds(unitIds).stream()
+                            .collect(Collectors.toMap(BaseUnit::getId, BaseUnit::getName));
+
+            // 填充名称
+            for (BaseMaterial material : result.getRecords()) {
+                if (material.getCategoryId() != null) {
+                    material.setCategoryName(categoryMap.get(material.getCategoryId()));
+                }
+                if (material.getUnitId() != null) {
+                    material.setUnitName(unitMap.get(material.getUnitId()));
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override

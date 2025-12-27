@@ -35,6 +35,9 @@ import SaleReturnDetail from '@/pages/Business/Sale/Return/Detail'
 import StockCheckList from '@/pages/Business/Stock/Check/List'
 import StockCheckForm from '@/pages/Business/Stock/Check/Form'
 import StockCheckDetail from '@/pages/Business/Stock/Check/Detail'
+import StockTransferList from '@/pages/Business/Stock/Transfer/List'
+import StockTransferForm from '@/pages/Business/Stock/Transfer/Form'
+import StockTransferDetail from '@/pages/Business/Stock/Transfer/Detail'
 
 // 路由守卫组件
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -230,6 +233,22 @@ const router = createBrowserRouter([
             {
                 path: 'business/stock/check/detail/:id',
                 element: <StockCheckDetail />
+            },
+            {
+                path: 'business/stock/transfer',
+                element: <StockTransferList />
+            },
+            {
+                path: 'business/stock/transfer/add',
+                element: <StockTransferForm />
+            },
+            {
+                path: 'business/stock/transfer/edit/:id',
+                element: <StockTransferForm />
+            },
+            {
+                path: 'business/stock/transfer/detail/:id',
+                element: <StockTransferDetail />
             }
         ]
     },

@@ -40,12 +40,13 @@ const AdjustSheetList: React.FC = () => {
 
     const loadSelectOptions = async () => {
         try {
-            const [whRes, reasonRes] = await Promise.all([
+            const [whRes, reasonRes]: any[] = await Promise.all([
                 getWarehouseList(),
                 getAdjustReasonList(),
             ]);
+            // 响应拦截器已解包 data.data
             setWarehouses(whRes || []);
-            setReasons(reasonRes.data || []);
+            setReasons(reasonRes || []);
         } catch (error) {
             console.error('加载选项失败', error);
         }
@@ -63,9 +64,10 @@ const AdjustSheetList: React.FC = () => {
                 bizType: searchBizType,
                 status: searchStatus,
             };
-            const res = await getAdjustSheetPage(params);
-            setDataSource(res.data?.records || []);
-            setTotal(res.data?.total || 0);
+            const res: any = await getAdjustSheetPage(params);
+            // 响应拦截器已解包 data.data
+            setDataSource(res?.records || []);
+            setTotal(res?.total || 0);
         } catch (error) {
             message.error('加载数据失败');
         } finally {

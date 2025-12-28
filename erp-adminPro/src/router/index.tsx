@@ -38,6 +38,46 @@ import StockCheckDetail from '@/pages/Business/Stock/Check/Detail'
 import StockTransferList from '@/pages/Business/Stock/Transfer/List'
 import StockTransferForm from '@/pages/Business/Stock/Transfer/Form'
 import StockTransferDetail from '@/pages/Business/Stock/Transfer/Detail'
+import StockAdjustReasonList from '@/pages/Business/Stock/Adjust/Reason'
+import StockAdjustSheetList from '@/pages/Business/Stock/Adjust/Sheet/List'
+import StockAdjustSheetForm from '@/pages/Business/Stock/Adjust/Sheet/Form'
+import RetailConfig from '@/pages/Business/Retail/Config'
+import RetailOutList from '@/pages/Business/Retail/Outbound/List'
+import RetailOutForm from '@/pages/Business/Retail/Outbound/Form'
+import RetailOutDetail from '@/pages/Business/Retail/Outbound/Detail'
+import RetailReturnList from '@/pages/Business/Retail/Return/List'
+import RetailReturnForm from '@/pages/Business/Retail/Return/Form'
+import RetailReturnDetail from '@/pages/Business/Retail/Return/Detail'
+import IncomeExpenseItemList from '@/pages/Business/Settle/IncomeExpenseItem/List'
+import FeeSheetList from '@/pages/Business/Settle/FeeSheet/List'
+import FeeSheetForm from '@/pages/Business/Settle/FeeSheet/Form'
+import FeeSheetDetail from '@/pages/Business/Settle/FeeSheet/Detail'
+import PreSheetList from '@/pages/Business/Settle/PreSheet/List'
+import PreSheetForm from '@/pages/Business/Settle/PreSheet/Form'
+import PreSheetDetail from '@/pages/Business/Settle/PreSheet/Detail'
+import CheckSheetList from '@/pages/Business/Settle/CheckSheet/List'
+import CheckSheetForm from '@/pages/Business/Settle/CheckSheet/Form'
+import CheckSheetDetail from '@/pages/Business/Settle/CheckSheet/Detail'
+import SettleSheetList from '@/pages/Business/Settle/SettleSheet/List'
+import SettleSheetForm from '@/pages/Business/Settle/SettleSheet/Form'
+import SettleSheetDetail from '@/pages/Business/Settle/SettleSheet/Detail'
+import CustomerFeeSheetList from '@/pages/Business/Settle/CustomerFeeSheet/List'
+import CustomerFeeSheetForm from '@/pages/Business/Settle/CustomerFeeSheet/Form'
+import CustomerFeeSheetDetail from '@/pages/Business/Settle/CustomerFeeSheet/Detail'
+import CustomerPreSheetList from '@/pages/Business/Settle/CustomerPreSheet/List'
+import CustomerPreSheetForm from '@/pages/Business/Settle/CustomerPreSheet/Form'
+import CustomerPreSheetDetail from '@/pages/Business/Settle/CustomerPreSheet/Detail'
+import CustomerCheckSheetList from '@/pages/Business/Settle/CustomerCheckSheet/List'
+import CustomerCheckSheetForm from '@/pages/Business/Settle/CustomerCheckSheet/Form'
+import CustomerCheckSheetDetail from '@/pages/Business/Settle/CustomerCheckSheet/Detail'
+import CustomerSettleSheetList from '@/pages/Business/Settle/CustomerSettleSheet/List'
+import CustomerSettleSheetForm from '@/pages/Business/Settle/CustomerSettleSheet/Form'
+import CustomerSettleSheetDetail from '@/pages/Business/Settle/CustomerSettleSheet/Detail'
+import ChartDashboard from '@/pages/Business/Chart/Dashboard'
+import ChartPurchase from '@/pages/Business/Chart/Purchase'
+import ChartSales from '@/pages/Business/Chart/Sales'
+import ChartStock from '@/pages/Business/Chart/Stock'
+import ChartSummary from '@/pages/Business/Chart/Summary'
 
 // 路由守卫组件
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -249,6 +289,219 @@ const router = createBrowserRouter([
             {
                 path: 'business/stock/transfer/detail/:id',
                 element: <StockTransferDetail />
+            },
+            {
+                path: 'stock/adjust/reason',
+                element: <StockAdjustReasonList />
+            },
+            {
+                path: 'stock/adjust/sheet',
+                element: <StockAdjustSheetList />
+            },
+            {
+                path: 'stock/adjust/sheet/add',
+                element: <StockAdjustSheetForm />
+            },
+            {
+                path: 'stock/adjust/sheet/edit/:id',
+                element: <StockAdjustSheetForm />
+            },
+            {
+                path: 'stock/adjust/sheet/detail/:id',
+                element: <StockAdjustSheetList />
+            },
+            {
+                path: 'business/retail/config',
+                element: <RetailConfig />
+            },
+            {
+                path: 'business/retail/out',
+                element: <RetailOutList />
+            },
+            {
+                path: 'business/retail/out/add',
+                element: <RetailOutForm />
+            },
+            {
+                path: 'business/retail/out/edit/:id',
+                element: <RetailOutForm />
+            },
+            {
+                path: 'business/retail/out/detail/:id',
+                element: <RetailOutDetail />
+            },
+            {
+                path: 'business/retail/return',
+                element: <RetailReturnList />
+            },
+            {
+                path: 'business/retail/return/add',
+                element: <RetailReturnForm />
+            },
+            {
+                path: 'business/retail/return/edit/:id',
+                element: <RetailReturnForm />
+            },
+            {
+                path: 'business/retail/return/detail/:id',
+                element: <RetailReturnDetail />
+            },
+            {
+                path: 'business/settle/item',
+                element: <IncomeExpenseItemList />
+            },
+            {
+                path: 'business/settle/fee',
+                element: <FeeSheetList />
+            },
+            {
+                path: 'business/settle/fee/add',
+                element: <FeeSheetForm />
+            },
+            {
+                path: 'business/settle/fee/edit/:id',
+                element: <FeeSheetForm />
+            },
+            {
+                path: 'business/settle/fee/detail/:id',
+                element: <FeeSheetDetail />
+            },
+            {
+                path: 'business/settle/pre',
+                element: <PreSheetList />
+            },
+            {
+                path: 'business/settle/pre/add',
+                element: <PreSheetForm />
+            },
+            {
+                path: 'business/settle/pre/edit/:id',
+                element: <PreSheetForm />
+            },
+            {
+                path: 'business/settle/pre/detail/:id',
+                element: <PreSheetDetail />
+            },
+            {
+                path: 'business/settle/check',
+                element: <CheckSheetList />
+            },
+            {
+                path: 'business/settle/check/add',
+                element: <CheckSheetForm />
+            },
+            {
+                path: 'business/settle/check/edit/:id',
+                element: <CheckSheetForm />
+            },
+            {
+                path: 'business/settle/check/detail/:id',
+                element: <CheckSheetDetail />
+            },
+            {
+                path: 'business/settle/sheet',
+                element: <SettleSheetList />
+            },
+            {
+                path: 'business/settle/sheet/add',
+                element: <SettleSheetForm />
+            },
+            {
+                path: 'business/settle/sheet/edit/:id',
+                element: <SettleSheetForm />
+            },
+            {
+                path: 'business/settle/sheet/detail/:id',
+                element: <SettleSheetDetail />
+            },
+            // Customer Fee Sheet
+            {
+                path: 'business/settle/customer/fee',
+                element: <CustomerFeeSheetList />
+            },
+            {
+                path: 'business/settle/customer/fee/add',
+                element: <CustomerFeeSheetForm />
+            },
+            {
+                path: 'business/settle/customer/fee/edit/:id',
+                element: <CustomerFeeSheetForm />
+            },
+            {
+                path: 'business/settle/customer/fee/detail/:id',
+                element: <CustomerFeeSheetDetail />
+            },
+            // Customer Pre Sheet
+            {
+                path: 'business/settle/customer/pre',
+                element: <CustomerPreSheetList />
+            },
+            {
+                path: 'business/settle/customer/pre/add',
+                element: <CustomerPreSheetForm />
+            },
+            {
+                path: 'business/settle/customer/pre/edit/:id',
+                element: <CustomerPreSheetForm />
+            },
+            {
+                path: 'business/settle/customer/pre/detail/:id',
+                element: <CustomerPreSheetDetail />
+            },
+            // Customer Check Sheet
+            {
+                path: 'business/settle/customer/check',
+                element: <CustomerCheckSheetList />
+            },
+            {
+                path: 'business/settle/customer/check/add',
+                element: <CustomerCheckSheetForm />
+            },
+            {
+                path: 'business/settle/customer/check/edit/:id',
+                element: <CustomerCheckSheetForm />
+            },
+            {
+                path: 'business/settle/customer/check/detail/:id',
+                element: <CustomerCheckSheetDetail />
+            },
+            // Customer Settle Sheet
+            {
+                path: 'business/settle/customer/sheet',
+                element: <CustomerSettleSheetList />
+            },
+            {
+                path: 'business/settle/customer/sheet/add',
+                element: <CustomerSettleSheetForm />
+            },
+            {
+                path: 'business/settle/customer/sheet/edit/:id',
+                element: <CustomerSettleSheetForm />
+            },
+            {
+                path: 'business/settle/customer/sheet/detail/:id',
+                element: <CustomerSettleSheetDetail />
+            },
+            // Chart routes
+            {
+                path: 'chart/dashboard',
+                element: <ChartDashboard />
+            },
+            {
+                path: 'chart/purchase',
+                element: <ChartPurchase />
+            },
+            {
+                path: 'chart/sales',
+                element: <ChartSales />
+            },
+            {
+                path: 'chart/stock',
+                element: <ChartStock />
+            },
+            {
+                path: 'chart/summary',
+                element: <ChartSummary />
             }
         ]
     },

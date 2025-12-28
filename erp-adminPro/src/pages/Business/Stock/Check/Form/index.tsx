@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Form, Select, DatePicker, InputNumber, Button, Card, Table, Space, message, Divider, Input } from 'antd';
 import { PlusOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createStockCheck, updateStockCheck, getStockCheckById } from '@/api/business/stockCheck';
+import { getStockCheckById, createStockCheck, updateStockCheck } from '@/api/business/stockCheck';
 import { getWarehouseList } from '@/api/basedata/warehouse';
-import { getMaterialPage } from '@/api/material/material';
+import { getMaterialList } from '@/api/material/material';
 import dayjs from 'dayjs';
 
 const { Option } = Select;
@@ -25,9 +25,9 @@ const StockCheckForm: React.FC = () => {
 
     const loadBasicData = async () => {
         try {
-            const [warehouseData, materialData] = await Promise.all([getWarehouseList(), getMaterialPage({ current: 1, size: 1000 })]);
+            const [warehouseData, materialData] = await Promise.all([getWarehouseList(), getMaterialList()]);
             setWarehouses(Array.isArray(warehouseData) ? warehouseData : []);
-            setMaterials((materialData as any)?.records || []);
+            setMaterials(Array.isArray(materialData) ? materialData : []);
         } catch (error) { console.error('加载基础数据失败', error); }
     };
 

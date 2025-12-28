@@ -98,6 +98,14 @@ public class BaseMaterialServiceImpl extends ServiceImpl<BaseMaterialMapper, Bas
     }
 
     @Override
+    public List<BaseMaterial> getAll() {
+        LambdaQueryWrapper<BaseMaterial> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(BaseMaterial::getStatus, 1)
+                .orderByAsc(BaseMaterial::getCode);
+        return this.list(wrapper);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean saveMaterial(BaseMaterial material) {
         // 1. 生成物料编号(如果未提供)

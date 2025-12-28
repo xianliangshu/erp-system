@@ -17,6 +17,13 @@ export const getMaterialById = (id: number) => {
 };
 
 /**
+ * 获取所有物料列表（下拉选择用）
+ */
+export const getMaterialList = () => {
+    return request.get('/basedata/material/list');
+};
+
+/**
  * 根据分类ID获取物料列表
  */
 export const getMaterialByCategory = (categoryId: number) => {

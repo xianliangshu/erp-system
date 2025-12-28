@@ -1,0 +1,20 @@
+﻿Field	Type	Null	Key	Default	Extra
+id	bigint(20)	NO	PRI	NULL	auto_increment
+parent_id	bigint(20)	YES	MUL	NULL	
+code	varchar(20)	NO	UNI	NULL	
+name	varchar(50)	NO		NULL	
+title	varchar(50)	NO		NULL	
+menu_type	tinyint(4)	NO		NULL	
+path	varchar(200)	YES		NULL	
+component	varchar(200)	YES		NULL	
+permission	varchar(100)	YES		NULL	
+icon	varchar(100)	YES		NULL	
+sort	int(11)	NO		0	
+visible	tinyint(4)	NO		1	
+status	tinyint(4)	NO	MUL	1	
+is_deleted	tinyint(4)	NO		0	
+remark	varchar(500)	YES		NULL	
+create_by	varchar(64)	YES		NULL	
+create_time	datetime	NO		CURRENT_TIMESTAMP	
+update_by	varchar(64)	YES		NULL	
+update_time	datetime	NO		CURRENT_TIMESTAMP	on update CURRENT_TIMESTAMP

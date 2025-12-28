@@ -22,7 +22,9 @@ public enum ProductStockBizType implements IEnum<Integer> {
     STOCK_CHECK_PROFIT(7, "盘盈入库"),
     STOCK_CHECK_LOSS(8, "盘亏出库"),
     STOCK_TRANSFER_OUT(9, "调拨出库"),
-    STOCK_TRANSFER_IN(10, "调拨入库");
+    STOCK_TRANSFER_IN(10, "调拨入库"),
+    RETAIL_OUT(11, "零售出库"),
+    RETAIL_RETURN(12, "零售退货");
 
     @EnumValue
     @JsonValue

@@ -77,37 +77,39 @@ CREATE TABLE `stock_adjust_sheet_detail` (
 -- ================================================================
 
 -- 获取库存管理的父菜单ID
-SET @stock_parent_id = (SELECT id FROM sys_menu WHERE name = '库存查询' LIMIT 1);
-SET @stock_manage_id = (SELECT id FROM sys_menu WHERE title = '库存管理' LIMIT 1);
+SET @stock_parent_id = (SELECT id FROM sys_menu WHERE name = 'inventory' OR title = '库存管理' LIMIT 1);
 
 -- 如果找不到库存管理菜单，使用固定值
-SET @parent_id = IFNULL(@stock_manage_id, 5);
+SET @parent_id = IFNULL(@stock_parent_id, 5);
 
 -- 插入库存调整原因菜单
-INSERT INTO `sys_menu` (`parent_id`, `title`, `name`, `path`, `component`, `icon`, `sort`, `hidden`, `status`, `permission`, `menu_type`, `create_by`, `create_time`) VALUES
-(@parent_id, '调整原因', 'StockAdjustReason', '/stock/adjust/reason', '/stock/adjust/reason/index', 'SettingOutlined', 60, 0, 1, 'stock:adjust:reason:query', 1, 'admin', NOW());
+INSERT INTO `sys_menu` (`parent_id`, `code`, `name`, `title`, `menu_type`, `path`, `component`, `icon`, `sort`, `visible`, `status`, `permission`, `create_by`, `create_time`) VALUES
+(@parent_id, 'M000203', 'stock-adjust-reason', '调整原因', 1, '/stock/adjust/reason', '/Business/Stock/Adjust/Reason', 'SettingOutlined', 60, 1, 1, 'stock:adjust:reason:query', 'admin', NOW());
 
 SET @reason_menu_id = LAST_INSERT_ID();
 
 -- 调整原因按钮权限
-INSERT INTO `sys_menu` (`parent_id`, `title`, `name`, `path`, `component`, `icon`, `sort`, `hidden`, `status`, `permission`, `menu_type`, `create_by`, `create_time`) VALUES
-(@reason_menu_id, '新增', '', '', '', '', 1, 0, 1, 'stock:adjust:reason:add', 2, 'admin', NOW()),
-(@reason_menu_id, '修改', '', '', '', '', 2, 0, 1, 'stock:adjust:reason:modify', 2, 'admin', NOW()),
-(@reason_menu_id, '删除', '', '', '', '', 3, 0, 1, 'stock:adjust:reason:delete', 2, 'admin', NOW());
+INSERT INTO `sys_menu` (`parent_id`, `code`, `name`, `title`, `menu_type`, `path`, `component`, `icon`, `sort`, `visible`, `status`, `permission`, `create_by`, `create_time`) VALUES
+(@reason_menu_id, 'M00020301', '', '新增', 2, '', '', '', 1, 1, 1, 'stock:adjust:reason:add', 'admin', NOW()),
+(@reason_menu_id, 'M00020302', '', '修改', 2, '', '', '', 2, 1, 1, 'stock:adjust:reason:modify', 'admin', NOW()),
+(@reason_menu_id, 'M00020303', '', '删除', 2, '', '', '', 3, 1, 1, 'stock:adjust:reason:delete', 'admin', NOW());
 
 -- 插入库存调整单菜单
-INSERT INTO `sys_menu` (`parent_id`, `title`, `name`, `path`, `component`, `icon`, `sort`, `hidden`, `status`, `permission`, `menu_type`, `create_by`, `create_time`) VALUES
-(@parent_id, '库存调整', 'StockAdjustSheet', '/stock/adjust/sheet', '/stock/adjust/sheet/index', 'SwapOutlined', 61, 0, 1, 'stock:adjust:query', 1, 'admin', NOW());
+INSERT INTO `sys_menu` (`parent_id`, `code`, `name`, `title`, `menu_type`, `path`, `component`, `icon`, `sort`, `visible`, `status`, `permission`, `create_by`, `create_time`) VALUES
+(@parent_id, 'M000204', 'stock-adjust-sheet', '库存调整', 1, '/stock/adjust/sheet', '/Business/Stock/Adjust/Sheet/List', 'SwapOutlined', 61, 1, 1, 'stock:adjust:query', 'admin', NOW());
 
 SET @sheet_menu_id = LAST_INSERT_ID();
 
 -- 调整单按钮权限
-INSERT INTO `sys_menu` (`parent_id`, `title`, `name`, `path`, `component`, `icon`, `sort`, `hidden`, `status`, `permission`, `menu_type`, `create_by`, `create_time`) VALUES
-(@sheet_menu_id, '新增', '', '', '', '', 1, 0, 1, 'stock:adjust:add', 2, 'admin', NOW()),
-(@sheet_menu_id, '修改', '', '', '', '', 2, 0, 1, 'stock:adjust:modify', 2, 'admin', NOW()),
-(@sheet_menu_id, '删除', '', '', '', '', 3, 0, 1, 'stock:adjust:delete', 2, 'admin', NOW()),
-(@sheet_menu_id, '审核', '', '', '', '', 4, 0, 1, 'stock:adjust:approve', 2, 'admin', NOW());
+INSERT INTO `sys_menu` (`parent_id`, `code`, `name`, `title`, `menu_type`, `path`, `component`, `icon`, `sort`, `visible`, `status`, `permission`, `create_by`, `create_time`) VALUES
+(@sheet_menu_id, 'M00020401', '', '新增', 2, '', '', '', 1, 1, 1, 'stock:adjust:add', 'admin', NOW()),
+(@sheet_menu_id, 'M00020402', '', '修改', 2, '', '', '', 2, 1, 1, 'stock:adjust:modify', 'admin', NOW()),
+(@sheet_menu_id, 'M00020403', '', '删除', 2, '', '', '', 3, 1, 1, 'stock:adjust:delete', 'admin', NOW()),
+(@sheet_menu_id, 'M00020404', '', '审核', 2, '', '', '', 4, 1, 1, 'stock:adjust:approve', 'admin', NOW());
 
 -- 为管理员角色分配新菜单权限
-INSERT INTO `sys_role_menu` (`role_id`, `menu_id`, `create_time`)
-SELECT 1, id, NOW() FROM sys_menu WHERE permission LIKE 'stock:adjust%';
+SET @admin_role_id = (SELECT id FROM sys_role WHERE code = 'R000001' LIMIT 1);
+
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
+SELECT @admin_role_id, id FROM sys_menu WHERE permission LIKE 'stock:adjust%';
+

@@ -4,7 +4,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getStockCheckById } from '@/api/business/stockCheck';
 import { getWarehouseList } from '@/api/basedata/warehouse';
-import { getMaterialPage } from '@/api/material/material';
+import { getMaterialList } from '@/api/material/material';
 
 const statusMap: Record<number, { text: string; color: string }> = { 0: { text: '待审核', color: 'orange' }, 1: { text: '已审核', color: 'green' } };
 
@@ -21,9 +21,9 @@ const StockCheckDetail: React.FC = () => {
 
     const loadBasicData = async () => {
         try {
-            const [warehouseData, materialData] = await Promise.all([getWarehouseList(), getMaterialPage({ current: 1, size: 1000 })]);
+            const [warehouseData, materialData] = await Promise.all([getWarehouseList(), getMaterialList()]);
             setWarehouses(Array.isArray(warehouseData) ? warehouseData : []);
-            setMaterials((materialData as any)?.records || []);
+            setMaterials(Array.isArray(materialData) ? materialData : []);
         } catch (e) { console.error(e); }
     };
 

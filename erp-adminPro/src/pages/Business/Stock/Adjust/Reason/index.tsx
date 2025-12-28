@@ -33,9 +33,10 @@ const AdjustReasonList: React.FC = () => {
                 name: searchName || undefined,
                 status: searchStatus,
             };
-            const res = await getAdjustReasonPage(params);
-            setDataSource(res.data?.records || []);
-            setTotal(res.data?.total || 0);
+            const res: any = await getAdjustReasonPage(params);
+            // 响应拦截器已返回 data.data，所以直接取 records
+            setDataSource(res?.records || []);
+            setTotal(res?.total || 0);
         } catch (error) {
             message.error('加载数据失败');
         } finally {

@@ -51,6 +51,15 @@ public class BaseMaterialController {
     }
 
     /**
+     * 获取所有物料列表（下拉选择用）
+     */
+    @GetMapping("/list")
+    public Result<List<BaseMaterial>> getList() {
+        List<BaseMaterial> list = materialService.getAll();
+        return Result.success(list);
+    }
+
+    /**
      * 新增物料
      */
     @PostMapping

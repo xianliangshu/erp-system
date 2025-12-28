@@ -39,6 +39,13 @@ public interface IBaseMaterialService {
     List<BaseMaterial> getByCategory(Long categoryId);
 
     /**
+     * 获取所有物料列表（下拉选择用）
+     *
+     * @return 物料列表
+     */
+    List<BaseMaterial> getAll();
+
+    /**
      * 新增物料
      *
      * @param material 物料信息

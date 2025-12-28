@@ -196,17 +196,12 @@ public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper,
         String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "PTH" + dateStr;
 
-        // 查询今天最大的退货单号
-        LambdaQueryWrapper<PurchaseReturn> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(PurchaseReturn::getCode, prefix)
-                .orderByDesc(PurchaseReturn::getCode)
-                .last("LIMIT 1");
-        PurchaseReturn lastReturn = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
 
         int seq = 1;
-        if (lastReturn != null) {
-            String lastCode = lastReturn.getCode();
-            String seqStr = lastCode.substring(prefix.length());
+        if (maxCode != null) {
+            String seqStr = maxCode.substring(prefix.length());
             seq = Integer.parseInt(seqStr) + 1;
         }
 

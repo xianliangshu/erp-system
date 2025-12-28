@@ -3,6 +3,7 @@ package com.erp.business.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.erp.business.enums.PurchaseOrderStatus;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,13 +13,9 @@ import java.time.LocalDateTime;
  * 采购订单
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("purchase_order")
-public class PurchaseOrder implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+public class PurchaseOrder extends BaseBusinessEntity {
 
     /**
      * 订单编号
@@ -79,34 +76,4 @@ public class PurchaseOrder implements Serializable {
      * 拒绝原因
      */
     private String refuseReason;
-
-    /**
-     * 创建者
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 更新者
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    /**
-     * 逻辑删除
-     */
-    @TableLogic
-    private Integer deleted;
 }

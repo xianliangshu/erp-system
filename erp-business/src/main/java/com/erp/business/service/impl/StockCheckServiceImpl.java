@@ -163,12 +163,13 @@ public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCh
     private String generateCheckCode() {
         String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "SC" + dateStr;
-        LambdaQueryWrapper<StockCheck> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(StockCheck::getCode, prefix).orderByDesc(StockCheck::getCode).last("LIMIT 1");
-        StockCheck last = this.getOne(wrapper);
+
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
+
         int seq = 1;
-        if (last != null) {
-            String seqStr = last.getCode().substring(prefix.length());
+        if (maxCode != null) {
+            String seqStr = maxCode.substring(prefix.length());
             seq = Integer.parseInt(seqStr) + 1;
         }
         return prefix + String.format("%04d", seq);

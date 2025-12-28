@@ -2,9 +2,9 @@ package com.erp.basedata.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * 供应商信息实体类
@@ -13,16 +13,9 @@ import java.time.LocalDateTime;
  * @since 2025-12-16
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("base_supplier")
-public class BaseSupplier implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+public class BaseSupplier extends BaseDataEntity {
 
     /**
      * 供应商编号
@@ -113,34 +106,4 @@ public class BaseSupplier implements Serializable {
      * 备注
      */
     private String remark;
-
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建人
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
-
-    /**
-     * 更新人
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateBy;
-
-    /**
-     * 删除标记: 0-未删除 1-已删除
-     */
-    @TableLogic
-    private Integer deleted;
 }

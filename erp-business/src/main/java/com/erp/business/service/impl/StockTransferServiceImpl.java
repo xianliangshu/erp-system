@@ -194,12 +194,13 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
     private String generateTransferCode() {
         String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "ST" + dateStr;
-        LambdaQueryWrapper<StockTransfer> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(StockTransfer::getCode, prefix).orderByDesc(StockTransfer::getCode).last("LIMIT 1");
-        StockTransfer last = this.getOne(wrapper);
+
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
+
         int seq = 1;
-        if (last != null) {
-            String seqStr = last.getCode().substring(prefix.length());
+        if (maxCode != null) {
+            String seqStr = maxCode.substring(prefix.length());
             seq = Integer.parseInt(seqStr) + 1;
         }
         return prefix + String.format("%04d", seq);

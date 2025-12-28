@@ -136,19 +136,16 @@ public class BaseSupplierServiceImpl extends ServiceImpl<BaseSupplierMapper, Bas
      * @return 供应商编号
      */
     private String generateSupplierCode() {
-        // 查询最大的供应商编号
-        LambdaQueryWrapper<BaseSupplier> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseSupplier::getCode).last("LIMIT 1");
-        BaseSupplier lastSupplier = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastSupplier == null || StrUtil.isBlank(lastSupplier.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有供应商,从SUP000001开始
             return "SUP000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastSupplier.getCode();
-        String numberPart = lastCode.substring(3); // 去掉前缀SUP
+        String numberPart = maxCode.substring(3); // 去掉前缀SUP
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

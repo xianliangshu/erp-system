@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public Result<?> handleRuntimeException(RuntimeException e) {
         log.error("运行时异常: {}", e.getMessage(), e);
-        return Result.error("系统异常,请联系管理员");
+        return Result.error(e.getMessage());
     }
 
     /**

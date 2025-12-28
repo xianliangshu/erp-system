@@ -200,16 +200,12 @@ public class SaleOrderServiceImpl extends ServiceImpl<SaleOrderMapper, SaleOrder
         String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "SO" + dateStr;
 
-        LambdaQueryWrapper<SaleOrder> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(SaleOrder::getCode, prefix)
-                .orderByDesc(SaleOrder::getCode)
-                .last("LIMIT 1");
-        SaleOrder lastOrder = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
 
         int seq = 1;
-        if (lastOrder != null) {
-            String lastCode = lastOrder.getCode();
-            String seqStr = lastCode.substring(prefix.length());
+        if (maxCode != null) {
+            String seqStr = maxCode.substring(prefix.length());
             seq = Integer.parseInt(seqStr) + 1;
         }
 

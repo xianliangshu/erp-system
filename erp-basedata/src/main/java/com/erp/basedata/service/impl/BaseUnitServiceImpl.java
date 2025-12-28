@@ -136,19 +136,16 @@ public class BaseUnitServiceImpl extends ServiceImpl<BaseUnitMapper, BaseUnit>
      * @return 单位编号
      */
     private String generateUnitCode() {
-        // 查询最大的单位编号
-        LambdaQueryWrapper<BaseUnit> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseUnit::getCode).last("LIMIT 1");
-        BaseUnit lastUnit = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastUnit == null || StrUtil.isBlank(lastUnit.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有单位,从UNIT000001开始
             return "UNIT000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastUnit.getCode();
-        String numberPart = lastCode.substring(4); // 去掉前缀UNIT
+        String numberPart = maxCode.substring(4); // 去掉前缀UNIT
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

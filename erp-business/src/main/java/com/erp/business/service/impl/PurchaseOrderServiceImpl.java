@@ -203,17 +203,12 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
         String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "PO" + dateStr;
 
-        // 查询今天最大的订单号
-        LambdaQueryWrapper<PurchaseOrder> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(PurchaseOrder::getCode, prefix)
-                .orderByDesc(PurchaseOrder::getCode)
-                .last("LIMIT 1");
-        PurchaseOrder lastOrder = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
 
         int seq = 1;
-        if (lastOrder != null) {
-            String lastCode = lastOrder.getCode();
-            String seqStr = lastCode.substring(prefix.length());
+        if (maxCode != null) {
+            String seqStr = maxCode.substring(prefix.length());
             seq = Integer.parseInt(seqStr) + 1;
         }
 

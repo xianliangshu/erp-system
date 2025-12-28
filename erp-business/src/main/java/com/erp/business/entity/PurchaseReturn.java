@@ -2,21 +2,17 @@ package com.erp.business.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * 采购退货表
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("purchase_return")
-public class PurchaseReturn implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+public class PurchaseReturn extends BaseBusinessEntity {
 
     /**
      * 退货单编号
@@ -62,34 +58,4 @@ public class PurchaseReturn implements Serializable {
      * 备注
      */
     private String description;
-
-    /**
-     * 创建者
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 更新者
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    /**
-     * 逻辑删除
-     */
-    @TableLogic
-    private Integer deleted;
 }

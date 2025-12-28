@@ -150,19 +150,16 @@ public class BaseMaterialCategoryServiceImpl extends ServiceImpl<BaseMaterialCat
      * @return 分类编号
      */
     private String generateCategoryCode() {
-        // 查询最大的分类编号
-        LambdaQueryWrapper<BaseMaterialCategory> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseMaterialCategory::getCode).last("LIMIT 1");
-        BaseMaterialCategory lastCategory = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastCategory == null || StrUtil.isBlank(lastCategory.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有分类,从MC000001开始
             return "MC000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastCategory.getCode();
-        String numberPart = lastCode.substring(2); // 去掉前缀MC
+        String numberPart = maxCode.substring(2); // 去掉前缀MC
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

@@ -149,7 +149,7 @@ public class BaseWarehouseServiceImpl extends ServiceImpl<BaseWarehouseMapper, B
         // 查询所有记录(包括已删除的)
         Long count = baseMapper.selectCount(wrapper);
         if (count != null && count > 0) {
-            throw new BusinessException("仓库编号"+code+"已存在(包括已删除的记录)");
+            throw new BusinessException("仓库编号" + code + "已存在(包括已删除的记录)");
         }
     }
 
@@ -170,19 +170,16 @@ public class BaseWarehouseServiceImpl extends ServiceImpl<BaseWarehouseMapper, B
      * @return 仓库编号
      */
     private String generateWarehouseCode() {
-        // 查询最大的仓库编号
-        LambdaQueryWrapper<BaseWarehouse> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseWarehouse::getCode).last("LIMIT 1");
-        BaseWarehouse lastWarehouse = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastWarehouse == null || StrUtil.isBlank(lastWarehouse.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有仓库,从WH000001开始
             return "WH000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastWarehouse.getCode();
-        String numberPart = lastCode.substring(2); // 去掉前缀WH
+        String numberPart = maxCode.substring(2); // 去掉前缀WH
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

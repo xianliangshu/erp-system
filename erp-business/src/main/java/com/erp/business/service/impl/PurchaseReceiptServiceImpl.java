@@ -238,17 +238,12 @@ public class PurchaseReceiptServiceImpl extends ServiceImpl<PurchaseReceiptMappe
         String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
         String prefix = "PR" + dateStr;
 
-        // 查询今天最大的收货单号
-        LambdaQueryWrapper<PurchaseReceipt> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(PurchaseReceipt::getCode, prefix)
-                .orderByDesc(PurchaseReceipt::getCode)
-                .last("LIMIT 1");
-        PurchaseReceipt lastReceipt = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
 
         int seq = 1;
-        if (lastReceipt != null) {
-            String lastCode = lastReceipt.getCode();
-            String seqStr = lastCode.substring(prefix.length());
+        if (maxCode != null) {
+            String seqStr = maxCode.substring(prefix.length());
             seq = Integer.parseInt(seqStr) + 1;
         }
 

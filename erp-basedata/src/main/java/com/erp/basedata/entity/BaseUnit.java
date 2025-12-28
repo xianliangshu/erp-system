@@ -2,9 +2,9 @@ package com.erp.basedata.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * 计量单位实体类
@@ -13,16 +13,9 @@ import java.time.LocalDateTime;
  * @since 2025-12-14
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("base_unit")
-public class BaseUnit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 单位ID
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+public class BaseUnit extends BaseDataEntity {
 
     /**
      * 单位编号
@@ -48,30 +41,4 @@ public class BaseUnit implements Serializable {
      * 备注
      */
     private String remark;
-
-    /**
-     * 删除标记(0=未删除,1=已删除)
-     */
-    @TableLogic
-    private Integer deleted;
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 }

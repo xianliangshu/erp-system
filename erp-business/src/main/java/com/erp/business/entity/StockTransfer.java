@@ -2,22 +2,18 @@ package com.erp.business.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * 库存调拨
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("stock_transfer")
-public class StockTransfer implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+public class StockTransfer extends BaseBusinessEntity {
 
     /** 调拨单编号 */
     private String code;
@@ -39,19 +35,4 @@ public class StockTransfer implements Serializable {
 
     /** 备注 */
     private String description;
-
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
-
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateBy;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableLogic
-    private Integer deleted;
 }

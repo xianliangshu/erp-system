@@ -123,19 +123,16 @@ public class BaseBrandServiceImpl extends ServiceImpl<BaseBrandMapper, BaseBrand
      * @return 品牌编号
      */
     private String generateBrandCode() {
-        // 查询最大的品牌编号
-        LambdaQueryWrapper<BaseBrand> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseBrand::getCode).last("LIMIT 1");
-        BaseBrand lastBrand = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastBrand == null || StrUtil.isBlank(lastBrand.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有品牌,从BRD000001开始
             return "BRD000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastBrand.getCode();
-        String numberPart = lastCode.substring(3); // 去掉前缀BRD
+        String numberPart = maxCode.substring(3); // 去掉前缀BRD
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

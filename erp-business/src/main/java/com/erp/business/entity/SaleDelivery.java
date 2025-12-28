@@ -2,21 +2,17 @@ package com.erp.business.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * 销售出库
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("sale_delivery")
-public class SaleDelivery implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+public class SaleDelivery extends BaseBusinessEntity {
 
     /** 出库单编号 */
     private String code;
@@ -44,19 +40,4 @@ public class SaleDelivery implements Serializable {
 
     /** 备注 */
     private String description;
-
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
-
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateBy;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableLogic
-    private Integer deleted;
 }

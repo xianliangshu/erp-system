@@ -166,19 +166,16 @@ public class BaseMaterialServiceImpl extends ServiceImpl<BaseMaterialMapper, Bas
      * @return 物料编号
      */
     private String generateMaterialCode() {
-        // 查询最大的物料编号
-        LambdaQueryWrapper<BaseMaterial> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseMaterial::getCode).last("LIMIT 1");
-        BaseMaterial lastMaterial = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastMaterial == null || StrUtil.isBlank(lastMaterial.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有物料,从MAT000001开始
             return "MAT000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastMaterial.getCode();
-        String numberPart = lastCode.substring(3); // 去掉前缀MAT
+        String numberPart = maxCode.substring(3); // 去掉前缀MAT
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

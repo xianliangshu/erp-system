@@ -137,19 +137,16 @@ public class BaseCustomerServiceImpl extends ServiceImpl<BaseCustomerMapper, Bas
      * @return 客户编号
      */
     private String generateCustomerCode() {
-        // 查询最大的客户编号
-        LambdaQueryWrapper<BaseCustomer> wrapper = new LambdaQueryWrapper<>();
-        wrapper.orderByDesc(BaseCustomer::getCode).last("LIMIT 1");
-        BaseCustomer lastCustomer = this.getOne(wrapper);
+        // 使用自定义SQL查询最大编号（绕过软删除过滤）
+        String maxCode = baseMapper.selectMaxCode();
 
-        if (lastCustomer == null || StrUtil.isBlank(lastCustomer.getCode())) {
+        if (maxCode == null || StrUtil.isBlank(maxCode)) {
             // 如果没有客户,从CUS000001开始
             return "CUS000001";
         }
 
         // 提取数字部分并加1
-        String lastCode = lastCustomer.getCode();
-        String numberPart = lastCode.substring(3); // 去掉前缀CUS
+        String numberPart = maxCode.substring(3); // 去掉前缀CUS
         int nextNumber = Integer.parseInt(numberPart) + 1;
 
         // 格式化为6位数字

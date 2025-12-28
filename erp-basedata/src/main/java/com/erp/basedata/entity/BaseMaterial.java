@@ -2,10 +2,10 @@ package com.erp.basedata.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * 物料信息实体类
@@ -14,16 +14,9 @@ import java.time.LocalDateTime;
  * @since 2025-12-14
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("base_material")
-public class BaseMaterial implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 物料ID
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+public class BaseMaterial extends BaseDataEntity {
 
     /**
      * 分类ID
@@ -89,32 +82,6 @@ public class BaseMaterial implements Serializable {
      * 备注
      */
     private String remark;
-
-    /**
-     * 删除标记(0=未删除,1=已删除)
-     */
-    @TableLogic
-    private Integer deleted;
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
     /**
      * 分类名称(非数据库字段)

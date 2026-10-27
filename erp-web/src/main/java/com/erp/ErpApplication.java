@@ -3,6 +3,7 @@ package com.erp;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * ERP系统启动类
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2025-12-12
  */
 @SpringBootApplication
+@EnableScheduling
 @MapperScan({ "com.erp.*.mapper" })
 public class ErpApplication {
     public static void main(String[] args) {

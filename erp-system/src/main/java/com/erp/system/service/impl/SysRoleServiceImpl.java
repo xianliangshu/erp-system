@@ -7,19 +7,26 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.erp.common.core.page.PageResult;
 import com.erp.common.exception.BusinessException;
 import com.erp.system.entity.SysRole;
+import com.erp.system.entity.SysMenu;
 import com.erp.system.entity.SysRoleMenu;
 import com.erp.system.entity.SysUser;
 import com.erp.system.entity.SysUserRole;
 import com.erp.system.mapper.SysRoleMapper;
+import com.erp.system.mapper.SysMenuMapper;
 import com.erp.system.mapper.SysRoleMenuMapper;
 import com.erp.system.mapper.SysUserRoleMapper;
 import com.erp.system.param.SysRolePageParam;
+import com.erp.system.satoken.SaPermissionCache;
 import com.erp.system.service.ISysRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -34,6 +41,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
         private final SysRoleMenuMapper roleMenuMapper;
         private final SysUserRoleMapper userRoleMapper;
+        private final SysMenuMapper menuMapper;
+        /** 角色/菜单授权变更后必须清鉴权缓存, 否则用户会继续拿着旧权限 */
+        private final SaPermissionCache permissionCache;
 
         @Override
         public PageResult<SysRole> pageQuery(SysRolePageParam param) {
@@ -132,7 +142,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
                 roleMenuMapper.delete(menuWrapper);
 
                 // 4. 逻辑删除角色
-                return super.removeById(id);
+                boolean removed = super.removeById(id);
+
+                // 5. 鉴权缓存失效(角色已删, 缓存里的权限必须作废)
+                permissionCache.evictAll();
+
+                return removed;
         }
 
         @Override
@@ -151,11 +166,21 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
                 // 3. 如果菜单列表为空,则只删除不添加
                 if (menuIds == null || menuIds.isEmpty()) {
+                        permissionCache.evictAll();
                         return true;
                 }
 
-                // 4. 批量插入新的菜单关联
-                List<SysRoleMenu> roleMenus = menuIds.stream()
+                // 4. 去重 + 自动补齐所有祖先目录
+                //    前端菜单树在"非严格勾选"模式下只会把叶子节点放进 checked，
+                //    父级目录只进 halfChecked，直接落库会丢掉目录；而
+                //    SysMenuServiceImpl.buildTreeFromList() 只从授权集合里挑
+                //    parent_id=0 的节点当根，目录一旦缺失，整棵子树就从侧边栏消失。
+                //    这里统一在服务端做祖先闭包，保证无论客户端怎么传都不会写坏数据。
+                Set<Long> finalMenuIds = new LinkedHashSet<>(menuIds);
+                fillAncestors(finalMenuIds);
+
+                // 5. 批量插入新的菜单关联
+                List<SysRoleMenu> roleMenus = finalMenuIds.stream()
                                 .map(menuId -> {
                                         SysRoleMenu roleMenu = new SysRoleMenu();
                                         roleMenu.setRoleId(roleId);
@@ -164,10 +189,36 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
                                 })
                                 .collect(Collectors.toList());
 
-                // 5. 批量插入
                 roleMenus.forEach(roleMenuMapper::insert);
 
+                // 6. 鉴权缓存失效: 该角色下所有用户的权限都变了
+                permissionCache.evictAll();
+
                 return true;
+        }
+
+        /**
+         * 把集合中每个菜单的所有上级目录补进集合(就地修改)。
+         * <p>
+         * 用深度上限兜底，避免菜单数据成环时死循环。
+         *
+         * @param menuIds 待授权的菜单ID集合，原地被扩充为"含全部祖先"的闭包
+         */
+        private void fillAncestors(Set<Long> menuIds) {
+                Map<Long, Long> parentMap = menuMapper.selectList(null).stream()
+                                .collect(Collectors.toMap(
+                                                SysMenu::getId,
+                                                menu -> menu.getParentId() == null ? 0L : menu.getParentId(),
+                                                (a, b) -> a));
+
+                for (Long menuId : new ArrayList<>(menuIds)) {
+                        Long cursor = parentMap.get(menuId);
+                        int depth = 0;
+                        while (cursor != null && cursor != 0L && depth++ < 50) {
+                                menuIds.add(cursor);
+                                cursor = parentMap.get(cursor);
+                        }
+                }
         }
 
         @Override

@@ -12,6 +12,7 @@ import com.erp.business.entity.SettleFeeSheetDetail;
 import com.erp.business.mapper.SettleFeeSheetDetailMapper;
 import com.erp.business.mapper.SettleFeeSheetMapper;
 import com.erp.business.service.ISettleFeeSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SettleFeeSheetServiceImpl extends ServiceImpl<SettleFeeSheetMapper, SettleFeeSheet>
         implements ISettleFeeSheetService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SettleFeeSheetDetailMapper detailMapper;
 
@@ -115,7 +117,7 @@ public class SettleFeeSheetServiceImpl extends ServiceImpl<SettleFeeSheetMapper,
         if (sheet == null) {
             throw new RuntimeException("费用单不存在");
         }
-        if (sheet.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
             throw new RuntimeException("只有待审核的费用单才能修改");
         }
 
@@ -154,7 +156,7 @@ public class SettleFeeSheetServiceImpl extends ServiceImpl<SettleFeeSheetMapper,
         if (sheet == null) {
             throw new RuntimeException("费用单不存在");
         }
-        if (sheet.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
             throw new RuntimeException("只有待审核的费用单才能审核");
         }
 
@@ -171,7 +173,7 @@ public class SettleFeeSheetServiceImpl extends ServiceImpl<SettleFeeSheetMapper,
         if (sheet == null) {
             throw new RuntimeException("费用单不存在");
         }
-        if (sheet.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
             throw new RuntimeException("只有待审核的费用单才能拒绝");
         }
 
@@ -189,7 +191,7 @@ public class SettleFeeSheetServiceImpl extends ServiceImpl<SettleFeeSheetMapper,
         if (sheet == null) {
             return;
         }
-        if (sheet.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
             throw new RuntimeException("只有待审核的费用单才能删除");
         }
 
@@ -204,17 +206,6 @@ public class SettleFeeSheetServiceImpl extends ServiceImpl<SettleFeeSheetMapper,
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "FY" + dateStr;
-
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length()) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SETTLE_FEE");
     }
 }

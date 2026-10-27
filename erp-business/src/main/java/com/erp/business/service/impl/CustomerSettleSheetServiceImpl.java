@@ -12,6 +12,7 @@ import com.erp.business.entity.CustomerSettleSheetDetail;
 import com.erp.business.mapper.CustomerSettleSheetDetailMapper;
 import com.erp.business.mapper.CustomerSettleSheetMapper;
 import com.erp.business.service.ICustomerSettleSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CustomerSettleSheetServiceImpl extends ServiceImpl<CustomerSettleSheetMapper, CustomerSettleSheet>
         implements ICustomerSettleSheetService {
+    private final ICodeGenerateService codeGenerateService;
     private final CustomerSettleSheetDetailMapper detailMapper;
 
     @Override
@@ -97,7 +99,7 @@ public class CustomerSettleSheetServiceImpl extends ServiceImpl<CustomerSettleSh
         CustomerSettleSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("结算单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能修改");
         sheet.setCustomerId(dto.getCustomerId());
         sheet.setStartDate(dto.getStartDate());
@@ -134,7 +136,7 @@ public class CustomerSettleSheetServiceImpl extends ServiceImpl<CustomerSettleSh
         CustomerSettleSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("结算单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能审核");
         sheet.setStatus(1);
         sheet.setApproveTime(LocalDateTime.now());
@@ -148,7 +150,7 @@ public class CustomerSettleSheetServiceImpl extends ServiceImpl<CustomerSettleSh
         CustomerSettleSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("结算单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能拒绝");
         sheet.setStatus(2);
         sheet.setApproveTime(LocalDateTime.now());
@@ -163,7 +165,7 @@ public class CustomerSettleSheetServiceImpl extends ServiceImpl<CustomerSettleSh
         CustomerSettleSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能删除");
         LambdaQueryWrapper<CustomerSettleSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(CustomerSettleSheetDetail::getSheetId, id);
@@ -173,12 +175,6 @@ public class CustomerSettleSheetServiceImpl extends ServiceImpl<CustomerSettleSh
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "KJS" + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length())
-            seq = Integer.parseInt(maxCode.substring(prefix.length())) + 1;
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("CUSTOMER_SETTLE");
     }
 }

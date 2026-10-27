@@ -14,6 +14,7 @@ import com.erp.system.mapper.SysUserDeptMapper;
 import com.erp.system.mapper.SysUserMapper;
 import com.erp.system.mapper.SysUserRoleMapper;
 import com.erp.system.param.SysUserPageParam;
+import com.erp.system.satoken.SaPermissionCache;
 import com.erp.system.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         private final SysUserRoleMapper userRoleMapper;
         private final SysUserDeptMapper userDeptMapper;
+        /** 用户角色变更后必须清该用户的鉴权缓存, 否则会继续拿着旧权限 */
+        private final SaPermissionCache permissionCache;
 
         @Override
         public PageResult<SysUser> pageQuery(SysUserPageParam param) {
@@ -214,6 +217,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
                 // 3. 如果角色列表为空,则只删除不添加
                 if (roleIds == null || roleIds.isEmpty()) {
+                        permissionCache.evictUser(userId);
                         return true;
                 }
 
@@ -229,6 +233,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
                 // 5. 批量插入
                 userRoles.forEach(userRoleMapper::insert);
+
+                // 6. 鉴权缓存失效: 该用户的权限来源变了
+                permissionCache.evictUser(userId);
 
                 return true;
         }

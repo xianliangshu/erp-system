@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.entity.StockAdjustReason;
@@ -21,6 +22,7 @@ public class StockAdjustReasonController {
     /**
      * 分页查询
      */
+    @SaCheckPermission("stock:adjust:reason:query")
     @GetMapping("/page")
     public Result<IPage<StockAdjustReason>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -47,6 +49,7 @@ public class StockAdjustReasonController {
     /**
      * 根据ID查询
      */
+    @SaCheckPermission("stock:adjust:reason:query")
     @GetMapping("/{id}")
     public Result<StockAdjustReason> getById(@PathVariable Long id) {
         return Result.success(stockAdjustReasonService.getById(id));
@@ -55,6 +58,7 @@ public class StockAdjustReasonController {
     /**
      * 新增
      */
+    @SaCheckPermission("stock:adjust:reason:query")
     @PostMapping
     public Result<?> add(@RequestBody StockAdjustReason reason) {
         boolean success = stockAdjustReasonService.add(reason);
@@ -64,6 +68,7 @@ public class StockAdjustReasonController {
     /**
      * 修改
      */
+    @SaCheckPermission("stock:adjust:reason:query")
     @PutMapping
     public Result<?> modify(@RequestBody StockAdjustReason reason) {
         boolean success = stockAdjustReasonService.modify(reason);
@@ -73,6 +78,7 @@ public class StockAdjustReasonController {
     /**
      * 删除
      */
+    @SaCheckPermission("stock:adjust:reason:query")
     @DeleteMapping("/{id}")
     public Result<?> delete(@PathVariable Long id) {
         boolean success = stockAdjustReasonService.removeById(id);

@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.StockCheckDTO;
@@ -23,6 +24,7 @@ public class StockCheckController {
     private final IStockCheckService stockCheckService;
     private final StockCheckDetailMapper stockCheckDetailMapper;
 
+    @SaCheckPermission("business:stock:check")
     @GetMapping("/page")
     public Result<Page<StockCheck>> page(@RequestParam(defaultValue = "1") Long current,
             @RequestParam(defaultValue = "10") Long size,
@@ -30,6 +32,7 @@ public class StockCheckController {
         return Result.success(stockCheckService.getCheckPage(current, size, scId, status));
     }
 
+    @SaCheckPermission("business:stock:check")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         StockCheck check = stockCheckService.getById(id);
@@ -44,23 +47,27 @@ public class StockCheckController {
         return Result.success(result);
     }
 
+    @SaCheckPermission("business:stock:check")
     @PostMapping
     public Result<Long> create(@RequestBody StockCheckDTO dto) {
         return Result.success(stockCheckService.createCheck(dto));
     }
 
+    @SaCheckPermission("business:stock:check")
     @PutMapping
     public Result<Void> update(@RequestBody StockCheckDTO dto) {
         stockCheckService.updateCheck(dto);
         return Result.success();
     }
 
+    @SaCheckPermission("business:stock:check")
     @PostMapping("/{id}/approve")
     public Result<Void> approve(@PathVariable Long id) {
         stockCheckService.approveCheck(id);
         return Result.success();
     }
 
+    @SaCheckPermission("business:stock:check")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         stockCheckService.removeById(id);

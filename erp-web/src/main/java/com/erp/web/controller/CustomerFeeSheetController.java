@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.CustomerFeeSheetDTO;
 import com.erp.business.dto.CustomerFeeSheetQueryDTO;
@@ -20,6 +21,7 @@ public class CustomerFeeSheetController {
     private final ICustomerFeeSheetService feeSheetService;
 
     @Operation(summary = "分页查询")
+    @SaCheckPermission("business:settle:customer:fee")
     @GetMapping("/page")
     public Result<Page<CustomerFeeSheet>> page(@RequestParam(defaultValue = "1") Long current,
             @RequestParam(defaultValue = "10") Long size, CustomerFeeSheetQueryDTO queryDTO) {
@@ -27,18 +29,21 @@ public class CustomerFeeSheetController {
     }
 
     @Operation(summary = "获取详情")
+    @SaCheckPermission("business:settle:customer:fee")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getInfo(@PathVariable Long id) {
         return Result.success(feeSheetService.getDetailById(id));
     }
 
     @Operation(summary = "新增")
+    @SaCheckPermission("business:settle:customer:fee")
     @PostMapping
     public Result<Long> add(@RequestBody CustomerFeeSheetDTO dto) {
         return Result.success(feeSheetService.create(dto));
     }
 
     @Operation(summary = "修改")
+    @SaCheckPermission("business:settle:customer:fee")
     @PutMapping
     public Result<Void> edit(@RequestBody CustomerFeeSheetDTO dto) {
         feeSheetService.update(dto);
@@ -46,6 +51,7 @@ public class CustomerFeeSheetController {
     }
 
     @Operation(summary = "审核通过")
+    @SaCheckPermission("business:settle:customer:fee")
     @PostMapping("/approve/{id}")
     public Result<Void> approve(@PathVariable Long id) {
         feeSheetService.approve(id);
@@ -53,6 +59,7 @@ public class CustomerFeeSheetController {
     }
 
     @Operation(summary = "审核拒绝")
+    @SaCheckPermission("business:settle:customer:fee")
     @PostMapping("/refuse/{id}")
     public Result<Void> refuse(@PathVariable Long id, @RequestBody Map<String, String> data) {
         feeSheetService.refuse(id, data.get("refuseReason"));
@@ -60,6 +67,7 @@ public class CustomerFeeSheetController {
     }
 
     @Operation(summary = "删除")
+    @SaCheckPermission("business:settle:customer:fee")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         feeSheetService.deleteById(id);

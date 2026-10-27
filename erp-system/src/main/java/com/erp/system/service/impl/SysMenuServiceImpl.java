@@ -9,6 +9,7 @@ import com.erp.system.entity.SysRoleMenu;
 import com.erp.system.mapper.SysMenuMapper;
 import com.erp.system.mapper.SysRoleMenuMapper;
 import com.erp.system.param.SysMenuQueryParam;
+import com.erp.system.satoken.SaPermissionCache;
 import com.erp.system.service.ISysMenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ import java.util.stream.Collectors;
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
 
     private final SysRoleMenuMapper roleMenuMapper;
+    /** 菜单的 permission 字符串变了, 所有角色的鉴权缓存都得作废 */
+    private final SaPermissionCache permissionCache;
 
     @Override
     public List<SysMenu> listQuery(SysMenuQueryParam param) {
@@ -62,7 +65,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
 
         // 3. 保存菜单
-        return super.save(menu);
+        boolean saved = super.save(menu);
+
+        // 4. 菜单权限串变了, 清鉴权缓存
+        permissionCache.evictAll();
+
+        return saved;
     }
 
     @Override
@@ -82,7 +90,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
 
         // 3. 更新菜单
-        return super.updateById(menu);
+        boolean updated = super.updateById(menu);
+
+        // 4. 菜单权限串可能变了, 清鉴权缓存
+        permissionCache.evictAll();
+
+        return updated;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -107,18 +120,23 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         roleMenuMapper.delete(roleWrapper);
 
         // 4. 逻辑删除菜单
-        return super.removeById(id);
+        boolean removed = super.removeById(id);
+
+        // 5. 删菜单会连带删掉角色授权, 清鉴权缓存
+        permissionCache.evictAll();
+
+        return removed;
     }
 
     @Override
     public List<SysMenu> buildTree() {
-        // 1. 查询所有菜单
-        List<SysMenu> allMenus = this.list();
-
-        // 2. 构建树形结构(这里返回顶级菜单列表,前端自行构建树)
-        return allMenus.stream()
-                .filter(menu -> menu.getParentId() == null)
-                .collect(Collectors.toList());
+        // 修复说明(2026-10-01)：
+        //   原实现过滤的是 parentId == null，但库中顶级菜单的 parent_id 一律是 0，
+        //   导致该接口恒返回空数组，菜单管理页整棵表格为空；
+        //   且原实现只挑出根节点、从不给 children 赋值，而前端 Menu/index.tsx 依赖
+        //   嵌套结构(Table 的 expandable)渲染，即使过滤条件修对也只会显示 8 个目录。
+        //   这里统一复用 buildTreeFromList()：它同时兼容 null/0 两种根标记，并递归挂载 children。
+        return buildTreeFromList(this.list());
     }
 
     @Override

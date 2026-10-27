@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.StockTransferDTO;
@@ -29,6 +30,7 @@ public class StockTransferController {
     /**
      * 分页查询调拨单
      */
+    @SaCheckPermission("business:stock:transfer")
     @GetMapping("/page")
     public Result<Page<StockTransfer>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -42,6 +44,7 @@ public class StockTransferController {
     /**
      * 获取调拨单详情（含明细）
      */
+    @SaCheckPermission("business:stock:transfer")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         StockTransfer transfer = stockTransferService.getById(id);
@@ -62,6 +65,7 @@ public class StockTransferController {
     /**
      * 创建调拨单
      */
+    @SaCheckPermission("business:stock:transfer")
     @PostMapping
     public Result<Long> create(@RequestBody StockTransferDTO dto) {
         Long id = stockTransferService.createTransfer(dto);
@@ -71,6 +75,7 @@ public class StockTransferController {
     /**
      * 更新调拨单
      */
+    @SaCheckPermission("business:stock:transfer")
     @PutMapping("/{id}")
     public Result<Void> update(@PathVariable Long id, @RequestBody StockTransferDTO dto) {
         dto.setId(id);
@@ -81,6 +86,7 @@ public class StockTransferController {
     /**
      * 确认调拨
      */
+    @SaCheckPermission("business:stock:transfer")
     @PostMapping("/{id}/confirm")
     public Result<Void> confirm(@PathVariable Long id) {
         stockTransferService.confirmTransfer(id);
@@ -90,6 +96,7 @@ public class StockTransferController {
     /**
      * 删除调拨单
      */
+    @SaCheckPermission("business:stock:transfer")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         stockTransferService.deleteTransfer(id);

@@ -9,6 +9,8 @@ import com.erp.basedata.mapper.BaseMaterialCategoryMapper;
 import com.erp.basedata.mapper.BaseMaterialMapper;
 import com.erp.basedata.service.IBaseMaterialCategoryService;
 import com.erp.common.exception.BusinessException;
+import com.erp.common.service.ICodeGenerateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 @Service
 public class BaseMaterialCategoryServiceImpl extends ServiceImpl<BaseMaterialCategoryMapper, BaseMaterialCategory>
         implements IBaseMaterialCategoryService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     private final BaseMaterialMapper materialMapper;
 
@@ -150,20 +154,7 @@ public class BaseMaterialCategoryServiceImpl extends ServiceImpl<BaseMaterialCat
      * @return 分类编号
      */
     private String generateCategoryCode() {
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCode();
-
-        if (maxCode == null || StrUtil.isBlank(maxCode)) {
-            // 如果没有分类,从MC000001开始
-            return "MC000001";
-        }
-
-        // 提取数字部分并加1
-        String numberPart = maxCode.substring(2); // 去掉前缀MC
-        int nextNumber = Integer.parseInt(numberPart) + 1;
-
-        // 格式化为6位数字
-        return String.format("MC%06d", nextNumber);
+        return codeGenerateService.generate("BASE_MATERIAL_CATEGORY");
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.erp.common.core.result.Result;
 import com.erp.system.entity.SysMenu;
 import com.erp.system.param.SysMenuQueryParam;
@@ -30,6 +31,7 @@ public class SysMenuController {
      * 查询菜单列表
      */
     @Operation(summary = "查询菜单列表", description = "根据条件查询菜单列表")
+    @SaCheckPermission("system:menu:list")
     @GetMapping("/list")
     public Result<List<SysMenu>> list(SysMenuQueryParam param) {
         List<SysMenu> list = menuService.listQuery(param);
@@ -38,6 +40,9 @@ public class SysMenuController {
 
     /**
      * 获取菜单树
+     * <p>
+     * 刻意<b>不</b>加权限注解: 该接口除了菜单管理页, 还被"角色授权"页(AssignMenus.tsx)
+     * 复用; 若要求 system:menu:list, 采购经理等角色点开角色授权就会 403。
      */
     @Operation(summary = "获取菜单树", description = "获取菜单树形结构(顶级菜单列表)")
     @GetMapping("/tree")
@@ -48,6 +53,9 @@ public class SysMenuController {
 
     /**
      * 获取当前用户菜单
+     * <p>
+     * 同样<b>不</b>加权限注解: 它是每个登录用户构建自己侧边栏用的,
+     * 加了权限会导致非管理员登录后菜单加载失败, 直接变成"什么都看不到"。
      */
     @Operation(summary = "获取当前用户菜单", description = "获取当前登录用户的菜单列表")
     @GetMapping("/user-menus")
@@ -61,6 +69,7 @@ public class SysMenuController {
      * 根据ID查询菜单
      */
     @Operation(summary = "根据ID查询菜单", description = "根据ID查询菜单")
+    @SaCheckPermission("system:menu:list")
     @GetMapping("/{id}")
     public Result<SysMenu> getById(@PathVariable Long id) {
         SysMenu menu = menuService.getById(id);
@@ -71,6 +80,7 @@ public class SysMenuController {
      * 新增菜单
      */
     @Operation(summary = "新增菜单", description = "新增菜单")
+    @SaCheckPermission("system:menu:add")
     @PostMapping
     public Result<Void> save(@RequestBody SysMenu menu) {
         menuService.save(menu);
@@ -81,6 +91,7 @@ public class SysMenuController {
      * 修改菜单
      */
     @Operation(summary = "修改菜单", description = "修改菜单")
+    @SaCheckPermission("system:menu:edit")
     @PutMapping
     public Result<Void> update(@RequestBody SysMenu menu) {
         menuService.updateById(menu);
@@ -91,6 +102,7 @@ public class SysMenuController {
      * 删除菜单
      */
     @Operation(summary = "删除菜单", description = "删除菜单")
+    @SaCheckPermission("system:menu:delete")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         menuService.removeById(id);

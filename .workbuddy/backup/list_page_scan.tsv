@@ -1,0 +1,64 @@
+file	setcur1	calls	form	deps	searchStates	size
+pages/Basedata/Brand/index.tsx	2	6	True	current, pageSize	searchName,searchCode,searchStatus	300
+pages/Basedata/Customer/index.tsx	2	6	True	current, pageSize	searchName,searchCode,searchType,searchStatus	441
+pages/Basedata/Material/Info/index.tsx	2	7	True	|current, pageSize	searchName,searchCode,searchCategoryId,searchSpuId,searchStatus	500
+pages/Basedata/Material/Unit/index.tsx	2	6	True	current, pageSize	searchName,searchStatus	275
+pages/Basedata/Product/SaleProperty/index.tsx	2	5	True	current, pageSize	searchName,searchCode,searchStatus	310
+pages/Basedata/Product/Spu/index.tsx	2	5	True	|current, pageSize|selections, properties, existingSkus	searchName,searchCode,searchCategoryId,searchStatus	527
+pages/Basedata/Supplier/index.tsx	2	6	True	current, pageSize	searchName,searchCode,searchType,searchStatus	467
+pages/Business/Chart/Dashboard/index.tsx	0	1	False			159
+pages/Business/Chart/Purchase/index.tsx	0	3	False			118
+pages/Business/Chart/Sales/index.tsx	0	3	False			128
+pages/Business/Chart/Stock/index.tsx	0	3	False			130
+pages/Business/Chart/Summary/index.tsx	0	3	False			143
+pages/Business/Purchase/Order/List/index.tsx	2	7	False	|current, pageSize	searchSupplierId,searchStatus	283
+pages/Business/Purchase/Receipt/List/index.tsx	2	5	False	|current, pageSize	searchSupplierId,searchStatus	226
+pages/Business/Purchase/Return/List/index.tsx	2	5	False	|current, pageSize	searchSupplierId,searchStatus	226
+pages/Business/Retail/Outbound/Detail/index.tsx	0	1	False	id		69
+pages/Business/Retail/Outbound/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchScId,searchStatus	134
+pages/Business/Retail/Return/Detail/index.tsx	0	1	False	id		69
+pages/Business/Retail/Return/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchScId,searchStatus	134
+pages/Business/Sale/Delivery/List/index.tsx	2	5	False	|current, pageSize	searchCustomerId,searchStatus	100
+pages/Business/Sale/Order/List/index.tsx	2	7	False	|current, pageSize	searchCustomerId,searchStatus	152
+pages/Business/Sale/Return/List/index.tsx	2	5	False	|current, pageSize	searchCustomerId,searchStatus	78
+pages/Business/Settle/CheckSheet/Detail/index.tsx	0	1	False	|id		60
+pages/Business/Settle/CheckSheet/Form/index.tsx	0	1	True	|id		112
+pages/Business/Settle/CheckSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchSupplierId,searchStatus	105
+pages/Business/Settle/CustomerCheckSheet/Detail/index.tsx	0	1	False	|id		48
+pages/Business/Settle/CustomerCheckSheet/Form/index.tsx	0	1	True	|id		85
+pages/Business/Settle/CustomerCheckSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchCustomerId,searchStatus	100
+pages/Business/Settle/CustomerFeeSheet/Detail/index.tsx	0	1	False	|id		63
+pages/Business/Settle/CustomerFeeSheet/Form/index.tsx	0	1	True	|id		91
+pages/Business/Settle/CustomerFeeSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchCustomerId,searchStatus	101
+pages/Business/Settle/CustomerPreSheet/Detail/index.tsx	0	1	False	|id		61
+pages/Business/Settle/CustomerPreSheet/Form/index.tsx	0	1	True	|id		86
+pages/Business/Settle/CustomerPreSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchCustomerId,searchStatus	99
+pages/Business/Settle/CustomerSettleSheet/Detail/index.tsx	0	1	False	|id		48
+pages/Business/Settle/CustomerSettleSheet/Form/index.tsx	0	1	True	|id		85
+pages/Business/Settle/CustomerSettleSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchCustomerId,searchStatus	100
+pages/Business/Settle/FeeSheet/Detail/index.tsx	0	1	False	|id		94
+pages/Business/Settle/FeeSheet/Form/index.tsx	0	1	True	|id		198
+pages/Business/Settle/FeeSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchSupplierId,searchSheetType,searchStatus	141
+pages/Business/Settle/IncomeExpenseItem/List/index.tsx	2	5	True	current, pageSize	searchCode,searchName,searchItemType,searchStatus	245
+pages/Business/Settle/PreSheet/Detail/index.tsx	0	1	False	|id		78
+pages/Business/Settle/PreSheet/Form/index.tsx	0	1	True	|id		105
+pages/Business/Settle/PreSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchSupplierId,searchStatus	129
+pages/Business/Settle/SettleSheet/Detail/index.tsx	0	1	False	|id		59
+pages/Business/Settle/SettleSheet/Form/index.tsx	0	1	True	|id		102
+pages/Business/Settle/SettleSheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchSupplierId,searchStatus	102
+pages/Business/Stock/Adjust/Cost/List/index.tsx	2	5	True	current, pageSize|	searchCode,searchScId,searchStatus	301
+pages/Business/Stock/Adjust/Reason/index.tsx	2	5	True	current, pageSize	searchCode,searchName,searchStatus	233
+pages/Business/Stock/Adjust/Sheet/List/index.tsx	2	6	False	|current, pageSize	searchCode,searchScId,searchReasonId,searchBizType,searchStatus	325
+pages/Business/Stock/Check/List/index.tsx	2	5	False	|current, pageSize	searchScId,searchStatus	78
+pages/Business/Stock/Log/index.tsx	2	3	False	|current, pageSize	searchScId,searchProductName,searchBizType	258
+pages/Business/Stock/Query/index.tsx	2	3	False	|current, pageSize	searchScId,searchProductName	173
+pages/Business/Stock/Take/Config/index.tsx	0	2	True			134
+pages/Business/Stock/Transfer/Detail/index.tsx	0	2	False	id		131
+pages/Business/Stock/Transfer/List/index.tsx	2	5	False	|current, pageSize	searchOutScId,searchInScId,searchStatus	169
+pages/Business/Stock/Warning/index.tsx	2	4	True	|activeTab, current, pageSize	searchScId,searchProductName,searchStatus	412
+pages/System/Dict/index.tsx	0	0	True	typeCurrent, typePageSize|typeList	searchDictName	486
+pages/System/LoginLog/index.tsx	3	1	False	current, pageSize	searchUsername,searchStatus	200
+pages/System/OperationLog/index.tsx	3	1	False	current, pageSize	searchUsername,searchTitle,searchStatus,searchBusinessType	281
+pages/System/Role/AssignMenus.tsx	0	0	False	visible, role.id		159
+pages/System/User/AssignDept.tsx	0	0	False	visible		140
+pages/System/User/AssignRole.tsx	0	0	False	visible		95

@@ -14,11 +14,4 @@ export const getProductStockPage = (params: any): Promise<PageResult<any>> => {
     });
 };
 
-// 分页查询库存日志
-export const getProductStockLogPage = (params: any): Promise<PageResult<any>> => {
-    return request({
-        url: '/business/stock/log/page',
-        method: 'get',
-        params
-    });
-};
+// 注意：库存流水分页查询见 '@/api/business/stockLog'（getProductStockLogPage）

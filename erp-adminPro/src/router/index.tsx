@@ -6,6 +6,9 @@ import UserManagement from '@/pages/System/User'
 import RoleManagement from '@/pages/System/Role'
 import DeptManagement from '@/pages/System/Dept'
 import MenuManagement from '@/pages/System/Menu'
+import DictManagement from '@/pages/System/Dict'
+import LoginLogManagement from '@/pages/System/LoginLog'
+import OperationLogManagement from '@/pages/System/OperationLog'
 import WarehouseManagement from '@/pages/Basedata/Warehouse'
 import MaterialCategoryManagement from '@/pages/Basedata/Material/Category'
 import UnitManagement from '@/pages/Basedata/Material/Unit'
@@ -13,7 +16,10 @@ import MaterialManagement from '@/pages/Basedata/Material/Info'
 import SupplierManagement from '@/pages/Basedata/Supplier'
 import CustomerManagement from '@/pages/Basedata/Customer'
 import BrandManagement from '@/pages/Basedata/Brand'
+import SpuManagement from '@/pages/Basedata/Product/Spu'
+import SalePropertyManagement from '@/pages/Basedata/Product/SaleProperty'
 import InventoryQuery from '@/pages/Business/Stock/Query'
+import StockLogList from '@/pages/Business/Stock/Log'
 import PurchaseOrderList from '@/pages/Business/Purchase/Order/List'
 import PurchaseOrderForm from '@/pages/Business/Purchase/Order/Form'
 import PurchaseOrderDetail from '@/pages/Business/Purchase/Order/Detail'
@@ -41,6 +47,13 @@ import StockTransferDetail from '@/pages/Business/Stock/Transfer/Detail'
 import StockAdjustReasonList from '@/pages/Business/Stock/Adjust/Reason'
 import StockAdjustSheetList from '@/pages/Business/Stock/Adjust/Sheet/List'
 import StockAdjustSheetForm from '@/pages/Business/Stock/Adjust/Sheet/Form'
+import CostAdjustList from '@/pages/Business/Stock/Adjust/Cost/List'
+import CostAdjustForm from '@/pages/Business/Stock/Adjust/Cost/Form'
+import StockWarningPage from '@/pages/Business/Stock/Warning'
+import TakeStockConfigPage from '@/pages/Business/Stock/Take/Config'
+import TakeStockPlanPage from '@/pages/Business/Stock/Take/Plan'
+import PreTakeStockList from '@/pages/Business/Stock/Take/Pre/List'
+import PreTakeStockForm from '@/pages/Business/Stock/Take/Pre/Form'
 import RetailConfig from '@/pages/Business/Retail/Config'
 import RetailOutList from '@/pages/Business/Retail/Outbound/List'
 import RetailOutForm from '@/pages/Business/Retail/Outbound/Form'
@@ -131,6 +144,18 @@ const router = createBrowserRouter([
                 element: <MenuManagement />
             },
             {
+                path: 'system/dict',
+                element: <DictManagement />
+            },
+            {
+                path: 'system/loginlog',
+                element: <LoginLogManagement />
+            },
+            {
+                path: 'system/operationlog',
+                element: <OperationLogManagement />
+            },
+            {
                 path: 'basedata/warehouse',
                 element: <WarehouseManagement />
             },
@@ -159,8 +184,20 @@ const router = createBrowserRouter([
                 element: <BrandManagement />
             },
             {
+                path: 'basedata/product/spu',
+                element: <SpuManagement />
+            },
+            {
+                path: 'basedata/product/sale-property',
+                element: <SalePropertyManagement />
+            },
+            {
                 path: 'business/stock/query',
                 element: <InventoryQuery />
+            },
+            {
+                path: 'business/stock/log',
+                element: <StockLogList />
             },
             {
                 path: 'business/purchase/order',
@@ -309,6 +346,42 @@ const router = createBrowserRouter([
             {
                 path: 'stock/adjust/sheet/detail/:id',
                 element: <StockAdjustSheetList />
+            },
+            {
+                path: 'stock/adjust/cost',
+                element: <CostAdjustList />
+            },
+            {
+                path: 'stock/adjust/cost/add',
+                element: <CostAdjustForm />
+            },
+            {
+                path: 'stock/adjust/cost/edit/:id',
+                element: <CostAdjustForm />
+            },
+            {
+                path: 'stock/warning',
+                element: <StockWarningPage />
+            },
+            {
+                path: 'stock/take/config',
+                element: <TakeStockConfigPage />
+            },
+            {
+                path: 'stock/take/plan',
+                element: <TakeStockPlanPage />
+            },
+            {
+                path: 'stock/take/pre',
+                element: <PreTakeStockList />
+            },
+            {
+                path: 'stock/take/pre/add',
+                element: <PreTakeStockForm />
+            },
+            {
+                path: 'stock/take/pre/edit/:id',
+                element: <PreTakeStockForm />
             },
             {
                 path: 'business/retail/config',

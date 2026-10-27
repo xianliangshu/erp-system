@@ -12,6 +12,7 @@ import com.erp.business.entity.SettleCheckSheetDetail;
 import com.erp.business.mapper.SettleCheckSheetDetailMapper;
 import com.erp.business.mapper.SettleCheckSheetMapper;
 import com.erp.business.service.ISettleCheckSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SettleCheckSheetServiceImpl extends ServiceImpl<SettleCheckSheetMapper, SettleCheckSheet>
         implements ISettleCheckSheetService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SettleCheckSheetDetailMapper detailMapper;
 
@@ -107,7 +109,7 @@ public class SettleCheckSheetServiceImpl extends ServiceImpl<SettleCheckSheetMap
         SettleCheckSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("对账单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能修改");
 
         sheet.setSupplierId(dto.getSupplierId());
@@ -147,7 +149,7 @@ public class SettleCheckSheetServiceImpl extends ServiceImpl<SettleCheckSheetMap
         SettleCheckSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("对账单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能审核");
         sheet.setStatus(1);
         sheet.setApproveTime(LocalDateTime.now());
@@ -161,7 +163,7 @@ public class SettleCheckSheetServiceImpl extends ServiceImpl<SettleCheckSheetMap
         SettleCheckSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("对账单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能拒绝");
         sheet.setStatus(2);
         sheet.setApproveTime(LocalDateTime.now());
@@ -176,7 +178,7 @@ public class SettleCheckSheetServiceImpl extends ServiceImpl<SettleCheckSheetMap
         SettleCheckSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能删除");
         LambdaQueryWrapper<SettleCheckSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(SettleCheckSheetDetail::getSheetId, id);
@@ -186,14 +188,6 @@ public class SettleCheckSheetServiceImpl extends ServiceImpl<SettleCheckSheetMap
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "DZ" + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length()) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SETTLE_CHECK");
     }
 }

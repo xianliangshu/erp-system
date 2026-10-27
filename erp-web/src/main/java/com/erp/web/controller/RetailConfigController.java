@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.erp.business.entity.RetailConfig;
 import com.erp.business.service.IRetailConfigService;
 import com.erp.common.core.result.Result;
@@ -20,12 +21,14 @@ public class RetailConfigController {
     private IRetailConfigService retailConfigService;
 
     @Operation(summary = "获取零售配置")
+    @SaCheckPermission("business:retail:config")
     @GetMapping
     public Result<RetailConfig> get() {
         return Result.success(retailConfigService.getRetailConfig());
     }
 
     @Operation(summary = "更新零售配置")
+    @SaCheckPermission("business:retail:config")
     @PutMapping
     public Result<Void> update(@RequestBody RetailConfig config) {
         retailConfigService.updateRetailConfig(config);

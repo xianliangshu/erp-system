@@ -13,8 +13,8 @@ const StockCheckList: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState<any[]>([]);
     const [total, setTotal] = useState(0);
-    const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // 分页与查询条件：唯一的取数依据，搜索/重置/翻页都只改它
+    const [query, setQuery] = useState<any>({ current: 1, size: 10 });
     const [searchScId, setSearchScId] = useState<number | undefined>(undefined);
     const [searchStatus, setSearchStatus] = useState<number | undefined>(undefined);
     const [warehouses, setWarehouses] = useState<any[]>([]);
@@ -22,15 +22,15 @@ const StockCheckList: React.FC = () => {
     const loadWarehouses = async () => { try { const data: any = await getWarehouseList(); setWarehouses(Array.isArray(data) ? data : []); } catch (e) { console.error(e); } };
     const loadData = async () => {
         setLoading(true);
-        try { const data = await getStockCheckPage({ current, size: pageSize, scId: searchScId, status: searchStatus }); setDataSource(data.records); setTotal(data.total); }
+        try { const data = await getStockCheckPage({ ...query, scId: searchScId, status: searchStatus }); setDataSource(data.records); setTotal(data.total); }
         catch (error) { message.error('加载盘点数据失败'); } finally { setLoading(false); }
     };
 
     useEffect(() => { loadWarehouses(); }, []);
-    useEffect(() => { loadData(); }, [current, pageSize]);
+    useEffect(() => { loadData(); }, [query]);
 
-    const handleSearch = () => { setCurrent(1); loadData(); };
-    const handleReset = () => { setSearchScId(undefined); setSearchStatus(undefined); setCurrent(1); loadData(); };
+    const handleSearch = () => { setQuery((q: any) => ({ ...q, current: 1 })); };
+    const handleReset = () => { setSearchScId(undefined); setSearchStatus(undefined); setQuery((q: any) => ({ ...q, current: 1 })); };
     const handleApprove = async (id: number) => { try { await approveStockCheck(id); message.success('审核成功'); loadData(); } catch (e) { message.error('操作失败'); } };
     const handleDelete = async (id: number) => { try { await deleteStockCheck(id); message.success('删除成功'); loadData(); } catch (e) { message.error('删除失败'); } };
 
@@ -68,7 +68,7 @@ const StockCheckList: React.FC = () => {
                     <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/business/stock/check/add')}>新增盘点</Button>
                 </Space>
                 <Table loading={loading} columns={columns} dataSource={dataSource} rowKey="id"
-                    pagination={{ current, pageSize, total, showSizeChanger: true, showTotal: (t) => `共 ${t} 条`, onChange: (page, size) => { setCurrent(page); setPageSize(size); } }}
+                    pagination={{ current: query.current, pageSize: query.size, total, showSizeChanger: true, showTotal: (t) => `共 ${t} 条`, onChange: (page, size) => setQuery((q: any) => ({ ...q, current: page, size })), }}
                 />
             </Card>
         </div>

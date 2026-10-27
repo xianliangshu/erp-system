@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.SaleDeliveryDTO;
@@ -26,6 +27,7 @@ public class SaleDeliveryController {
     private final ISaleDeliveryService saleDeliveryService;
     private final SaleDeliveryDetailMapper saleDeliveryDetailMapper;
 
+    @SaCheckPermission("business:sale:delivery")
     @GetMapping("/page")
     public Result<Page<SaleDelivery>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -36,6 +38,7 @@ public class SaleDeliveryController {
         return Result.success(saleDeliveryService.getDeliveryPage(current, size, orderId, customerId, status));
     }
 
+    @SaCheckPermission("business:sale:delivery")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         SaleDelivery delivery = saleDeliveryService.getById(id);
@@ -52,23 +55,27 @@ public class SaleDeliveryController {
         return Result.success(result);
     }
 
+    @SaCheckPermission("business:sale:delivery")
     @PostMapping
     public Result<Long> create(@RequestBody SaleDeliveryDTO dto) {
         return Result.success(saleDeliveryService.createDelivery(dto));
     }
 
+    @SaCheckPermission("business:sale:delivery")
     @PutMapping
     public Result<Void> update(@RequestBody SaleDeliveryDTO dto) {
         saleDeliveryService.updateDelivery(dto);
         return Result.success();
     }
 
+    @SaCheckPermission("business:sale:delivery")
     @PostMapping("/{id}/confirm")
     public Result<Void> confirm(@PathVariable Long id) {
         saleDeliveryService.confirmDelivery(id);
         return Result.success();
     }
 
+    @SaCheckPermission("business:sale:delivery")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         saleDeliveryService.removeById(id);

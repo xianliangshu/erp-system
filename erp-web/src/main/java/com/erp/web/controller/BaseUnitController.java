@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.basedata.dto.UnitPageParam;
 import com.erp.basedata.entity.BaseUnit;
@@ -26,6 +27,7 @@ public class BaseUnitController {
     /**
      * 分页查询单位
      */
+    @SaCheckPermission("basedata:material:unit")
     @GetMapping("/page")
     public Result<Page<BaseUnit>> getPage(UnitPageParam param) {
         Page<BaseUnit> page = unitService.getUnitPage(param);
@@ -44,6 +46,7 @@ public class BaseUnitController {
     /**
      * 根据ID获取单位
      */
+    @SaCheckPermission("basedata:material:unit")
     @GetMapping("/{id}")
     public Result<BaseUnit> getById(@PathVariable Long id) {
         BaseUnit unit = unitService.getById(id);
@@ -53,6 +56,7 @@ public class BaseUnitController {
     /**
      * 新增单位
      */
+    @SaCheckPermission("basedata:material:unit")
     @PostMapping
     public Result<Void> save(@RequestBody BaseUnit unit) {
         unitService.saveUnit(unit);
@@ -62,6 +66,7 @@ public class BaseUnitController {
     /**
      * 更新单位
      */
+    @SaCheckPermission("basedata:material:unit")
     @PutMapping("/{id}")
     public Result<Void> update(@PathVariable Long id, @RequestBody BaseUnit unit) {
         unit.setId(id);
@@ -72,6 +77,7 @@ public class BaseUnitController {
     /**
      * 删除单位
      */
+    @SaCheckPermission("basedata:material:unit")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         unitService.deleteUnit(id);

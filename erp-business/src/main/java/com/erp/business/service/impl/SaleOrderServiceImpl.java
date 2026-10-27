@@ -11,6 +11,7 @@ import com.erp.business.enums.SaleOrderStatus;
 import com.erp.business.mapper.SaleOrderDetailMapper;
 import com.erp.business.mapper.SaleOrderMapper;
 import com.erp.business.service.ISaleOrderService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class SaleOrderServiceImpl extends ServiceImpl<SaleOrderMapper, SaleOrder>
         implements ISaleOrderService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SaleOrderDetailMapper orderDetailMapper;
 
@@ -196,19 +198,6 @@ public class SaleOrderServiceImpl extends ServiceImpl<SaleOrderMapper, SaleOrder
 
     @Override
     public String generateOrderCode() {
-        // 格式: SO + 日期 + 4位序号, 例如: SO202312210001
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "SO" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SALE_ORDER");
     }
 }

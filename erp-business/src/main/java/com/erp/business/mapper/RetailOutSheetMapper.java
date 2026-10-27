@@ -10,10 +10,4 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface RetailOutSheetMapper extends BaseMapper<RetailOutSheet> {
-
-    /**
-     * 查询最大编号
-     */
-    @Select("SELECT MAX(code) FROM retail_out_sheet")
-    String selectMaxCode();
 }

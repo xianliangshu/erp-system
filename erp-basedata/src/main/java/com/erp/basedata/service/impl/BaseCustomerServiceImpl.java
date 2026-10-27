@@ -8,11 +8,21 @@ import com.erp.basedata.dto.CustomerPageParam;
 import com.erp.basedata.entity.BaseCustomer;
 import com.erp.basedata.mapper.BaseCustomerMapper;
 import com.erp.basedata.service.IBaseCustomerService;
+import com.erp.basedata.vo.CustomerExcelVO;
+import com.erp.common.core.vo.ExcelImportResult;
 import com.erp.common.exception.BusinessException;
+import com.erp.common.service.ICodeGenerateService;
+import com.erp.common.util.ExcelUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 客户信息Service实现类
@@ -23,6 +33,8 @@ import java.util.List;
 @Service
 public class BaseCustomerServiceImpl extends ServiceImpl<BaseCustomerMapper, BaseCustomer>
         implements IBaseCustomerService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Override
     public Page<BaseCustomer> getCustomerPage(CustomerPageParam param) {
@@ -130,6 +142,136 @@ public class BaseCustomerServiceImpl extends ServiceImpl<BaseCustomerMapper, Bas
         return super.removeById(id);
     }
 
+    @Override
+    public List<CustomerExcelVO> listForExport(CustomerPageParam param) {
+        LambdaQueryWrapper<BaseCustomer> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(StrUtil.isNotBlank(param.getName()), BaseCustomer::getName, param.getName())
+                .like(StrUtil.isNotBlank(param.getCode()), BaseCustomer::getCode, param.getCode())
+                .eq(param.getType() != null, BaseCustomer::getType, param.getType())
+                .eq(param.getLevel() != null, BaseCustomer::getLevel, param.getLevel())
+                .eq(param.getStatus() != null, BaseCustomer::getStatus, param.getStatus())
+                .orderByAsc(BaseCustomer::getSort)
+                .orderByAsc(BaseCustomer::getId);
+
+        return this.list(wrapper).stream().map(this::toExcelVO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ExcelImportResult importExcel(InputStream in) {
+        List<CustomerExcelVO> rows = ExcelUtils.read(in, CustomerExcelVO.class);
+        rows.removeIf(row -> row == null || (trim(row.getName()).isEmpty() && trim(row.getCode()).isEmpty()));
+
+        ExcelImportResult result = new ExcelImportResult();
+        if (rows.isEmpty()) {
+            throw new BusinessException("导入文件中没有数据行，请先下载导入模板再填写");
+        }
+        result.setTotal(rows.size());
+
+        // 库内已存在的名称与编码，用于文件内 / 库内判重
+        Set<String> existNames = this.list().stream()
+                .map(c -> trim(c.getName())).collect(Collectors.toSet());
+        Set<String> existCodes = baseMapper.selectList(null).stream()
+                .map(c -> trim(c.getCode())).collect(Collectors.toSet());
+
+        // pass 1: 只校验、不落库
+        List<BaseCustomer> pending = new ArrayList<>();
+        Set<String> fileNames = new HashSet<>();
+        Set<String> fileCodes = new HashSet<>();
+        for (int i = 0; i < rows.size(); i++) {
+            int rowNum = i + 2; // 第 1 行是表头
+            try {
+                pending.add(convertRow(rows.get(i), existNames, existCodes, fileNames, fileCodes));
+            } catch (Exception e) {
+                result.addError(rowNum, e.getMessage());
+            }
+        }
+        if (!result.isAllSuccess()) {
+            return result;
+        }
+
+        // pass 2: 零错误，统一写入
+        for (BaseCustomer customer : pending) {
+            saveCustomer(customer);
+        }
+        result.setSuccess(pending.size());
+        return result;
+    }
+
+    /**
+     * 实体 → Excel 行模型
+     */
+    private CustomerExcelVO toExcelVO(BaseCustomer customer) {
+        CustomerExcelVO vo = new CustomerExcelVO();
+        vo.setCode(customer.getCode());
+        vo.setName(customer.getName());
+        vo.setShortName(customer.getShortName());
+        vo.setType(customer.getType());
+        vo.setLevel(customer.getLevel());
+        vo.setContactPerson(customer.getContactPerson());
+        vo.setContactPhone(customer.getContactPhone());
+        vo.setContactEmail(customer.getContactEmail());
+        vo.setAddress(customer.getAddress());
+        vo.setSettlementMethod(customer.getSettlementMethod());
+        vo.setPaymentDays(customer.getPaymentDays());
+        vo.setStatusText(ExcelUtils.statusText(customer.getStatus()));
+        vo.setRemark(customer.getRemark());
+        return vo;
+    }
+
+    /**
+     * Excel 行 → 客户实体（校验失败抛 BusinessException）
+     */
+    private BaseCustomer convertRow(CustomerExcelVO row, Set<String> existNames, Set<String> existCodes,
+                                    Set<String> fileNames, Set<String> fileCodes) {
+        String name = trim(row.getName());
+        if (name.isEmpty()) {
+            throw new BusinessException("客户名称不能为空");
+        }
+        if (fileNames.contains(name)) {
+            throw new BusinessException("客户名称在本文件中重复: " + name);
+        }
+        if (existNames.contains(name)) {
+            throw new BusinessException("客户名称已存在: " + name);
+        }
+
+        BaseCustomer customer = new BaseCustomer();
+        customer.setName(name);
+        customer.setShortName(row.getShortName());
+        customer.setType(row.getType());
+        customer.setLevel(row.getLevel());
+        customer.setContactPerson(row.getContactPerson());
+        customer.setContactPhone(row.getContactPhone());
+        customer.setContactEmail(row.getContactEmail());
+        customer.setAddress(row.getAddress());
+        customer.setSettlementMethod(row.getSettlementMethod());
+        customer.setPaymentDays(row.getPaymentDays());
+        customer.setStatus(ExcelUtils.parseStatus(row.getStatusText(), 1));
+        customer.setRemark(row.getRemark());
+
+        String code = trim(row.getCode());
+        if (!code.isEmpty()) {
+            if (fileCodes.contains(code)) {
+                throw new BusinessException("客户编号在本文件中重复: " + code);
+            }
+            if (existCodes.contains(code)) {
+                throw new BusinessException("客户编号已存在: " + code);
+            }
+            customer.setCode(code);
+        }
+
+        fileNames.add(name);
+        fileCodes.add(code);
+        return customer;
+    }
+
+    /**
+     * null 安全的去空格
+     */
+    private static String trim(String s) {
+        return s == null ? "" : s.trim();
+    }
+
     /**
      * 生成客户编号
      * 格式: CUS + 6位数字 (例如: CUS000001)
@@ -137,20 +279,7 @@ public class BaseCustomerServiceImpl extends ServiceImpl<BaseCustomerMapper, Bas
      * @return 客户编号
      */
     private String generateCustomerCode() {
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCode();
-
-        if (maxCode == null || StrUtil.isBlank(maxCode)) {
-            // 如果没有客户,从CUS000001开始
-            return "CUS000001";
-        }
-
-        // 提取数字部分并加1
-        String numberPart = maxCode.substring(3); // 去掉前缀CUS
-        int nextNumber = Integer.parseInt(numberPart) + 1;
-
-        // 格式化为6位数字
-        return String.format("CUS%06d", nextNumber);
+        return codeGenerateService.generate("BASE_CUSTOMER");
     }
 
     /**

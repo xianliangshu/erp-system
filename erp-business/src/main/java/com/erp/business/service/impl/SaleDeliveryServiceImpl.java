@@ -17,13 +17,16 @@ import com.erp.business.mapper.SaleOrderDetailMapper;
 import com.erp.business.service.ISaleDeliveryService;
 import com.erp.business.service.ISaleOrderService;
 import com.erp.business.service.IProductStockService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 销售出库服务实现
@@ -32,6 +35,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SaleDeliveryServiceImpl extends ServiceImpl<SaleDeliveryMapper, SaleDelivery>
         implements ISaleDeliveryService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SaleDeliveryDetailMapper deliveryDetailMapper;
     private final ISaleOrderService saleOrderService;
@@ -110,7 +114,7 @@ public class SaleDeliveryServiceImpl extends ServiceImpl<SaleDeliveryMapper, Sal
         SaleDelivery delivery = this.getById(dto.getId());
         if (delivery == null)
             throw new RuntimeException("出库单不存在");
-        if (delivery.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(delivery.getStatus()))
             throw new RuntimeException("只有待确认的出库单才能修改");
 
         delivery.setDescription(dto.getDescription());
@@ -152,18 +156,31 @@ public class SaleDeliveryServiceImpl extends ServiceImpl<SaleDeliveryMapper, Sal
         SaleDelivery delivery = this.getById(id);
         if (delivery == null)
             throw new RuntimeException("出库单不存在");
-        if (delivery.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(delivery.getStatus()))
             throw new RuntimeException("出库单已确认");
-
-        delivery.setStatus(1);
-        this.updateById(delivery);
 
         LambdaQueryWrapper<SaleDeliveryDetail> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(SaleDeliveryDetail::getDeliveryId, id);
         List<SaleDeliveryDetail> details = deliveryDetailMapper.selectList(wrapper);
 
+        // 修复(2026-10-03)：出库前必须校验库存，否则可以把库存扣成负数。
+        // 按商品把出库量汇总后再校验：同一次出库中同一商品可能落在多条明细上，
+        // 逐条校验会漏掉累计超出的情况（例如库存 88，两条明细各要 60）。
+        Map<Long, BigDecimal> requireByProduct = new LinkedHashMap<>();
+        for (SaleDeliveryDetail detail : details) {
+            requireByProduct.merge(detail.getProductId(), detail.getDeliveryNum(), BigDecimal::add);
+        }
+        for (Map.Entry<Long, BigDecimal> entry : requireByProduct.entrySet()) {
+            productStockService.checkStockEnough(delivery.getScId(), entry.getKey(), entry.getValue());
+        }
+
+        delivery.setStatus(1);
+        this.updateById(delivery);
+
         // 扣减库存
         for (SaleDeliveryDetail detail : details) {
+            // 出库走 subStock：addStock 的 isAdd=true 会用传入价格覆盖成本价，
+            // 而出库传的是售价，会把售价写进成本价、抬高库存金额。
             productStockService.subStock(
                     delivery.getScId(),
                     detail.getProductId(),
@@ -192,6 +209,10 @@ public class SaleDeliveryServiceImpl extends ServiceImpl<SaleDeliveryMapper, Sal
         wrapper.eq(SaleOrderDetail::getOrderId, orderId);
         List<SaleOrderDetail> details = orderDetailMapper.selectList(wrapper);
 
+        if (details.isEmpty()) {
+            return;
+        }
+
         boolean allDelivered = details.stream()
                 .allMatch(d -> d.getDeliveredNum() != null && d.getDeliveredNum().compareTo(d.getOrderNum()) >= 0);
 
@@ -216,17 +237,6 @@ public class SaleDeliveryServiceImpl extends ServiceImpl<SaleDeliveryMapper, Sal
     }
 
     private String generateDeliveryCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "SD" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SALE_DELIVERY");
     }
 }

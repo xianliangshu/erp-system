@@ -14,12 +14,15 @@ import com.erp.business.mapper.PurchaseReturnMapper;
 import com.erp.business.service.IPurchaseReceiptService;
 import com.erp.business.service.IPurchaseReturnService;
 import com.erp.business.service.IProductStockService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 采购退货服务实现
@@ -28,6 +31,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper, PurchaseReturn>
         implements IPurchaseReturnService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final PurchaseReturnDetailMapper returnDetailMapper;
     private final IPurchaseReceiptService purchaseReceiptService;
@@ -61,7 +65,7 @@ public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper,
         if (receipt == null) {
             throw new RuntimeException("收货单不存在");
         }
-        if (receipt.getStatus() != 1) {
+        if (!Integer.valueOf(1).equals(receipt.getStatus())) {
             throw new RuntimeException("只有已确认的收货单才能退货");
         }
 
@@ -117,7 +121,7 @@ public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper,
         if (purchaseReturn == null) {
             throw new RuntimeException("退货单不存在");
         }
-        if (purchaseReturn.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(purchaseReturn.getStatus())) {
             throw new RuntimeException("只有待确认的退货单才能修改");
         }
 
@@ -164,7 +168,7 @@ public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper,
         if (purchaseReturn == null) {
             throw new RuntimeException("退货单不存在");
         }
-        if (purchaseReturn.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(purchaseReturn.getStatus())) {
             throw new RuntimeException("只有待确认的退货单才能确认");
         }
 
@@ -173,7 +177,17 @@ public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper,
         detailWrapper.eq(PurchaseReturnDetail::getReturnId, id);
         var details = returnDetailMapper.selectList(detailWrapper);
 
-        // 2. 扣减库存
+        // 2. 修复(2026-10-03)：退货出库前必须校验库存，否则可以把库存扣成负数。
+        // 按商品把退货量汇总后再校验：同一商品可能落在多条明细上，逐条校验会漏掉累计超出。
+        Map<Long, BigDecimal> requireByProduct = new LinkedHashMap<>();
+        for (PurchaseReturnDetail detail : details) {
+            requireByProduct.merge(detail.getProductId(), detail.getReturnNum(), BigDecimal::add);
+        }
+        for (Map.Entry<Long, BigDecimal> entry : requireByProduct.entrySet()) {
+            productStockService.checkStockEnough(purchaseReturn.getScId(), entry.getKey(), entry.getValue());
+        }
+
+        // 3. 扣减库存（出库走 subStock，不能用 addStock 传负数：那会用售价覆盖成本价）
         for (PurchaseReturnDetail detail : details) {
             productStockService.subStock(
                     purchaseReturn.getScId(),
@@ -185,27 +199,14 @@ public class PurchaseReturnServiceImpl extends ServiceImpl<PurchaseReturnMapper,
                     ProductStockBizType.PURCHASE_RETURN);
         }
 
-        // 3. 更新退货单状态
+        // 4. 更新退货单状态
         purchaseReturn.setStatus(1); // 已确认
         this.updateById(purchaseReturn);
     }
 
     @Override
     public String generateReturnCode() {
-        // 格式: PTH + 日期 + 4位序号, 例如: PTH202312210001
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "PTH" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("PURCHASE_RETURN");
     }
 
     @Override

@@ -7,7 +7,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <Card title="欢迎使用ERP管理系统" style={{ marginBottom: 24 }}>
+            <Card title="欢迎使用" style={{ marginBottom: 24 }}>
                 <p style={{ fontSize: 16 }}>您好，{user?.nickname || user?.username}！</p>
                 <p style={{ color: '#666' }}>欢迎回来，这是您的工作台。</p>
             </Card>

@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.SettleInOutItemDTO;
 import com.erp.business.dto.SettleInOutItemQueryDTO;
@@ -28,6 +29,7 @@ public class SettleInOutItemController {
      * 分页查询
      */
     @Operation(summary = "分页查询")
+    @SaCheckPermission("business:settle:item")
     @GetMapping("/page")
     public Result<Page<SettleInOutItem>> page(@RequestParam(defaultValue = "1") Long current,
             @RequestParam(defaultValue = "10") Long size,
@@ -40,6 +42,7 @@ public class SettleInOutItemController {
      * 获取详情
      */
     @Operation(summary = "获取详情")
+    @SaCheckPermission("business:settle:item")
     @GetMapping("/{id}")
     public Result<SettleInOutItem> getInfo(@PathVariable Long id) {
         return Result.success(itemService.getById(id));
@@ -49,6 +52,7 @@ public class SettleInOutItemController {
      * 新增
      */
     @Operation(summary = "新增")
+    @SaCheckPermission("business:settle:item")
     @PostMapping
     public Result<Void> add(@RequestBody SettleInOutItemDTO dto) {
         SettleInOutItem item = new SettleInOutItem();
@@ -69,6 +73,7 @@ public class SettleInOutItemController {
      * 修改
      */
     @Operation(summary = "修改")
+    @SaCheckPermission("business:settle:item")
     @PutMapping
     public Result<Void> edit(@RequestBody SettleInOutItemDTO dto) {
         SettleInOutItem item = itemService.getById(dto.getId());
@@ -87,6 +92,7 @@ public class SettleInOutItemController {
      * 删除
      */
     @Operation(summary = "删除")
+    @SaCheckPermission("business:settle:item")
     @DeleteMapping("/{ids}")
     public Result<Void> remove(@PathVariable List<Long> ids) {
         itemService.removeByIds(ids);

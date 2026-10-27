@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.PurchaseReturnDTO;
 import com.erp.business.entity.PurchaseReturn;
@@ -29,6 +30,7 @@ public class PurchaseReturnController {
     /**
      * 分页查询采购退货
      */
+    @SaCheckPermission("business:purchase:return")
     @GetMapping("/page")
     public Result<Page<PurchaseReturn>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -42,6 +44,7 @@ public class PurchaseReturnController {
     /**
      * 获取退货单详情（包含明细）
      */
+    @SaCheckPermission("business:purchase:return")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         PurchaseReturn purchaseReturn = purchaseReturnService.getById(id);
@@ -64,6 +67,7 @@ public class PurchaseReturnController {
     /**
      * 创建采购退货
      */
+    @SaCheckPermission("business:purchase:return")
     @PostMapping
     public Result<Long> create(@RequestBody PurchaseReturnDTO dto) {
         Long returnId = purchaseReturnService.createReturn(dto);
@@ -73,6 +77,7 @@ public class PurchaseReturnController {
     /**
      * 更新采购退货
      */
+    @SaCheckPermission("business:purchase:return")
     @PutMapping
     public Result<Void> update(@RequestBody PurchaseReturnDTO dto) {
         purchaseReturnService.updateReturn(dto);
@@ -82,6 +87,7 @@ public class PurchaseReturnController {
     /**
      * 确认退货
      */
+    @SaCheckPermission("business:purchase:return")
     @PostMapping("/{id}/confirm")
     public Result<Void> confirm(@PathVariable Long id) {
         purchaseReturnService.confirmReturn(id);
@@ -91,6 +97,7 @@ public class PurchaseReturnController {
     /**
      * 删除退货单
      */
+    @SaCheckPermission("business:purchase:return")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         purchaseReturnService.removeById(id);

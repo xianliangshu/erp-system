@@ -12,6 +12,7 @@ import com.erp.business.mapper.StockTransferDetailMapper;
 import com.erp.business.mapper.StockTransferMapper;
 import com.erp.business.service.IProductStockService;
 import com.erp.business.service.IStockTransferService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,12 +21,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, StockTransfer>
         implements IStockTransferService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final StockTransferDetailMapper transferDetailMapper;
     private final IProductStockService productStockService;
@@ -92,7 +96,7 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
         StockTransfer transfer = this.getById(dto.getId());
         if (transfer == null)
             throw new RuntimeException("调拨单不存在");
-        if (transfer.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(transfer.getStatus()))
             throw new RuntimeException("只有待确认的调拨单才能修改");
 
         // 验证调出仓库和调入仓库不能相同
@@ -137,7 +141,7 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
         StockTransfer transfer = this.getById(id);
         if (transfer == null)
             throw new RuntimeException("调拨单不存在");
-        if (transfer.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(transfer.getStatus()))
             throw new RuntimeException("调拨单已确认");
 
         // 获取调拨明细
@@ -145,9 +149,19 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
         wrapper.eq(StockTransferDetail::getTransferId, id);
         List<StockTransferDetail> details = transferDetailMapper.selectList(wrapper);
 
+        // 修复(2026-10-03)：调出仓库出库前必须校验库存，否则可以把库存扣成负数。
+        // 按商品把调拨量汇总后再校验：同一商品可能落在多条明细上，逐条校验会漏掉累计超出。
+        Map<Long, BigDecimal> requireByProduct = new LinkedHashMap<>();
+        for (StockTransferDetail detail : details) {
+            requireByProduct.merge(detail.getProductId(), detail.getTransferNum(), BigDecimal::add);
+        }
+        for (Map.Entry<Long, BigDecimal> entry : requireByProduct.entrySet()) {
+            productStockService.checkStockEnough(transfer.getOutScId(), entry.getKey(), entry.getValue());
+        }
+
         // 执行库存变动
         for (StockTransferDetail detail : details) {
-            // 调出仓库扣减库存
+            // 调出仓库扣减库存（出库走 subStock，不能用 addStock 传负数）
             productStockService.subStock(
                     transfer.getOutScId(),
                     detail.getProductId(),
@@ -157,7 +171,7 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
                     transfer.getCode(),
                     ProductStockBizType.STOCK_TRANSFER_OUT);
 
-            // 调入仓库增加库存
+            // 调入仓库增加库存（调拨入库传的是成本价，走 addStock 正确）
             productStockService.addStock(
                     transfer.getInScId(),
                     detail.getProductId(),
@@ -179,7 +193,7 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
         StockTransfer transfer = this.getById(id);
         if (transfer == null)
             throw new RuntimeException("调拨单不存在");
-        if (transfer.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(transfer.getStatus()))
             throw new RuntimeException("已确认的调拨单不能删除");
 
         // 删除明细
@@ -192,17 +206,6 @@ public class StockTransferServiceImpl extends ServiceImpl<StockTransferMapper, S
     }
 
     private String generateTransferCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "ST" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("STOCK_TRANSFER");
     }
 }

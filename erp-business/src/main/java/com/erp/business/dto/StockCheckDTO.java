@@ -10,6 +10,10 @@ public class StockCheckDTO {
     private Long scId;
     private String checkDate;
     private String description;
+    /** 关联盘点任务ID（可空，仅「由任务生成差异」时传入） */
+    private Long planId;
+    /** 关联预先盘点单ID（可空） */
+    private Long preSheetId;
     private List<StockCheckDetailDTO> details;
 
     @Data

@@ -24,7 +24,11 @@ public enum ProductStockBizType implements IEnum<Integer> {
     STOCK_TRANSFER_OUT(9, "调拨出库"),
     STOCK_TRANSFER_IN(10, "调拨入库"),
     RETAIL_OUT(11, "零售出库"),
-    RETAIL_RETURN(12, "零售退货");
+    RETAIL_RETURN(12, "零售退货"),
+    /**
+     * 成本调整：数量变动恒为 0，只标记「此处发生过一次成本价调整」，便于在流水里过滤
+     */
+    COST_ADJUST(13, "成本调整");
 
     @EnumValue
     @JsonValue

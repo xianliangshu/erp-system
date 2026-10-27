@@ -12,6 +12,7 @@ import com.erp.business.entity.CustomerPreSheetDetail;
 import com.erp.business.mapper.CustomerPreSheetDetailMapper;
 import com.erp.business.mapper.CustomerPreSheetMapper;
 import com.erp.business.service.ICustomerPreSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CustomerPreSheetServiceImpl extends ServiceImpl<CustomerPreSheetMapper, CustomerPreSheet>
         implements ICustomerPreSheetService {
+    private final ICodeGenerateService codeGenerateService;
     private final CustomerPreSheetDetailMapper detailMapper;
 
     @Override
@@ -90,7 +92,7 @@ public class CustomerPreSheetServiceImpl extends ServiceImpl<CustomerPreSheetMap
         CustomerPreSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("单据不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能修改");
         sheet.setCustomerId(dto.getCustomerId());
         sheet.setDescription(dto.getDescription());
@@ -120,7 +122,7 @@ public class CustomerPreSheetServiceImpl extends ServiceImpl<CustomerPreSheetMap
         CustomerPreSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("单据不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能审核");
         sheet.setStatus(1);
         sheet.setApproveTime(LocalDateTime.now());
@@ -134,7 +136,7 @@ public class CustomerPreSheetServiceImpl extends ServiceImpl<CustomerPreSheetMap
         CustomerPreSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("单据不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能拒绝");
         sheet.setStatus(2);
         sheet.setApproveTime(LocalDateTime.now());
@@ -149,7 +151,7 @@ public class CustomerPreSheetServiceImpl extends ServiceImpl<CustomerPreSheetMap
         CustomerPreSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能删除");
         LambdaQueryWrapper<CustomerPreSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(CustomerPreSheetDetail::getSheetId, id);
@@ -159,12 +161,6 @@ public class CustomerPreSheetServiceImpl extends ServiceImpl<CustomerPreSheetMap
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "KYS" + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length())
-            seq = Integer.parseInt(maxCode.substring(prefix.length())) + 1;
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("CUSTOMER_PRE");
     }
 }

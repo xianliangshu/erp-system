@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.erp.business.entity.StockAdjustReason;
 import com.erp.business.mapper.StockAdjustReasonMapper;
 import com.erp.business.service.IStockAdjustReasonService;
+import com.erp.common.service.ICodeGenerateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,6 +17,8 @@ import org.springframework.util.StringUtils;
 @Service
 public class StockAdjustReasonServiceImpl extends ServiceImpl<StockAdjustReasonMapper, StockAdjustReason>
         implements IStockAdjustReasonService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Override
     public IPage<StockAdjustReason> page(IPage<StockAdjustReason> page, String code, String name, Integer status) {
@@ -28,12 +32,7 @@ public class StockAdjustReasonServiceImpl extends ServiceImpl<StockAdjustReasonM
 
     @Override
     public String generateCode() {
-        String maxCode = baseMapper.selectMaxCode();
-        if (maxCode == null) {
-            return "001";
-        }
-        int nextNum = Integer.parseInt(maxCode) + 1;
-        return String.format("%03d", nextNum);
+        return codeGenerateService.generate("STOCK_ADJUST_REASON");
     }
 
     @Override

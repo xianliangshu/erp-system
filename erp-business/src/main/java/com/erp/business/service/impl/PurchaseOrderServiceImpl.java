@@ -11,6 +11,7 @@ import com.erp.business.enums.PurchaseOrderStatus;
 import com.erp.business.mapper.PurchaseOrderDetailMapper;
 import com.erp.business.mapper.PurchaseOrderMapper;
 import com.erp.business.service.IPurchaseOrderService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, PurchaseOrder>
         implements IPurchaseOrderService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final PurchaseOrderDetailMapper detailMapper;
 
@@ -199,19 +201,6 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
 
     @Override
     public String generateOrderCode() {
-        // 格式: PO + 日期 + 4位序号, 例如: PO202312210001
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "PO" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("PURCHASE_ORDER");
     }
 }

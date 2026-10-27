@@ -1,0 +1,75 @@
+src/components/Layout/MainLayout.tsx(9,5): error TS6133: 'DashboardOutlined' is declared but its value is never read.
+src/pages/Basedata/Material/Category/index.tsx(16,12): error TS6133: 'selectedParentId' is declared but its value is never read.
+src/pages/Basedata/Material/Category/index.tsx(26,44): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'any[]'.
+  Type 'AxiosResponse<any, any, {}>' is missing the following properties from type 'any[]': length, pop, push, concat, and 29 more.
+src/pages/Basedata/Material/Category/index.tsx(30,30): error TS2339: Property 'length' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Material/Category/index.tsx(31,35): error TS2339: Property 'map' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Material/Info/index.tsx(49,46): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'any[]'.
+  Type 'AxiosResponse<any, any, {}>' is missing the following properties from type 'any[]': length, pop, push, concat, and 29 more.
+src/pages/Basedata/Material/Info/index.tsx(50,29): error TS2345: Argument of type 'any[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type 'any[]' is not assignable to type 'never[]'.
+    Type 'any' is not assignable to type 'never'.
+src/pages/Basedata/Material/Info/index.tsx(60,25): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<never[]>'.
+src/pages/Basedata/Material/Info/index.tsx(70,24): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Basedata/Material/Info/index.tsx(104,32): error TS2339: Property 'records' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Material/Info/index.tsx(105,27): error TS2339: Property 'total' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Material/Unit/index.tsx(33,32): error TS2339: Property 'records' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Material/Unit/index.tsx(34,27): error TS2339: Property 'total' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/SaleProperty/index.tsx(46,32): error TS2339: Property 'records' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/SaleProperty/index.tsx(47,27): error TS2339: Property 'total' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(74,42): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'any[]'.
+  Type 'AxiosResponse<any, any, {}>' is missing the following properties from type 'any[]': length, pop, push, concat, and 29 more.
+src/pages/Basedata/Product/Spu/index.tsx(75,25): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Basedata/Product/Spu/index.tsx(76,26): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Basedata/Product/Spu/index.tsx(77,27): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Basedata/Product/Spu/index.tsx(99,32): error TS2339: Property 'records' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(100,27): error TS2339: Property 'total' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(202,36): error TS2339: Property 'categoryId' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(203,33): error TS2339: Property 'brandId' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(204,32): error TS2339: Property 'unitId' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(205,30): error TS2339: Property 'code' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(206,30): error TS2339: Property 'name' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(207,35): error TS2339: Property 'shortName' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(208,39): error TS2339: Property 'specification' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(210,32): error TS2339: Property 'remark' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(215,26): error TS2339: Property 'forEach' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/index.tsx(227,29): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Basedata/Product/Spu/SkuDrawer.tsx(8,5): error TS6133: 'materialCodeTypeText' is declared but its value is never read.
+src/pages/Basedata/Product/Spu/SkuDrawer.tsx(22,11): error TS6133: 'modal' is declared but its value is never read.
+src/pages/Basedata/Product/Spu/SkuDrawer.tsx(35,21): error TS2345: Argument of type 'AxiosResponse<any, any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Basedata/Product/Spu/SkuDrawer.tsx(55,38): error TS2339: Property 'length' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Product/Spu/SkuDrawer.tsx(56,29): error TS2339: Property 'map' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Supplier/index.tsx(49,32): error TS2339: Property 'records' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Basedata/Supplier/index.tsx(50,27): error TS2339: Property 'total' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Business/Chart/Dashboard/index.tsx(3,46): error TS6133: 'DatabaseOutlined' is declared but its value is never read.
+src/pages/Business/Purchase/Return/Form/index.tsx(24,12): error TS6133: 'selectedReceiptId' is declared but its value is never read.
+src/pages/Business/Stock/Adjust/Reason/index.tsx(6,7): error TS6133: 'Search' is declared but its value is never read.
+src/pages/Business/Stock/Adjust/Sheet/Form/index.tsx(152,11): error TS6133: 'getMaterialName' is declared but its value is never read.
+src/pages/Business/Stock/Check/Form/index.tsx(45,11): error TS6133: 'getMaterialName' is declared but its value is never read.
+src/pages/Business/Stock/Query/index.tsx(2,62): error TS6133: 'Tag' is declared but its value is never read.
+src/pages/Business/Stock/Query/index.tsx(7,7): error TS6133: 'Search' is declared but its value is never read.
+src/pages/Business/Stock/Query/index.tsx(25,27): error TS2345: Argument of type 'AxiosResponse<Warehouse[], any, {}>' is not assignable to parameter of type 'SetStateAction<any[]>'.
+src/pages/Business/Stock/Transfer/List/index.tsx(44,32): error TS2339: Property 'records' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/Business/Stock/Transfer/List/index.tsx(45,27): error TS2339: Property 'total' does not exist on type 'AxiosResponse<any, any, {}>'.
+src/pages/System/Dept/index.tsx(9,7): error TS6133: 'Search' is declared but its value is never read.
+src/pages/System/Dept/index.tsx(242,72): error TS2345: Argument of type 'readonly Key[]' is not assignable to parameter of type 'SetStateAction<Key[]>'.
+  The type 'readonly Key[]' is 'readonly' and cannot be assigned to the mutable type 'Key[]'.
+src/pages/System/Menu/index.tsx(9,7): error TS6133: 'Search' is declared but its value is never read.
+src/pages/System/Menu/index.tsx(255,72): error TS2345: Argument of type 'readonly Key[]' is not assignable to parameter of type 'SetStateAction<Key[]>'.
+  The type 'readonly Key[]' is 'readonly' and cannot be assigned to the mutable type 'Key[]'.
+src/pages/System/Menu/MenuForm.tsx(5,7): error TS6133: 'Option' is declared but its value is never read.
+src/pages/System/Role/index.tsx(22,12): error TS6133: 'selectedRowKeys' is declared but its value is never read.
+src/pages/System/Role/index.tsx(22,29): error TS6133: 'setSelectedRowKeys' is declared but its value is never read.
+src/pages/System/User/AssignDept.tsx(18,12): error TS6133: 'loading' is declared but its value is never read.
+src/pages/System/User/AssignRole.tsx(3,1): error TS6133: 'TransferDirection' is declared but its value is never read.
+src/pages/System/User/AssignRole.tsx(83,17): error TS2322: Type '(newTargetKeys: string[]) => void' is not assignable to type '(targetKeys: Key[], direction: TransferDirection, moveKeys: Key[]) => void'.
+  Types of parameters 'newTargetKeys' and 'targetKeys' are incompatible.
+    Type 'Key[]' is not assignable to type 'string[]'.
+      Type 'Key' is not assignable to type 'string'.
+        Type 'number' is not assignable to type 'string'.
+src/pages/System/User/index.tsx(2,61): error TS6133: 'Modal' is declared but its value is never read.
+src/pages/System/User/index.tsx(2,68): error TS6133: 'Form' is declared but its value is never read.
+src/pages/System/User/index.tsx(52,31): error TS2339: Property 'records' does not exist on type 'AxiosResponse<PageResult<User>, any, {}>'.
+src/pages/System/User/index.tsx(53,26): error TS2339: Property 'total' does not exist on type 'AxiosResponse<PageResult<User>, any, {}>'.
+src/pages/System/User/UserForm.tsx(5,7): error TS6133: 'Option' is declared but its value is never read.
+src/store/menuStore.ts(26,27): error TS2740: Type 'AxiosResponse<Menu[], any, {}>' is missing the following properties from type 'Menu[]': length, pop, push, concat, and 29 more.

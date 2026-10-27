@@ -11,6 +11,8 @@ import com.erp.basedata.mapper.BaseMaterialMapper;
 import com.erp.basedata.mapper.BaseUnitMapper;
 import com.erp.basedata.service.IBaseUnitService;
 import com.erp.common.exception.BusinessException;
+import com.erp.common.service.ICodeGenerateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,8 @@ import java.util.List;
 @Service
 public class BaseUnitServiceImpl extends ServiceImpl<BaseUnitMapper, BaseUnit>
         implements IBaseUnitService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     private final BaseMaterialMapper materialMapper;
 
@@ -136,20 +140,7 @@ public class BaseUnitServiceImpl extends ServiceImpl<BaseUnitMapper, BaseUnit>
      * @return 单位编号
      */
     private String generateUnitCode() {
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCode();
-
-        if (maxCode == null || StrUtil.isBlank(maxCode)) {
-            // 如果没有单位,从UNIT000001开始
-            return "UNIT000001";
-        }
-
-        // 提取数字部分并加1
-        String numberPart = maxCode.substring(4); // 去掉前缀UNIT
-        int nextNumber = Integer.parseInt(numberPart) + 1;
-
-        // 格式化为6位数字
-        return String.format("UNIT%06d", nextNumber);
+        return codeGenerateService.generate("BASE_UNIT");
     }
 
     /**

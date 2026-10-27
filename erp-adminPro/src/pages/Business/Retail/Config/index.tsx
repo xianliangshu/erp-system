@@ -7,11 +7,15 @@ const RetailConfig: React.FC = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    // 配置行的主键。表单只声明了两个开关字段，提交时不会带上 id，
+    // 必须单独存下来在保存时回传，否则后端 updateById 找不到记录会静默失败。
+    const [configId, setConfigId] = useState<number | undefined>(undefined);
 
     const loadConfig = async () => {
         setLoading(true);
         try {
             const res: any = await getRetailConfig();
+            setConfigId(res?.id);
             form.setFieldsValue(res);
         } catch (error) {
             message.error('加载配置失败');
@@ -27,7 +31,7 @@ const RetailConfig: React.FC = () => {
     const onFinish = async (values: any) => {
         setSubmitting(true);
         try {
-            await updateRetailConfig(values);
+            await updateRetailConfig({ ...values, id: configId });
             message.success('保存成功');
         } catch (error) {
             message.error('保存失败');

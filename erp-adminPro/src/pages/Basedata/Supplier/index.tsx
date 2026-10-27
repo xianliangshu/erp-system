@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, Row, Col, App } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { getSupplierPage, saveSupplier, updateSupplier, deleteSupplier } from '@/api/basedata/supplier';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined, DownloadOutlined } from '@ant-design/icons';
+import {
+    getSupplierPage,
+    saveSupplier,
+    updateSupplier,
+    deleteSupplier,
+    exportSupplier,
+    downloadSupplierTemplate,
+    importSupplier,
+} from '@/api/basedata/supplier';
+import ExcelImportButton from '@/components/ExcelImport/ExcelImportButton';
 
 const { Search } = Input;
 const { TextArea } = Input;
@@ -11,8 +20,8 @@ const SupplierManagement: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState([]);
     const [total, setTotal] = useState(0);
-    const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // 分页与查询条件：唯一的取数依据，搜索/重置/翻页都只改它
+    const [query, setQuery] = useState<any>({ current: 1, size: 10 });
 
     // 搜索条件
     const [searchName, setSearchName] = useState('');
@@ -30,8 +39,7 @@ const SupplierManagement: React.FC = () => {
         setLoading(true);
         try {
             const params = {
-                current,
-                size: pageSize,
+                ...query,
                 name: searchName || undefined,
                 code: searchCode || undefined,
                 type: searchType,
@@ -49,12 +57,11 @@ const SupplierManagement: React.FC = () => {
 
     useEffect(() => {
         loadData();
-    }, [current, pageSize]);
+    }, [query]);
 
     // 搜索
     const handleSearch = () => {
-        setCurrent(1);
-        loadData();
+        setQuery((q: any) => ({ ...q, current: 1 }));
     };
 
     // 重置
@@ -63,8 +70,17 @@ const SupplierManagement: React.FC = () => {
         setSearchCode('');
         setSearchType(undefined);
         setSearchStatus(undefined);
-        setCurrent(1);
-        loadData();
+        setQuery((q: any) => ({ ...q, current: 1 }));
+    };
+
+    // 导出：沿用当前筛选条件，但不分页，导出全量匹配数据
+    const handleExport = () => {
+        exportSupplier({
+            name: searchName || undefined,
+            code: searchCode || undefined,
+            type: searchType,
+            status: searchStatus,
+        });
     };
 
     // 新增
@@ -275,6 +291,15 @@ const SupplierManagement: React.FC = () => {
                         搜索
                     </Button>
                     <Button onClick={handleReset}>重置</Button>
+                    <Button icon={<DownloadOutlined />} onClick={handleExport}>
+                        导出
+                    </Button>
+                    <ExcelImportButton
+                        bizName="供应商"
+                        importApi={importSupplier}
+                        templateApi={downloadSupplierTemplate}
+                        onSuccess={loadData}
+                    />
                     <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
                         新增供应商
                     </Button>
@@ -288,16 +313,13 @@ const SupplierManagement: React.FC = () => {
                     rowKey="id"
                     scroll={{ x: 1200 }}
                     pagination={{
-                        current,
-                        pageSize,
+                        current: query.current,
+                        pageSize: query.size,
                         total,
                         showSizeChanger: true,
                         showQuickJumper: true,
                         showTotal: (total) => `共 ${total} 条`,
-                        onChange: (page, size) => {
-                            setCurrent(page);
-                            setPageSize(size);
-                        },
+                        onChange: (page, size) => setQuery((q: any) => ({ ...q, current: page, size })),
                     }}
                 />
             </Card>

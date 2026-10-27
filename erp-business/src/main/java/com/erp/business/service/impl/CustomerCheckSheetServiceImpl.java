@@ -12,6 +12,7 @@ import com.erp.business.entity.CustomerCheckSheetDetail;
 import com.erp.business.mapper.CustomerCheckSheetDetailMapper;
 import com.erp.business.mapper.CustomerCheckSheetMapper;
 import com.erp.business.service.ICustomerCheckSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CustomerCheckSheetServiceImpl extends ServiceImpl<CustomerCheckSheetMapper, CustomerCheckSheet>
         implements ICustomerCheckSheetService {
+    private final ICodeGenerateService codeGenerateService;
     private final CustomerCheckSheetDetailMapper detailMapper;
 
     @Override
@@ -98,7 +100,7 @@ public class CustomerCheckSheetServiceImpl extends ServiceImpl<CustomerCheckShee
         CustomerCheckSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("对账单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能修改");
         sheet.setCustomerId(dto.getCustomerId());
         sheet.setStartDate(dto.getStartDate());
@@ -135,7 +137,7 @@ public class CustomerCheckSheetServiceImpl extends ServiceImpl<CustomerCheckShee
         CustomerCheckSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("对账单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能审核");
         sheet.setStatus(1);
         sheet.setApproveTime(LocalDateTime.now());
@@ -149,7 +151,7 @@ public class CustomerCheckSheetServiceImpl extends ServiceImpl<CustomerCheckShee
         CustomerCheckSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("对账单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能拒绝");
         sheet.setStatus(2);
         sheet.setApproveTime(LocalDateTime.now());
@@ -164,7 +166,7 @@ public class CustomerCheckSheetServiceImpl extends ServiceImpl<CustomerCheckShee
         CustomerCheckSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的对账单才能删除");
         LambdaQueryWrapper<CustomerCheckSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(CustomerCheckSheetDetail::getSheetId, id);
@@ -174,12 +176,6 @@ public class CustomerCheckSheetServiceImpl extends ServiceImpl<CustomerCheckShee
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "KDZ" + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length())
-            seq = Integer.parseInt(maxCode.substring(prefix.length())) + 1;
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("CUSTOMER_CHECK");
     }
 }

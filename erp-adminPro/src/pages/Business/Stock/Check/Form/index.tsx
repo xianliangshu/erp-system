@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Select, DatePicker, InputNumber, Button, Card, Table, Space, message, Divider, Input } from 'antd';
+import { Form, Select, DatePicker, InputNumber, Button, Card, Table, Space, message, Divider, Input, Alert } from 'antd';
 import { PlusOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getStockCheckById, createStockCheck, updateStockCheck } from '@/api/business/stockCheck';
 import { getWarehouseList } from '@/api/basedata/warehouse';
 import { getMaterialList } from '@/api/material/material';
+import { getTakePlanOptions, getTakePlanDetails } from '@/api/stock/takePlan';
+import { getPreTakeOptions } from '@/api/stock/preTakeSheet';
+import { getTakeStockConfig } from '@/api/stock/takeConfig';
 import dayjs from 'dayjs';
 
 const { Option } = Select;
@@ -20,14 +23,25 @@ const StockCheckForm: React.FC = () => {
     const [warehouses, setWarehouses] = useState<any[]>([]);
     const [materials, setMaterials] = useState<any[]>([]);
     const [details, setDetails] = useState<any[]>([]);
+    // 关联来源
+    const [takePlans, setTakePlans] = useState<any[]>([]);
+    const [preSheets, setPreSheets] = useState<any[]>([]);
+    // 盘点参数：关联任务后是否带出商品明细
+    const [showProduct, setShowProduct] = useState(false);
 
     useEffect(() => { loadBasicData(); if (isEdit) loadCheckData(); }, [id]);
 
     const loadBasicData = async () => {
         try {
-            const [warehouseData, materialData] = await Promise.all([getWarehouseList(), getMaterialList()]);
+            const [warehouseData, materialData, config, planOptions, preOptions] = await Promise.all([
+                getWarehouseList(), getMaterialList(), getTakeStockConfig(),
+                getTakePlanOptions(), getPreTakeOptions(),
+            ]);
             setWarehouses(Array.isArray(warehouseData) ? warehouseData : []);
             setMaterials(Array.isArray(materialData) ? materialData : []);
+            setShowProduct(Number((config as any)?.showProduct) === 1);
+            setTakePlans(Array.isArray(planOptions) ? planOptions : []);
+            setPreSheets(Array.isArray(preOptions) ? preOptions : []);
         } catch (error) { console.error('加载基础数据失败', error); }
     };
 
@@ -35,14 +49,52 @@ const StockCheckForm: React.FC = () => {
         try {
             const data: any = await getStockCheckById(Number(id));
             if (data?.stockCheck) {
-                form.setFieldsValue({ scId: data.stockCheck.scId, checkDate: data.stockCheck.checkDate ? dayjs(data.stockCheck.checkDate) : null, description: data.stockCheck.description });
+                form.setFieldsValue({
+                    scId: data.stockCheck.scId,
+                    checkDate: data.stockCheck.checkDate ? dayjs(data.stockCheck.checkDate) : null,
+                    description: data.stockCheck.description,
+                    planId: data.stockCheck.planId ?? undefined,
+                    preSheetId: data.stockCheck.preSheetId ?? undefined,
+                });
                 setDetails(data.details?.map((d: any, i: number) => ({ ...d, key: Date.now() + i })) || []);
             }
         } catch (error) { message.error('加载盘点单数据失败'); }
     };
 
+    /**
+     * 选择盘点任务后的联动。
+     *
+     * <p>是否带出商品由盘点参数 {@code showProduct} 开关控制；
+     * 带出时「账面数量」用任务创建时的<b>库存快照</b>（任务存在的意义所在），
+     * 「实盘数量」先用快照值占位，由盘点人改成实际数。</p>
+     */
+    const handlePlanChange = async (planId: number | undefined) => {
+        if (!planId) { return; }
+        if (!showProduct) {
+            message.info('盘点参数未开启「带出任务商品明细」，可按需手工添加商品');
+            return;
+        }
+        try {
+            const list: any = await getTakePlanDetails(planId);
+            if (!Array.isArray(list) || list.length === 0) {
+                message.warning('该任务没有明细');
+                return;
+            }
+            const rows = list.map((d: any, i: number) => ({
+                key: `plan-${d.id ?? i}-${Date.now()}`,
+                productId: d.productId,
+                stockNum: Number(d.stockNum ?? 0),
+                // 占位 = 快照数量，避免差异金额为负噪音；盘点人再改为实际数
+                actualNum: Number(d.takeNum ?? d.stockNum ?? 0),
+                costPrice: 0,
+                description: d.description || '',
+            }));
+            setDetails(rows);
+            message.success(`已带出 ${rows.length} 条任务商品明细`);
+        } catch (error) { message.error('带出任务明细失败'); }
+    };
+
     const handleAddDetail = () => { setDetails([...details, { key: Date.now(), productId: undefined, stockNum: 0, actualNum: 0, costPrice: 0, description: '' }]); };
-    const getMaterialName = (productId: number) => materials.find(m => m.id === productId)?.name || productId;
     const handleDetailChange = (key: number, field: string, value: any) => {
         setDetails(details.map(d => {
             if (d.key === key || d.id === key) {
@@ -63,6 +115,9 @@ const StockCheckForm: React.FC = () => {
             setLoading(true);
             const checkData = {
                 id: isEdit ? Number(id) : undefined, scId: values.scId, checkDate: values.checkDate?.format('YYYY-MM-DD'), description: values.description,
+                // 单据来源关联：仅在创建时由后端写入，修改时不覆盖
+                planId: values.planId ?? undefined,
+                preSheetId: values.preSheetId ?? undefined,
                 details: details.map(d => ({ productId: d.productId, stockNum: d.stockNum, actualNum: d.actualNum, costPrice: d.costPrice, description: d.description })),
             };
             if (isEdit) { await updateStockCheck(checkData); message.success('更新成功'); }
@@ -127,6 +182,48 @@ const StockCheckForm: React.FC = () => {
                         <Form.Item name="checkDate" label="盘点日期" style={{ flex: 1 }}><DatePicker style={{ width: '100%' }} /></Form.Item>
                     </div>
                     <Form.Item name="description" label="备注"><TextArea rows={2} placeholder="盘点备注" /></Form.Item>
+                    <div style={{ display: 'flex', gap: 24 }}>
+                        <Form.Item
+                            name="planId"
+                            label="关联盘点任务"
+                            style={{ flex: 1 }}
+                            extra={showProduct ? '选择后将按任务的库存快照带出商品明细' : '盘点参数未开启「带出任务商品明细」，仅记录关联关系'}
+                        >
+                            <Select
+                                placeholder="不关联可留空"
+                                allowClear
+                                showSearch
+                                optionFilterProp="label"
+                                onChange={handlePlanChange}
+                                options={takePlans.map((p: any) => ({ value: p.id, label: `${p.code}（${p.scName || p.scId || ''}）` }))}
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            name="preSheetId"
+                            label="关联预先盘点单"
+                            style={{ flex: 1 }}
+                            extra="仅记录来源，用于追溯分次清点结果"
+                        >
+                            <Select
+                                placeholder="不关联可留空"
+                                allowClear
+                                showSearch
+                                optionFilterProp="label"
+                                options={preSheets.map((s: any) => ({
+                                    value: s.id,
+                                    label: `${s.code}（${s.scName || s.scId || ''}·${{ 0: '初盘', 1: '复盘', 2: '抽盘' }[s.takeStatus as number] || '未知'}）`,
+                                }))}
+                            />
+                        </Form.Item>
+                    </div>
+                    {isEdit && (
+                        <Alert
+                            type="info"
+                            showIcon
+                            style={{ marginBottom: 16 }}
+                            message="盘点单的「单据来源」只在创建时写入，编辑不会改动既有来源，也不会重新带出商品。"
+                        />
+                    )}
                 </Form>
                 <Divider>盘点明细</Divider>
                 <Button type="dashed" onClick={handleAddDetail} style={{ marginBottom: 16 }} icon={<PlusOutlined />}>添加商品</Button>

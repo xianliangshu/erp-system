@@ -4,22 +4,27 @@ server:
     context-path: /api
 
 spring:
+  # Excel 批量导入：Spring Boot 默认单文件上限 1MB，批量导入基础资料容易超限，放宽到 10MB
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
   application:
     name: erp-system
   
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/erp_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.31.199:3306/erp-data?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     
   # Redis配置
   data:
     redis:
-      host: localhost
+      host: 192.168.31.199
       port: 6379
-      password: 
+      password: 123456
       database: 0
       timeout: 3000ms
       lettuce:
@@ -28,6 +33,25 @@ spring:
           max-wait: -1ms
           max-idle: 8
           min-idle: 0
+
+# Sa-Token 权限认证配置
+sa-token:
+  # 与前端对齐: erp-adminPro/src/utils/request.ts 发的是 Authorization: Bearer <token>
+  # 改了这两个值就必须同步改前端,否则鉴权全部 401
+  token-name: Authorization
+  token-prefix: Bearer
+  # token 有效期(秒), 30 天
+  timeout: 2592000
+  # 不允许同一账号多地同时登录时排除其它端(false 会互踢)
+  is-concurrent: true
+  # 多端登录时共用一个 token
+  is-share: true
+  # token 风格
+  token-style: uuid
+  # 前端是 SPA,只从 header 读 token,不读 cookie
+  is-read-cookie: false
+  # 鉴权日志,排查权限问题时打开
+  is-log: false
 
 # MyBatis-Plus配置
 mybatis-plus:

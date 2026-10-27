@@ -11,10 +11,4 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface SettleFeeSheetMapper extends BaseMapper<SettleFeeSheet> {
-
-    /**
-     * 根据前缀查询最大编号（不考虑逻辑删除）
-     */
-    @Select("SELECT MAX(code) FROM settle_fee_sheet WHERE code LIKE CONCAT(#{prefix}, '%')")
-    String selectMaxCodeByPrefix(@Param("prefix") String prefix);
 }

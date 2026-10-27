@@ -12,8 +12,8 @@
     <artifactId>erp-web</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -43,6 +43,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         -->
+
+        <!-- AOP：操作日志切面 LogAspect 依赖 @Aspect（spring-aop 本身不含 AspectJ 注解） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
         <!-- JWT (JSON Web Token) -->
         <dependency>

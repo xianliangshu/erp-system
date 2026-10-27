@@ -11,4 +11,7 @@ VALUES (2, '供应商管理', '/basedata/supplier', '/Basedata/Supplier', 'TeamO
 
 -- 或者直接使用子查询:
 INSERT INTO sys_role_menu (role_id, menu_id, create_time)
-SELECT 1, id, NOW() FROM sys_menu WHERE name = '供应商管理' AND parent_id = 2 LIMIT 1;
+SELECT 1, id, NOW()
+FROM sys_menu
+WHERE name = '供应商管理'
+  AND parent_id = 2 LIMIT 1;

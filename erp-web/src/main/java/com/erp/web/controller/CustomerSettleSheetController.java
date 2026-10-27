@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.CustomerSettleSheetDTO;
 import com.erp.business.dto.CustomerSettleSheetQueryDTO;
@@ -20,6 +21,7 @@ public class CustomerSettleSheetController {
     private final ICustomerSettleSheetService settleSheetService;
 
     @Operation(summary = "分页查询")
+    @SaCheckPermission("business:settle:customer:sheet")
     @GetMapping("/page")
     public Result<Page<CustomerSettleSheet>> page(@RequestParam(defaultValue = "1") Long current,
             @RequestParam(defaultValue = "10") Long size, CustomerSettleSheetQueryDTO queryDTO) {
@@ -27,18 +29,21 @@ public class CustomerSettleSheetController {
     }
 
     @Operation(summary = "获取详情")
+    @SaCheckPermission("business:settle:customer:sheet")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getInfo(@PathVariable Long id) {
         return Result.success(settleSheetService.getDetailById(id));
     }
 
     @Operation(summary = "新增")
+    @SaCheckPermission("business:settle:customer:sheet")
     @PostMapping
     public Result<Long> add(@RequestBody CustomerSettleSheetDTO dto) {
         return Result.success(settleSheetService.create(dto));
     }
 
     @Operation(summary = "修改")
+    @SaCheckPermission("business:settle:customer:sheet")
     @PutMapping
     public Result<Void> edit(@RequestBody CustomerSettleSheetDTO dto) {
         settleSheetService.update(dto);
@@ -46,6 +51,7 @@ public class CustomerSettleSheetController {
     }
 
     @Operation(summary = "审核通过")
+    @SaCheckPermission("business:settle:customer:sheet")
     @PostMapping("/approve/{id}")
     public Result<Void> approve(@PathVariable Long id) {
         settleSheetService.approve(id);
@@ -53,6 +59,7 @@ public class CustomerSettleSheetController {
     }
 
     @Operation(summary = "审核拒绝")
+    @SaCheckPermission("business:settle:customer:sheet")
     @PostMapping("/refuse/{id}")
     public Result<Void> refuse(@PathVariable Long id, @RequestBody Map<String, String> data) {
         settleSheetService.refuse(id, data.get("refuseReason"));
@@ -60,6 +67,7 @@ public class CustomerSettleSheetController {
     }
 
     @Operation(summary = "删除")
+    @SaCheckPermission("business:settle:customer:sheet")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         settleSheetService.deleteById(id);

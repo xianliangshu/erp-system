@@ -13,12 +13,4 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface BaseCustomerMapper extends BaseMapper<BaseCustomer> {
-
-    /**
-     * 查询最大编号（忽略软删除条件）
-     * 
-     * @return 最大编号
-     */
-    @Select("SELECT MAX(code) FROM base_customer")
-    String selectMaxCode();
 }

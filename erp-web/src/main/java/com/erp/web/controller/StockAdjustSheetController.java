@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.entity.StockAdjustSheet;
@@ -32,6 +33,7 @@ public class StockAdjustSheetController {
     /**
      * 分页查询
      */
+    @SaCheckPermission("stock:adjust:query")
     @GetMapping("/page")
     public Result<IPage<StockAdjustSheet>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -64,6 +66,7 @@ public class StockAdjustSheetController {
     /**
      * 根据ID查询详情（包含明细）
      */
+    @SaCheckPermission("stock:adjust:query")
     @GetMapping("/{id}")
     public Result<?> getById(@PathVariable Long id) {
         StockAdjustSheet sheet = stockAdjustSheetService.getById(id);
@@ -81,6 +84,7 @@ public class StockAdjustSheetController {
     /**
      * 新增
      */
+    @SaCheckPermission("stock:adjust:query")
     @PostMapping
     public Result<?> add(@RequestBody Map<String, Object> params) {
         StockAdjustSheet sheet = parseSheet(params);
@@ -93,6 +97,7 @@ public class StockAdjustSheetController {
     /**
      * 修改
      */
+    @SaCheckPermission("stock:adjust:query")
     @PutMapping
     public Result<?> modify(@RequestBody Map<String, Object> params) {
         StockAdjustSheet sheet = parseSheet(params);
@@ -105,6 +110,7 @@ public class StockAdjustSheetController {
     /**
      * 删除
      */
+    @SaCheckPermission("stock:adjust:query")
     @DeleteMapping("/{id}")
     public Result<?> delete(@PathVariable Long id) {
         try {
@@ -118,6 +124,7 @@ public class StockAdjustSheetController {
     /**
      * 审核通过
      */
+    @SaCheckPermission("stock:adjust:query")
     @PostMapping("/approve/{id}")
     public Result<?> approvePass(@PathVariable Long id) {
         try {
@@ -131,6 +138,7 @@ public class StockAdjustSheetController {
     /**
      * 审核拒绝
      */
+    @SaCheckPermission("stock:adjust:query")
     @PostMapping("/refuse/{id}")
     public Result<?> approveRefuse(@PathVariable Long id, @RequestBody Map<String, String> params) {
         try {

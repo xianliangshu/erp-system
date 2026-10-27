@@ -27,6 +27,11 @@ public class MaterialPageParam {
     private Long categoryId;
 
     /**
+     * 所属SPU ID（商品中心）
+     */
+    private Long spuId;
+
+    /**
      * 物料名称(模糊查询)
      */
     private String name;

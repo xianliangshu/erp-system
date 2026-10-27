@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.basedata.dto.BrandPageParam;
 import com.erp.basedata.entity.BaseBrand;
@@ -26,6 +27,7 @@ public class BaseBrandController {
     /**
      * 分页查询品牌
      */
+    @SaCheckPermission("basedata:brand:list")
     @GetMapping("/page")
     public Result<Page<BaseBrand>> page(BrandPageParam param) {
         Page<BaseBrand> page = brandService.getBrandPage(param);
@@ -44,6 +46,7 @@ public class BaseBrandController {
     /**
      * 根据ID获取品牌
      */
+    @SaCheckPermission("basedata:brand:list")
     @GetMapping("/{id}")
     public Result<BaseBrand> getById(@PathVariable Long id) {
         BaseBrand brand = brandService.getById(id);
@@ -53,6 +56,7 @@ public class BaseBrandController {
     /**
      * 新增品牌
      */
+    @SaCheckPermission("basedata:brand:list")
     @PostMapping
     public Result<Void> save(@RequestBody BaseBrand brand) {
         brandService.saveBrand(brand);
@@ -62,6 +66,7 @@ public class BaseBrandController {
     /**
      * 更新品牌
      */
+    @SaCheckPermission("basedata:brand:list")
     @PutMapping("/{id}")
     public Result<Void> update(@PathVariable Long id, @RequestBody BaseBrand brand) {
         brand.setId(id);
@@ -72,6 +77,7 @@ public class BaseBrandController {
     /**
      * 删除品牌
      */
+    @SaCheckPermission("basedata:brand:list")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         brandService.deleteBrand(id);

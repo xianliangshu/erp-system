@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.erp.common.core.page.PageResult;
 import com.erp.common.core.result.Result;
@@ -34,6 +35,7 @@ public class SysDictController {
      * 分页查询字典类型列表
      */
     @Operation(summary = "分页查询字典类型", description = "根据条件分页查询字典类型列表")
+    @SaCheckPermission("system:dict:list")
     @GetMapping("/type/page")
     public Result<PageResult<SysDictType>> typePage(SysDictTypePageParam param) {
         // 调用Service业务方法
@@ -45,6 +47,7 @@ public class SysDictController {
      * 根据字典类型查询字典数据列表
      */
     @Operation(summary = "根据字典类型查询字典数据列表", description = "根据字典类型查询字典数据列表")
+    @SaCheckPermission("system:dict:list")
     @GetMapping("/data/list/{dictType}")
     public Result<List<SysDictData>> dataList(@PathVariable String dictType) {
         LambdaQueryWrapper<SysDictData> wrapper = new LambdaQueryWrapper<>();
@@ -60,6 +63,7 @@ public class SysDictController {
      * 新增字典类型
      */
     @Operation(summary = "新增字典类型", description = "新增字典类型")
+    @SaCheckPermission("system:dict:add")
     @PostMapping("/type")
     public Result<Void> saveType(@RequestBody SysDictType dictType) {
         dictTypeService.save(dictType);
@@ -70,6 +74,7 @@ public class SysDictController {
      * 新增字典数据
      */
     @Operation(summary = "新增字典数据", description = "新增字典数据")
+    @SaCheckPermission("system:dict:add")
     @PostMapping("/data")
     public Result<Void> saveData(@RequestBody SysDictData dictData) {
         dictDataService.save(dictData);
@@ -80,6 +85,7 @@ public class SysDictController {
      * 修改字典类型
      */
     @Operation(summary = "修改字典类型", description = "修改字典类型")
+    @SaCheckPermission("system:dict:edit")
     @PutMapping("/type")
     public Result<Void> updateType(@RequestBody SysDictType dictType) {
         dictTypeService.updateById(dictType);
@@ -90,6 +96,7 @@ public class SysDictController {
      * 修改字典数据
      */
     @Operation(summary = "修改字典数据", description = "修改字典数据")
+    @SaCheckPermission("system:dict:edit")
     @PutMapping("/data")
     public Result<Void> updateData(@RequestBody SysDictData dictData) {
         dictDataService.updateById(dictData);
@@ -100,6 +107,7 @@ public class SysDictController {
      * 删除字典类型
      */
     @Operation(summary = "删除字典类型", description = "删除字典类型")
+    @SaCheckPermission("system:dict:delete")
     @DeleteMapping("/type/{id}")
     public Result<Void> deleteType(@PathVariable Long id) {
         dictTypeService.removeById(id);
@@ -110,6 +118,7 @@ public class SysDictController {
      * 删除字典数据
      */
     @Operation(summary = "删除字典数据", description = "删除字典数据")
+    @SaCheckPermission("system:dict:delete")
     @DeleteMapping("/data/{id}")
     public Result<Void> deleteData(@PathVariable Long id) {
         dictDataService.removeById(id);

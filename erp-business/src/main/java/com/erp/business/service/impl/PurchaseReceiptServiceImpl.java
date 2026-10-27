@@ -17,6 +17,7 @@ import com.erp.business.mapper.PurchaseReceiptMapper;
 import com.erp.business.service.IPurchaseOrderService;
 import com.erp.business.service.IPurchaseReceiptService;
 import com.erp.business.service.IProductStockService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class PurchaseReceiptServiceImpl extends ServiceImpl<PurchaseReceiptMapper, PurchaseReceipt>
         implements IPurchaseReceiptService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final PurchaseReceiptDetailMapper receiptDetailMapper;
     private final PurchaseOrderDetailMapper orderDetailMapper;
@@ -121,7 +123,7 @@ public class PurchaseReceiptServiceImpl extends ServiceImpl<PurchaseReceiptMappe
         if (receipt == null) {
             throw new RuntimeException("收货单不存在");
         }
-        if (receipt.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(receipt.getStatus())) {
             throw new RuntimeException("只有待确认的收货单才能修改");
         }
 
@@ -168,7 +170,7 @@ public class PurchaseReceiptServiceImpl extends ServiceImpl<PurchaseReceiptMappe
         if (receipt == null) {
             throw new RuntimeException("收货单不存在");
         }
-        if (receipt.getStatus() != 0) {
+        if (!Integer.valueOf(0).equals(receipt.getStatus())) {
             throw new RuntimeException("只有待确认的收货单才能确认");
         }
 
@@ -234,20 +236,7 @@ public class PurchaseReceiptServiceImpl extends ServiceImpl<PurchaseReceiptMappe
 
     @Override
     public String generateReceiptCode() {
-        // 格式: PR + 日期 + 4位序号, 例如: PR202312210001
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "PR" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("PURCHASE_RECEIPT");
     }
 
     @Override

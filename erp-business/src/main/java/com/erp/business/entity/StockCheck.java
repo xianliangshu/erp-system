@@ -33,6 +33,19 @@ public class StockCheck extends BaseBusinessEntity {
     /** 状态 */
     private Integer status;
 
+    /**
+     * 关联盘点任务ID（可空）
+     *
+     * <p>由「盘点任务 → 生成差异」产生的盘点单会回填此列，便于从盘点单回溯到任务。
+     * 手工创建的盘点单保持为 NULL，行为与改造前完全一致。</p>
+     */
+    private Long planId;
+
+    /**
+     * 关联预先盘点单ID（可空）
+     */
+    private Long preSheetId;
+
     /** 备注 */
     private String description;
 }

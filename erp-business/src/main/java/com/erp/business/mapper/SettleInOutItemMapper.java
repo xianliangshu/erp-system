@@ -12,10 +12,4 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface SettleInOutItemMapper extends BaseMapper<SettleInOutItem> {
-
-    /**
-     * 根据前缀查询最大编号（不考虑逻辑删除）
-     */
-    @Select("SELECT MAX(code) FROM settle_in_out_item WHERE code LIKE CONCAT(#{prefix}, '%')")
-    String selectMaxCodeByPrefix(@Param("prefix") String prefix);
 }

@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.PurchaseReceiptDTO;
 import com.erp.business.entity.PurchaseReceipt;
@@ -29,6 +30,7 @@ public class PurchaseReceiptController {
     /**
      * 分页查询采购收货
      */
+    @SaCheckPermission("business:purchase:receipt")
     @GetMapping("/page")
     public Result<Page<PurchaseReceipt>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -42,6 +44,7 @@ public class PurchaseReceiptController {
     /**
      * 获取收货单详情（包含明细）
      */
+    @SaCheckPermission("business:purchase:receipt")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         PurchaseReceipt receipt = purchaseReceiptService.getById(id);
@@ -64,6 +67,7 @@ public class PurchaseReceiptController {
     /**
      * 创建采购收货
      */
+    @SaCheckPermission("business:purchase:receipt")
     @PostMapping
     public Result<Long> create(@RequestBody PurchaseReceiptDTO dto) {
         Long receiptId = purchaseReceiptService.createReceipt(dto);
@@ -73,6 +77,7 @@ public class PurchaseReceiptController {
     /**
      * 更新采购收货
      */
+    @SaCheckPermission("business:purchase:receipt")
     @PutMapping
     public Result<Void> update(@RequestBody PurchaseReceiptDTO dto) {
         purchaseReceiptService.updateReceipt(dto);
@@ -82,6 +87,7 @@ public class PurchaseReceiptController {
     /**
      * 确认收货
      */
+    @SaCheckPermission("business:purchase:receipt")
     @PostMapping("/{id}/confirm")
     public Result<Void> confirm(@PathVariable Long id) {
         purchaseReceiptService.confirmReceipt(id);
@@ -91,6 +97,7 @@ public class PurchaseReceiptController {
     /**
      * 删除收货单
      */
+    @SaCheckPermission("business:purchase:receipt")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         purchaseReceiptService.removeById(id);

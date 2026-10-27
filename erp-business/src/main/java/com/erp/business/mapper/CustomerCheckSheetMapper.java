@@ -8,6 +8,4 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface CustomerCheckSheetMapper extends BaseMapper<CustomerCheckSheet> {
-    @Select("SELECT MAX(code) FROM customer_check_sheet WHERE code LIKE CONCAT(#{prefix}, '%')")
-    String selectMaxCodeByPrefix(@Param("prefix") String prefix);
 }

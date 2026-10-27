@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Form, Select, Input, Button, Table, InputNumber, Space, message, Modal } from 'antd';
-import { PlusOutlined, DeleteOutlined, ArrowLeftOutlined, SaveOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Card, Form, Select, Input, Button, Table, InputNumber, Space, message } from 'antd';
+import { PlusOutlined, DeleteOutlined, ArrowLeftOutlined, SaveOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addRetailReturn, updateRetailReturn, getRetailReturnById } from '@/api/business/retail';
 import { getWarehouseList } from '@/api/basedata/warehouse';
@@ -60,7 +60,15 @@ const RetailReturnForm: React.FC = () => {
             setSubmitting(true);
             const data = { ...values, id: id ? Number(id) : undefined, details };
             if (isEdit) { await updateRetailReturn(data); message.success('修改成功'); }
-            else { await addRetailReturn(data); message.success('新增成功'); }
+            else {
+                // 后端会按「零售配置 → 零售退货单自动审核」决定是否直接审核加库存
+                const res: any = await addRetailReturn(data);
+                if (res?.autoApproved) {
+                    message.success('新增成功，已按零售配置自动审核并增加库存');
+                } else {
+                    message.success('新增成功，待审核');
+                }
+            }
             navigate('/business/retail/return');
         } catch (e) { console.error(e); }
         finally { setSubmitting(false); }

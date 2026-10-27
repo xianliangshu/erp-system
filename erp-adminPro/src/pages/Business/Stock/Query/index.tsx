@@ -10,8 +10,8 @@ const InventoryQuery: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState<any[]>([]);
     const [total, setTotal] = useState(0);
-    const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // 分页与查询条件：唯一的取数依据，搜索/重置/翻页都只改它
+    const [query, setQuery] = useState<any>({ current: 1, size: 10 });
 
     // 搜索条件
     const [searchScId, setSearchScId] = useState<number | undefined>(undefined);
@@ -33,8 +33,7 @@ const InventoryQuery: React.FC = () => {
         setLoading(true);
         try {
             const params = {
-                current,
-                size: pageSize,
+                ...query,
                 scId: searchScId,
                 productName: searchProductName || undefined,
             };
@@ -54,18 +53,16 @@ const InventoryQuery: React.FC = () => {
 
     useEffect(() => {
         loadData();
-    }, [current, pageSize]);
+    }, [query]);
 
     const handleSearch = () => {
-        setCurrent(1);
-        loadData();
+        setQuery((q: any) => ({ ...q, current: 1 }));
     };
 
     const handleReset = () => {
         setSearchScId(undefined);
         setSearchProductName('');
-        setCurrent(1);
-        loadData();
+        setQuery((q: any) => ({ ...q, current: 1 }));
     };
 
     const columns = [
@@ -154,15 +151,12 @@ const InventoryQuery: React.FC = () => {
                     dataSource={dataSource}
                     rowKey="id"
                     pagination={{
-                        current,
-                        pageSize,
+                        current: query.current,
+                        pageSize: query.size,
                         total,
                         showSizeChanger: true,
                         showTotal: (total) => `共 ${total} 条`,
-                        onChange: (page, size) => {
-                            setCurrent(page);
-                            setPageSize(size);
-                        },
+                        onChange: (page, size) => setQuery((q: any) => ({ ...q, current: page, size })),
                     }}
                 />
             </Card>

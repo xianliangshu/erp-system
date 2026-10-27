@@ -12,6 +12,7 @@ import com.erp.business.entity.SettleSheetDetail;
 import com.erp.business.mapper.SettleSheetDetailMapper;
 import com.erp.business.mapper.SettleSheetMapper;
 import com.erp.business.service.ISettleSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SettleSheetServiceImpl extends ServiceImpl<SettleSheetMapper, SettleSheet>
         implements ISettleSheetService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SettleSheetDetailMapper detailMapper;
 
@@ -102,7 +104,7 @@ public class SettleSheetServiceImpl extends ServiceImpl<SettleSheetMapper, Settl
         SettleSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("结算单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能修改");
 
         sheet.setSupplierId(dto.getSupplierId());
@@ -142,7 +144,7 @@ public class SettleSheetServiceImpl extends ServiceImpl<SettleSheetMapper, Settl
         SettleSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("结算单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能审核");
         sheet.setStatus(1);
         sheet.setApproveTime(LocalDateTime.now());
@@ -156,7 +158,7 @@ public class SettleSheetServiceImpl extends ServiceImpl<SettleSheetMapper, Settl
         SettleSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("结算单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能拒绝");
         sheet.setStatus(2);
         sheet.setApproveTime(LocalDateTime.now());
@@ -171,7 +173,7 @@ public class SettleSheetServiceImpl extends ServiceImpl<SettleSheetMapper, Settl
         SettleSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的结算单才能删除");
         LambdaQueryWrapper<SettleSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(SettleSheetDetail::getSheetId, id);
@@ -181,14 +183,6 @@ public class SettleSheetServiceImpl extends ServiceImpl<SettleSheetMapper, Settl
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "JS" + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length()) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SETTLE_SHEET");
     }
 }

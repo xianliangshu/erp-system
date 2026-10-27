@@ -1,0 +1,360 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.0)
+
+2026-10-01T19:57:14.881+08:00  INFO 11116 --- [erp-system] [           main] com.erp.ErpApplication                   : Starting ErpApplication v1.0-SNAPSHOT using Java 21.0.12 with PID 11116 (D:\code\java\java_study\erp-system\erp-web\target\erp-web-1.0-SNAPSHOT.jar started by shu in D:\code\java\java_study\erp-system)
+2026-10-01T19:57:14.886+08:00  INFO 11116 --- [erp-system] [           main] com.erp.ErpApplication                   : No active profile set, falling back to 1 default profile: "default"
+2026-10-01T19:57:18.831+08:00  INFO 11116 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-10-01T19:57:18.841+08:00  INFO 11116 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-10-01T19:57:19.041+08:00  INFO 11116 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 130 ms. Found 0 Redis repository interfaces.
+2026-10-01T19:57:24.305+08:00  INFO 11116 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-10-01T19:57:24.377+08:00  INFO 11116 --- [erp-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-01T19:57:24.381+08:00  INFO 11116 --- [erp-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2026-10-01T19:57:24.753+08:00  INFO 11116 --- [erp-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2026-10-01T19:57:24.757+08:00  INFO 11116 --- [erp-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9692 ms
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+Get /192.168.31.194 network interface 
+Get network interface info: name:wireless_32768 (Intel(R) Wi-Fi 6 AX201 160MHz)
+Initialization Sequence datacenterId:5 workerId:1
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.7 
+2026-10-01T19:57:34.341+08:00  INFO 11116 --- [erp-system] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-10-01T19:57:40.986+08:00  INFO 11116 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/api'
+2026-10-01T19:57:41.029+08:00  INFO 11116 --- [erp-system] [           main] com.erp.ErpApplication                   : Started ErpApplication in 27.625 seconds (process running for 29.167)
+2026-10-01T19:57:52.231+08:00  INFO 11116 --- [erp-system] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-01T19:57:52.232+08:00  INFO 11116 --- [erp-system] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-01T19:57:52.255+08:00  INFO 11116 --- [erp-system] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 22 ms
+2026-10-01T19:57:52.432+08:00  INFO 11116 --- [erp-system] [nio-8081-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-01T19:57:53.235+08:00  INFO 11116 --- [erp-system] [nio-8081-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c
+2026-10-01T19:57:53.243+08:00  INFO 11116 --- [erp-system] [nio-8081-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53219871]
+JDBC Connection [HikariProxyConnection@1715081091 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: SELECT id,out_stock_un_approve,return_stock_un_approve,create_time,update_time,create_by,update_by,deleted FROM retail_config WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, out_stock_un_approve, return_stock_un_approve, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 2026-10-01 19:36:35, 2026-10-01 19:46:51, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53219871]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53219871]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53219871]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53219871]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+JDBC Connection [HikariProxyConnection@988038183 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: SELECT MAX(code) FROM retail_out_sheet
+==> Parameters: 
+<==    Columns: MAX(code)
+<==        Row: null
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: INSERT INTO retail_out_sheet ( code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: LS202610010001(String), 1(Long), 3(Long), 10(BigDecimal), 200.0(BigDecimal), 0(Integer), TEST-VERIFY ³ö¿âµ¥-Õý³£(String), 2026-10-01T19:57:54.679415400(LocalDateTime), 2026-10-01T19:57:54.684980500(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+JDBC Connection [HikariProxyConnection@988038183 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: INSERT INTO retail_out_sheet_detail ( sheet_id, product_id, out_num, tax_price, tax_amount, description ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 1(Long), 3(Long), 10(BigDecimal), 20.0(BigDecimal), 200.0(BigDecimal), ÂÝË¨M8*20(String)
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: SELECT id,out_stock_un_approve,return_stock_un_approve,create_time,update_time,create_by,update_by,deleted FROM retail_config WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, out_stock_un_approve, return_stock_un_approve, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 2026-10-01 19:36:35, 2026-10-01 19:46:51, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: SELECT id,code,sc_id,customer_id,total_num,total_amount,status,description,create_time,update_time,create_by,update_by,deleted FROM retail_out_sheet WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, LS202610010001, 1, 3, 10.0000, 200.0000, 0, TEST-VERIFY ³ö¿âµ¥-Õý³£, 2026-10-01 19:57:55, 2026-10-01 19:57:55, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: SELECT id,sheet_id,product_id,out_num,tax_price,tax_amount,description FROM retail_out_sheet_detail WHERE (sheet_id = ?)
+==> Parameters: 1(Long)
+<==    Columns: id, sheet_id, product_id, out_num, tax_price, tax_amount, description
+<==        Row: 1, 1, 3, 10.0000, 20.0000, 200.0000, ÂÝË¨M8*20
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 100.0000, 1.0000, 100.0000, null, null, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: UPDATE retail_out_sheet SET code=?, sc_id=?, customer_id=?, total_num=?, total_amount=?, status=?, description=?, create_time=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: LS202610010001(String), 1(Long), 3(Long), 10.0000(BigDecimal), 200.0000(BigDecimal), 1(Integer), TEST-VERIFY ³ö¿âµ¥-Õý³£(String), 2026-10-01T19:57:55(LocalDateTime), 2026-10-01T19:57:55(LocalDateTime), system(String), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 100.0000, 1.0000, 100.0000, null, null, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE id=? AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 100.0000, 1.0000, 100.0000, null, null, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: UPDATE product_stock SET sc_id=?, product_id=?, stock_num=?, tax_price=?, tax_amount=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 1(Long), 3(Long), 90.0000(BigDecimal), 1.0000(BigDecimal), 90.00000000(BigDecimal), 2026-10-01T19:57:55.122057400(LocalDateTime), verify(String), verify(String), 3(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e] from current transaction
+==>  Preparing: INSERT INTO product_stock_log ( sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 1(Long), 3(Long), 100.0000(BigDecimal), 90.0000(BigDecimal), 10.0000(BigDecimal), 1(Long), LS202610010001(String), 11(Integer), system(String), 2026-10-01T19:57:55.157548700(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c1c9b2e]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+JDBC Connection [HikariProxyConnection@1233478349 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: SELECT MAX(code) FROM retail_out_sheet
+==> Parameters: 
+<==    Columns: MAX(code)
+<==        Row: LS202610010001
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: INSERT INTO retail_out_sheet ( code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: LS202610010002(String), 1(Long), 3(Long), 9999(BigDecimal), 199980.0(BigDecimal), 0(Integer), TEST-VERIFY ³ö¿âµ¥-¿â´æ²»×ã(String), 2026-10-01T19:58:03.083455700(LocalDateTime), 2026-10-01T19:58:03.083455700(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+JDBC Connection [HikariProxyConnection@1233478349 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: INSERT INTO retail_out_sheet_detail ( sheet_id, product_id, out_num, tax_price, tax_amount, description ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 2(Long), 3(Long), 9999(BigDecimal), 20.0(BigDecimal), 199980.0(BigDecimal), ÂÝË¨M8*20(String)
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: SELECT id,out_stock_un_approve,return_stock_un_approve,create_time,update_time,create_by,update_by,deleted FROM retail_config WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, out_stock_un_approve, return_stock_un_approve, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 2026-10-01 19:36:35, 2026-10-01 19:46:51, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: SELECT id,code,sc_id,customer_id,total_num,total_amount,status,description,create_time,update_time,create_by,update_by,deleted FROM retail_out_sheet WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, LS202610010002, 1, 3, 9999.0000, 199980.0000, 0, TEST-VERIFY ³ö¿âµ¥-¿â´æ²»×ã, 2026-10-01 19:58:03, 2026-10-01 19:58:03, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: SELECT id,sheet_id,product_id,out_num,tax_price,tax_amount,description FROM retail_out_sheet_detail WHERE (sheet_id = ?)
+==> Parameters: 2(Long)
+<==    Columns: id, sheet_id, product_id, out_num, tax_price, tax_amount, description
+<==        Row: 2, 2, 3, 9999.0000, 20.0000, 199980.0000, ÂÝË¨M8*20
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 90.0000, 1.0000, 90.0000, null, 2026-10-01 19:57:55, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, WH001, Ö÷²Ö¿â, ÕÅÈý, 13800138000, ±±¾©ÊÐ³¯ÑôÇøxxxÂ·xxxºÅ, 1, 1, ¹«Ë¾Ö÷²Ö¿â, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd] from current transaction
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 4, MAT000003, ÂÝË¨M8*20, ÂÝË¨, M8*20 304²»Ðâ¸Ö, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, ²»Ðâ¸ÖÂÝË¨, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@437d09bd]
+2026-10-01T19:58:03.331+08:00 ERROR 11116 --- [erp-system] [nio-8081-exec-9] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: åº“å­˜ä¸è¶³ï¼šä¸»ä»“åº“ çš„ã€ŒMAT000003 èžºæ “M8*20ã€å½“å‰åº“å­˜ 90ï¼Œæœ¬æ¬¡éœ€è¦ 9999
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1027d6e7]
+JDBC Connection [HikariProxyConnection@490546181 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: UPDATE retail_config SET out_stock_un_approve=?, return_stock_un_approve=?, update_time=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: false(Boolean), true(Boolean), 2026-10-01T19:58:12.860038600(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1027d6e7]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1027d6e7]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1027d6e7]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1027d6e7]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+JDBC Connection [HikariProxyConnection@1588442499 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: SELECT MAX(code) FROM retail_out_sheet
+==> Parameters: 
+<==    Columns: MAX(code)
+<==        Row: LS202610010001
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3] from current transaction
+==>  Preparing: INSERT INTO retail_out_sheet ( code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: LS202610010002(String), 1(Long), 3(Long), 5(BigDecimal), 100.0(BigDecimal), 0(Integer), TEST-VERIFY ³ö¿âµ¥-¿ª¹Ø¹Ø(String), 2026-10-01T19:58:14.257664300(LocalDateTime), 2026-10-01T19:58:14.257664300(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+JDBC Connection [HikariProxyConnection@1588442499 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: INSERT INTO retail_out_sheet_detail ( sheet_id, product_id, out_num, tax_price, tax_amount, description ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 3(Long), 3(Long), 5(BigDecimal), 20.0(BigDecimal), 100.0(BigDecimal), ÂÝË¨(String)
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3] from current transaction
+==>  Preparing: SELECT id,out_stock_un_approve,return_stock_un_approve,create_time,update_time,create_by,update_by,deleted FROM retail_config WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, out_stock_un_approve, return_stock_un_approve, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, 1, 2026-10-01 19:36:35, 2026-10-01 19:58:13, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5455def3]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+JDBC Connection [HikariProxyConnection@17710974 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,customer_id,total_num,total_amount,status,description,create_time,update_time,create_by,update_by,deleted FROM retail_out_sheet WHERE id=? AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, LS202610010002, 1, 3, 5.0000, 100.0000, 0, TEST-VERIFY ³ö¿âµ¥-¿ª¹Ø¹Ø, 2026-10-01 19:58:14, 2026-10-01 19:58:14, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: SELECT id,sheet_id,product_id,out_num,tax_price,tax_amount,description FROM retail_out_sheet_detail WHERE (sheet_id = ?)
+==> Parameters: 3(Long)
+<==    Columns: id, sheet_id, product_id, out_num, tax_price, tax_amount, description
+<==        Row: 3, 3, 3, 5.0000, 20.0000, 100.0000, ÂÝË¨
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 90.0000, 1.0000, 90.0000, null, 2026-10-01 19:57:55, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: UPDATE retail_out_sheet SET code=?, sc_id=?, customer_id=?, total_num=?, total_amount=?, status=?, description=?, create_time=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: LS202610010002(String), 1(Long), 3(Long), 5.0000(BigDecimal), 100.0000(BigDecimal), 1(Integer), TEST-VERIFY ³ö¿âµ¥-¿ª¹Ø¹Ø(String), 2026-10-01T19:58:14(LocalDateTime), 2026-10-01T19:58:14(LocalDateTime), system(String), system(String), 3(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 90.0000, 1.0000, 90.0000, null, 2026-10-01 19:57:55, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE id=? AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 90.0000, 1.0000, 90.0000, null, 2026-10-01 19:57:55, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: UPDATE product_stock SET sc_id=?, product_id=?, stock_num=?, tax_price=?, tax_amount=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 1(Long), 3(Long), 85.0000(BigDecimal), 1.0000(BigDecimal), 85.00000000(BigDecimal), 2026-10-01T19:57:55(LocalDateTime), verify(String), verify(String), 3(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd] from current transaction
+==>  Preparing: INSERT INTO product_stock_log ( sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 1(Long), 3(Long), 90.0000(BigDecimal), 85.0000(BigDecimal), 5.0000(BigDecimal), 3(Long), LS202610010002(String), 11(Integer), system(String), 2026-10-01T19:58:22.987039100(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@508a67cd]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+JDBC Connection [HikariProxyConnection@1922353519 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: SELECT MAX(code) FROM retail_return
+==> Parameters: 
+<==    Columns: MAX(code)
+<==        Row: null
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: INSERT INTO retail_return ( code, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: LT202610010001(String), 1(Long), 3(Long), 3(BigDecimal), 60.0(BigDecimal), 0(Integer), TEST-VERIFY ÍË»õµ¥-Õý³£(String), 2026-10-01T19:58:23.481429400(LocalDateTime), 2026-10-01T19:58:23.481429400(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+JDBC Connection [HikariProxyConnection@1922353519 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: INSERT INTO retail_return_detail ( return_id, product_id, return_num, tax_price, tax_amount, description ) VALUES ( ?, ?, ?, ?, ?, ? )
+==> Parameters: 1(Long), 3(Long), 3(BigDecimal), 20.0(BigDecimal), 60.0(BigDecimal), ÂÝË¨M8*20(String)
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: SELECT id,out_stock_un_approve,return_stock_un_approve,create_time,update_time,create_by,update_by,deleted FROM retail_config WHERE deleted=0
+==> Parameters: 
+<==    Columns: id, out_stock_un_approve, return_stock_un_approve, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, 1, 2026-10-01 19:36:35, 2026-10-01 19:58:13, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: SELECT id,code,out_sheet_id,sc_id,customer_id,total_num,total_amount,status,description,create_time,update_time,create_by,update_by,deleted FROM retail_return WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, out_sheet_id, sc_id, customer_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, LT202610010001, null, 1, 3, 3.0000, 60.0000, 0, TEST-VERIFY ÍË»õµ¥-Õý³£, 2026-10-01 19:58:23, 2026-10-01 19:58:23, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: UPDATE retail_return SET code=?, sc_id=?, customer_id=?, total_num=?, total_amount=?, status=?, description=?, create_time=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: LT202610010001(String), 1(Long), 3(Long), 3.0000(BigDecimal), 60.0000(BigDecimal), 1(Integer), TEST-VERIFY ÍË»õµ¥-Õý³£(String), 2026-10-01T19:58:23(LocalDateTime), 2026-10-01T19:58:23(LocalDateTime), system(String), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: SELECT id,return_id,product_id,return_num,tax_price,tax_amount,description FROM retail_return_detail WHERE (return_id = ?)
+==> Parameters: 1(Long)
+<==    Columns: id, return_id, product_id, return_num, tax_price, tax_amount, description
+<==        Row: 1, 1, 3, 3.0000, 20.0000, 60.0000, ÂÝË¨M8*20
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 85.0000, 1.0000, 85.0000, null, 2026-10-01 19:57:55, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE id=? AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 1, 3, 85.0000, 1.0000, 85.0000, null, 2026-10-01 19:57:55, verify, verify, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: UPDATE product_stock SET sc_id=?, product_id=?, stock_num=?, tax_price=?, tax_amount=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 1(Long), 3(Long), 88.0000(BigDecimal), 1.0000(BigDecimal), 88.00000000(BigDecimal), 2026-10-01T19:57:55(LocalDateTime), verify(String), verify(String), 3(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5] from current transaction
+==>  Preparing: INSERT INTO product_stock_log ( sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 1(Long), 3(Long), 85.0000(BigDecimal), 88.0000(BigDecimal), 3.0000(BigDecimal), 1(Long), LT202610010001(String), 12(Integer), system(String), 2026-10-01T19:58:23.597399(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec681d5]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@270d77f9]
+JDBC Connection [HikariProxyConnection@614089979 wrapping com.mysql.cj.jdbc.ConnectionImpl@5fb3c19c] will be managed by Spring
+==>  Preparing: UPDATE retail_config SET out_stock_un_approve=?, return_stock_un_approve=?, update_time=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: true(Boolean), true(Boolean), 2026-10-01T19:58:24.761407800(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@270d77f9]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@270d77f9]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@270d77f9]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@270d77f9]

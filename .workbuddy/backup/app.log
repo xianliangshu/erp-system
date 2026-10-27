@@ -1,0 +1,412 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.0)
+
+2026-10-01T15:56:10.108+08:00  INFO 20592 --- [erp-system] [           main] com.erp.ErpApplication                   : Starting ErpApplication v1.0-SNAPSHOT using Java 21.0.12 with PID 20592 (D:\code\java\java_study\erp-system\erp-web\target\erp-web-1.0-SNAPSHOT.jar started by shu in D:\code\java\java_study\erp-system)
+2026-10-01T15:56:10.115+08:00  INFO 20592 --- [erp-system] [           main] com.erp.ErpApplication                   : No active profile set, falling back to 1 default profile: "default"
+2026-10-01T15:56:12.943+08:00  INFO 20592 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-10-01T15:56:12.945+08:00  INFO 20592 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-10-01T15:56:13.104+08:00  INFO 20592 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 88 ms. Found 0 Redis repository interfaces.
+2026-10-01T15:56:15.561+08:00  INFO 20592 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-10-01T15:56:15.615+08:00  INFO 20592 --- [erp-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-01T15:56:15.615+08:00  INFO 20592 --- [erp-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2026-10-01T15:56:15.759+08:00  INFO 20592 --- [erp-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2026-10-01T15:56:15.761+08:00  INFO 20592 --- [erp-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5519 ms
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+Get /192.168.31.194 network interface 
+Get network interface info: name:wireless_32768 (Intel(R) Wi-Fi 6 AX201 160MHz)
+Initialization Sequence datacenterId:5 workerId:27
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.7 
+2026-10-01T15:56:23.500+08:00  INFO 20592 --- [erp-system] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-10-01T15:56:27.007+08:00  INFO 20592 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/api'
+2026-10-01T15:56:27.039+08:00  INFO 20592 --- [erp-system] [           main] com.erp.ErpApplication                   : Started ErpApplication in 17.801 seconds (process running for 18.95)
+2026-10-01T15:56:36.252+08:00  INFO 20592 --- [erp-system] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-01T15:56:36.253+08:00  INFO 20592 --- [erp-system] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-01T15:56:36.257+08:00  INFO 20592 --- [erp-system] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158120e3] was not registered for synchronization because synchronization is not active
+2026-10-01T15:56:36.504+08:00  INFO 20592 --- [erp-system] [nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-01T15:56:37.140+08:00  INFO 20592 --- [erp-system] [nio-8080-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7808e630
+2026-10-01T15:56:37.146+08:00  INFO 20592 --- [erp-system] [nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+JDBC Connection [HikariProxyConnection@1441221862 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT DISTINCT m.id, m.parent_id, m.code, m.name, m.title, m.menu_type, m.path, m.component, m.permission, m.icon, m.sort, m.visible, m.status, m.is_deleted, m.remark, m.create_by, m.create_time, m.update_by, m.update_time FROM sys_menu m INNER JOIN sys_role_menu rm ON m.id = rm.menu_id INNER JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.status = 1 AND m.visible = 1 AND m.is_deleted = 0 ORDER BY m.sort ASC
+==> Parameters: 1(Long)
+<==    Columns: id, parent_id, code, name, title, menu_type, path, component, permission, icon, sort, visible, status, is_deleted, remark, create_by, create_time, update_by, update_time
+<==        Row: 2, 1, M000201, stock-query, 库存查询, 1, /business/stock/query, Business/Stock/Query, business:stock:query, SearchOutlined, 1, 1, 1, 0, 实时库存查询, null, 2026-08-01 19:14:40, null, 2026-10-01 15:47:50
+<==        Row: 31, 30, M000008, role-add, 新增角色, 2, null, null, system:role:add, null, 1, 1, 1, 0, 新增角色按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 26, 25, M000003, user-add, 新增用户, 2, null, null, system:user:add, null, 1, 1, 1, 0, 新增用户按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 25, 17, M000002, user, 用户管理, 1, /system/user, System/User, system:user:list, UserOutlined, 1, 1, 1, 0, 用户信息管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 70, 20, M000701, settle-in-out-item, 收支项目, 1, /business/settle/item, Business/Settle/IncomeExpenseItem/List, business:settle:item, BarsOutlined, 1, 1, 1, 0, 收入/支出项目维护, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 79, 21, M000801, chart-dashboard, 数据看板, 1, /chart/dashboard, Business/Chart/Dashboard, chart:dashboard, DashboardOutlined, 1, 1, 1, 0, 经营数据看板, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 36, 35, M000013, dept-add, 新增部门, 2, null, null, system:dept:add, null, 1, 1, 1, 0, 新增部门按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 17, 0, M000001, system, 系统管理, 0, /system, null, null, SettingOutlined, 1, 1, 1, 0, 系统管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 40, 39, M000017, menu-add, 新增菜单, 2, null, null, system:menu:add, null, 1, 1, 1, 0, 新增菜单按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 44, 43, M000021, dict-add, 新增字典, 2, null, null, system:dict:add, null, 1, 1, 1, 0, 新增字典按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 11, 10, B000101, WarehouseAdd, 新增仓库, 2, null, null, basedata:warehouse:add, null, 1, 1, 1, 0, 新增仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 10, 9, M000101, warehouse, 仓库管理, 1, /basedata/warehouse, Basedata/Warehouse, basedata:warehouse:list, HomeOutlined, 1, 1, 1, 0, 仓库信息管理, null, 2026-08-01 19:16:12, null, 2026-10-01 15:47:50
+<==        Row: 67, 19, M000601, retail-config, 零售配置, 1, /business/retail/config, Business/Retail/Config, business:retail:config, SettingOutlined, 1, 1, 1, 0, 零售参数配置, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 6, 5, M000103, material-category, 物料分类, 1, /basedata/material/category, Basedata/Material/Category, basedata:material:category, FolderOutlined, 1, 1, 1, 0, 物料分类管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 4, 3, M000301, purchase-order, 采购订单, 1, /business/purchase/order, Business/Purchase/Order/List, business:purchase:order, FileTextOutlined, 1, 1, 1, 0, 采购订单管理, null, 2026-08-01 19:14:55, null, 2026-10-01 15:47:50
+<==        Row: 64, 18, M000401, sale-order, 销售订单, 1, /business/sale/order, Business/Sale/Order/List, business:sale:order, FileTextOutlined, 1, 1, 1, 0, 销售订单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 45, 43, M000022, dict-edit, 修改字典, 2, null, null, system:dict:edit, null, 2, 1, 1, 0, 修改字典按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 41, 39, M000018, menu-edit, 修改菜单, 2, null, null, system:menu:edit, null, 2, 1, 1, 0, 修改菜单按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 68, 19, M000602, retail-out, 零售出库, 1, /business/retail/out, Business/Retail/Outbound/List, business:retail:out, ExportOutlined, 2, 1, 1, 0, 零售出库单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 37, 35, M000014, dept-edit, 修改部门, 2, null, null, system:dept:edit, null, 2, 1, 1, 0, 修改部门按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 55, 1, M000202, stock-log, 库存流水, 1, /business/stock/log, Business/Stock/Log, business:stock:log, HistoryOutlined, 2, 1, 1, 0, 库存出入库变动记录, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 65, 18, M000402, sale-delivery, 销售出库, 1, /business/sale/delivery, Business/Sale/Delivery/List, business:sale:delivery, ExportOutlined, 2, 1, 1, 0, 销售出库单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 32, 30, M000009, role-edit, 修改角色, 2, null, null, system:role:edit, null, 2, 1, 1, 0, 修改角色按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 61, 3, M000302, purchase-receipt, 采购收货, 1, /business/purchase/receipt, Business/Purchase/Receipt/List, business:purchase:receipt, InboxOutlined, 2, 1, 1, 0, 采购收货单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 30, 17, M000007, role, 角色管理, 1, /system/role, System/Role, system:role:list, TeamOutlined, 2, 1, 1, 0, 角色与授权管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 71, 20, M000702, settle-fee-sheet, 供应商费用单, 1, /business/settle/fee, Business/Settle/FeeSheet/List, business:settle:fee, AccountBookOutlined, 2, 1, 1, 0, 供应商费用单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 27, 25, M000004, user-edit, 修改用户, 2, null, null, system:user:edit, null, 2, 1, 1, 0, 修改用户按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 5, 9, M000102, material, 物料管理, 0, /basedata/material, null, null, AppstoreOutlined, 2, 1, 1, 0, 物料管理模块, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 7, 5, M000104, unit, 计量单位, 1, /basedata/material/unit, Basedata/Material/Unit, basedata:material:unit, CalculatorOutlined, 2, 1, 1, 0, 计量单位管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 80, 21, M000802, chart-purchase, 采购统计, 1, /chart/purchase, Business/Chart/Purchase, chart:purchase, ShoppingCartOutlined, 2, 1, 1, 0, 采购金额/数量统计, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 9, 0, M000100, basedata, 基础数据, 0, /basedata, null, null, DatabaseOutlined, 2, 1, 1, 0, 基础数据管理模块, null, 2026-08-01 19:16:12, null, 2026-10-01 15:47:50
+<==        Row: 12, 10, B000102, WarehouseEdit, 编辑仓库, 2, null, null, basedata:warehouse:edit, null, 2, 1, 1, 0, 编辑仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 28, 25, M000005, user-delete, 删除用户, 2, null, null, system:user:delete, null, 3, 1, 1, 0, 删除用户按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 66, 18, M000403, sale-return, 销售退货, 1, /business/sale/return, Business/Sale/Return/List, business:sale:return, ImportOutlined, 3, 1, 1, 0, 销售退货单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 56, 1, M000203, stock-adjust-sheet, 库存调整, 1, /stock/adjust/sheet, Business/Stock/Adjust/Sheet/List, stock:adjust:query, SwapOutlined, 3, 1, 1, 0, 库存调整单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 8, 5, M000105, material-info, 物料信息, 1, /basedata/material/info, Basedata/Material/Info, basedata:material:info, InboxOutlined, 3, 1, 1, 0, 物料信息管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 46, 43, M000023, dict-delete, 删除字典, 2, null, null, system:dict:delete, null, 3, 1, 1, 0, 删除字典按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 13, 10, B000103, WarehouseDelete, 删除仓库, 2, null, null, basedata:warehouse:delete, null, 3, 1, 1, 0, 删除仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 69, 19, M000603, retail-return, 零售退货, 1, /business/retail/return, Business/Retail/Return/List, business:retail:return, ImportOutlined, 3, 1, 1, 0, 零售退货单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 42, 39, M000019, menu-delete, 删除菜单, 2, null, null, system:menu:delete, null, 3, 1, 1, 0, 删除菜单按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 81, 21, M000803, chart-sales, 销售统计, 1, /chart/sales, Business/Chart/Sales, chart:sales, RiseOutlined, 3, 1, 1, 0, 销售金额/数量统计, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 15, 3, M000303, purchase-return, 采购退货, 1, /business/purchase/return, Business/Purchase/Return/List, business:purchase:return, RollbackOutlined, 3, 1, 1, 0, 采购退货管理, null, 2026-08-01 19:21:34, null, 2026-10-01 15:47:50
+<==        Row: 1, 0, M000200, inventory, 库存管理, 0, /inventory, null, null, StockOutlined, 3, 1, 1, 0, 库存管理模块, null, 2026-08-01 19:14:40, null, 2026-10-01 15:47:50
+<==        Row: 38, 35, M000015, dept-delete, 删除部门, 2, null, null, system:dept:delete, null, 3, 1, 1, 0, 删除部门按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 16, 9, M000106, supplier, 供应商管理, 1, /basedata/supplier, Basedata/Supplier, basedata:supplier:list, TeamOutlined, 3, 1, 1, 0, 供应商信息管理, null, 2026-08-01 19:22:06, null, 2026-10-01 15:47:50
+<==        Row: 35, 17, M000012, dept, 部门管理, 1, /system/dept, System/Dept, system:dept:list, ApartmentOutlined, 3, 1, 1, 0, 组织部门管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 33, 30, M000010, role-delete, 删除角色, 2, null, null, system:role:delete, null, 3, 1, 1, 0, 删除角色按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 72, 20, M000703, settle-pre-sheet, 供应商预付款单, 1, /business/settle/pre, Business/Settle/PreSheet/List, business:settle:pre, MoneyCollectOutlined, 3, 1, 1, 0, 供应商预付款单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 73, 20, M000704, settle-check-sheet, 供应商对账单, 1, /business/settle/check, Business/Settle/CheckSheet/List, business:settle:check, ReconciliationOutlined, 4, 1, 1, 0, 供应商对账单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 82, 21, M000804, chart-stock, 库存报表, 1, /chart/stock, Business/Chart/Stock, chart:stock, DatabaseOutlined, 4, 1, 1, 0, 库存金额/库龄报表, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 39, 17, M000016, menu, 菜单管理, 1, /system/menu, System/Menu, system:menu:list, MenuOutlined, 4, 1, 1, 0, 菜单与权限项管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 57, 1, M000204, stock-adjust-reason, 调整原因, 1, /stock/adjust/reason, Business/Stock/Adjust/Reason, stock:adjust:reason:query, SettingOutlined, 4, 1, 1, 0, 库存调整原因维护, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 3, 0, M000300, purchase, 采购管理, 0, /purchase, null, null, ShoppingCartOutlined, 4, 1, 1, 0, 采购管理模块, null, 2026-08-01 19:14:55, null, 2026-10-01 15:47:50
+<==        Row: 47, 9, M000107, customer, 客户管理, 1, /basedata/customer, Basedata/Customer, basedata:customer:list, UserOutlined, 4, 1, 1, 0, 客户信息管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 14, 10, B000104, WarehouseSetDefault, 设置默认, 2, null, null, basedata:warehouse:setDefault, null, 4, 1, 1, 0, 设置默认仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 34, 30, M000011, role-assign, 分配权限, 2, null, null, system:role:assign, null, 4, 1, 1, 0, 角色分配菜单权限, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 29, 25, M000006, user-reset, 重置密码, 2, null, null, system:user:resetPwd, null, 4, 1, 1, 0, 重置密码按钮, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 74, 20, M000705, settle-sheet, 供应商结算单, 1, /business/settle/sheet, Business/Settle/SettleSheet/List, business:settle:sheet, TransactionOutlined, 5, 1, 1, 0, 供应商结算单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 83, 21, M000805, chart-summary, 进销存汇总, 1, /chart/summary, Business/Chart/Summary, chart:summary, FundOutlined, 5, 1, 1, 0, 进销存综合分析, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 18, 0, M000400, sale, 销售管理, 0, /sale, null, null, ShoppingOutlined, 5, 1, 1, 0, 销售管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 43, 17, M000020, dict, 字典管理, 1, /system/dict, System/Dict, system:dict:list, BookOutlined, 5, 1, 1, 0, 数据字典管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 48, 9, M000108, brand, 品牌管理, 1, /basedata/brand, Basedata/Brand, basedata:brand:list, TagOutlined, 5, 1, 1, 0, 品牌信息管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 58, 1, M000205, stock-check, 库存盘点, 1, /business/stock/check, Business/Stock/Check/List, business:stock:check, AuditOutlined, 5, 1, 1, 0, 库存盘点管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 59, 1, M000206, stock-transfer, 库存调拨, 1, /business/stock/transfer, Business/Stock/Transfer/List, business:stock:transfer, NodeIndexOutlined, 6, 1, 1, 0, 仓库间调拨管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 75, 20, M000706, customer-fee-sheet, 客户费用单, 1, /business/settle/customer/fee, Business/Settle/CustomerFeeSheet/List, business:settle:customer:fee, AccountBookOutlined, 6, 1, 1, 0, 客户费用单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 19, 0, M000600, retail, 零售管理, 0, /retail, null, null, ShopOutlined, 6, 1, 1, 0, 零售管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 20, 0, M000700, settle, 结算管理, 0, /settle, null, null, DollarOutlined, 7, 1, 1, 0, 结算管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 76, 20, M000707, customer-pre-sheet, 客户预收款单, 1, /business/settle/customer/pre, Business/Settle/CustomerPreSheet/List, business:settle:customer:pre, MoneyCollectOutlined, 7, 1, 1, 0, 客户预收款单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 77, 20, M000708, customer-check-sheet, 客户对账单, 1, /business/settle/customer/check, Business/Settle/CustomerCheckSheet/List, business:settle:customer:check, ReconciliationOutlined, 8, 1, 1, 0, 客户对账单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 21, 0, M000800, chart, 统计报表, 0, /chart, null, null, AreaChartOutlined, 8, 1, 1, 0, 统计报表模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 78, 20, M000709, customer-settle-sheet, 客户结算单, 1, /business/settle/customer/sheet, Business/Settle/CustomerSettleSheet/List, business:settle:customer:sheet, TransactionOutlined, 9, 1, 1, 0, 客户结算单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==      Total: 71
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158120e3]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@331fff5d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1851571619 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@331fff5d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61188090] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@701567795 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM sys_dict_type
+==> Parameters: 
+<==    Columns: total
+<==        Row: 4
+<==      Total: 1
+==>  Preparing: SELECT id,dict_name,dict_type,status,remark,create_time,update_time,create_by,update_by FROM sys_dict_type ORDER BY create_time DESC LIMIT ?
+==> Parameters: 10(Long)
+<==    Columns: id, dict_name, dict_type, status, remark, create_time, update_time, create_by, update_by
+<==        Row: 1, 用户性别, sys_user_gender, 1, 用户性别列表, 2026-08-01 19:35:36, 2026-08-01 19:35:36, system, null
+<==        Row: 2, 用户状态, sys_user_status, 1, 用户状态列表, 2026-08-01 19:35:36, 2026-08-01 19:35:36, system, null
+<==        Row: 3, 菜单类型, sys_menu_type, 1, 菜单类型列表, 2026-08-01 19:35:36, 2026-08-01 19:35:36, system, null
+<==        Row: 4, 数据权限范围, sys_data_scope, 1, 数据权限范围列表, 2026-08-01 19:35:36, 2026-08-01 19:35:36, system, null
+<==      Total: 4
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@61188090]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22e70194] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@673147620 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log
+==> Parameters: 
+<==    Columns: total
+<==        Row: 2
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 10(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 2, 2, 3, 500.0000, 450.0000, -50.0000, 99998, TEST-VERIFY-20261001, 3, verify, 2026-10-01 15:57:17
+<==        Row: 1, 1, 1, 0.0000, 100.0000, 100.0000, 99999, TEST-VERIFY-20261001, 1, verify, 2026-10-01 15:57:17
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22e70194]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2269049d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1211304509 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, WH001, 主仓库, 张三, 13800138000, 北京市朝阳区xxx路xxx号, 1, 1, 公司主仓库, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==        Row: 2, WH002, 分仓库A, 李四, 13800138001, 上海市浦东新区xxx路xxx号, 0, 1, 上海分仓, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2269049d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e66f109] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1732058610 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, MAT000001, 钢板Q235, 钢板, 1200*2400*3mm, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, 普通碳素结构钢板, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==        Row: 3, 4, MAT000003, 螺栓M8*20, 螺栓, M8*20 304不锈钢, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, 不锈钢螺栓, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e66f109]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@301b4b1d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@215676796 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, 个, 1, 1, 通用计数单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 5, UNIT000005, 千克, 5, 1, 重量单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@301b4b1d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1932f11e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@661887835 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log WHERE (sc_id = ?)
+==> Parameters: 2(Long)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log WHERE (sc_id = ?) ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 2(Long), 10(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 2, 2, 3, 500.0000, 450.0000, -50.0000, 99998, TEST-VERIFY-20261001, 3, verify, 2026-10-01 15:57:17
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1932f11e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38d7839a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@63270552 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, 分仓库A, 李四, 13800138001, 上海市浦东新区xxx路xxx号, 0, 1, 上海分仓, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@38d7839a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bdc4600] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@798215090 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 4, MAT000003, 螺栓M8*20, 螺栓, M8*20 304不锈钢, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, 不锈钢螺栓, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bdc4600]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@545394aa] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@502670438 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, 个, 1, 1, 通用计数单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@545394aa]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34c8d42c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1979047447 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log WHERE (biz_type = ?)
+==> Parameters: 3(Integer)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log WHERE (biz_type = ?) ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 3(Integer), 10(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 2, 2, 3, 500.0000, 450.0000, -50.0000, 99998, TEST-VERIFY-20261001, 3, verify, 2026-10-01 15:57:17
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34c8d42c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1194582b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@300613546 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, 分仓库A, 李四, 13800138001, 上海市浦东新区xxx路xxx号, 0, 1, 上海分仓, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1194582b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47711d43] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1947680902 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 4, MAT000003, 螺栓M8*20, 螺栓, M8*20 304不锈钢, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, 不锈钢螺栓, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47711d43]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@54372aa1] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@459521633 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, 个, 1, 1, 通用计数单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@54372aa1]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@43fd238d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1561442225 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE deleted=0 AND ((name LIKE ? OR code LIKE ?))
+==> Parameters: %螺栓%(String), %螺栓%(String)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 4, MAT000003, 螺栓M8*20, 螺栓, M8*20 304不锈钢, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, 不锈钢螺栓, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@43fd238d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5fd8a93a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@597354725 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log WHERE (product_id IN (?))
+==> Parameters: 3(Long)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log WHERE (product_id IN (?)) ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 3(Long), 10(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 2, 2, 3, 500.0000, 450.0000, -50.0000, 99998, TEST-VERIFY-20261001, 3, verify, 2026-10-01 15:57:17
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5fd8a93a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@30bf383f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1150694157 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, 分仓库A, 李四, 13800138001, 上海市浦东新区xxx路xxx号, 0, 1, 上海分仓, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@30bf383f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10cdbcd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1211856147 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, 4, MAT000003, 螺栓M8*20, 螺栓, M8*20 304不锈钢, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, 不锈钢螺栓, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10cdbcd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c87bd2b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1806880197 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, 个, 1, 1, 通用计数单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c87bd2b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ee1c3a7] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1343327628 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log WHERE (create_time >= ? AND create_time <= ?)
+==> Parameters: 2026-10-01T00:00(LocalDateTime), 2026-10-01T23:59:59(LocalDateTime)
+<==    Columns: total
+<==        Row: 2
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log WHERE (create_time >= ? AND create_time <= ?) ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 2026-10-01T00:00(LocalDateTime), 2026-10-01T23:59:59(LocalDateTime), 10(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 2, 2, 3, 500.0000, 450.0000, -50.0000, 99998, TEST-VERIFY-20261001, 3, verify, 2026-10-01 15:57:17
+<==        Row: 1, 1, 1, 0.0000, 100.0000, 100.0000, 99999, TEST-VERIFY-20261001, 1, verify, 2026-10-01 15:57:17
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ee1c3a7]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@381e4c4e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1793010192 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, WH001, 主仓库, 张三, 13800138000, 北京市朝阳区xxx路xxx号, 1, 1, 公司主仓库, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==        Row: 2, WH002, 分仓库A, 李四, 13800138001, 上海市浦东新区xxx路xxx号, 0, 1, 上海分仓, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@381e4c4e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@725fb8ae] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@946464407 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 3(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, MAT000001, 钢板Q235, 钢板, 1200*2400*3mm, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, 普通碳素结构钢板, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==        Row: 3, 4, MAT000003, 螺栓M8*20, 螺栓, M8*20 304不锈钢, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, 不锈钢螺栓, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@725fb8ae]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@727256e0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2112293576 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, 个, 1, 1, 通用计数单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 5, UNIT000005, 千克, 5, 1, 重量单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@727256e0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14af38c8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@509039544 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log WHERE (sc_id = ? AND biz_type = ?)
+==> Parameters: 1(Long), 1(Integer)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log WHERE (sc_id = ? AND biz_type = ?) ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 1(Long), 1(Integer), 10(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 1, 1, 1, 0.0000, 100.0000, 100.0000, 99999, TEST-VERIFY-20261001, 1, verify, 2026-10-01 15:57:17
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14af38c8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a44a787] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1311433700 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, WH001, 主仓库, 张三, 13800138000, 北京市朝阳区xxx路xxx号, 1, 1, 公司主仓库, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6a44a787]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b5655e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1275236912 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, code, name, short_name, specification, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, MAT000001, 钢板Q235, 钢板, 1200*2400*3mm, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, 普通碳素结构钢板, 2026-08-01 19:23:55, 2026-08-01 19:23:55, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b5655e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3f34fe82] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@394523567 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, 千克, 5, 1, 重量单位, 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3f34fe82]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b4fcf3e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@92811303 wrapping com.mysql.cj.jdbc.ConnectionImpl@7808e630] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,code,name,short_name,specification,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE deleted=0 AND ((name LIKE ? OR code LIKE ?))
+==> Parameters: %不存在的商品ZZZ%(String), %不存在的商品ZZZ%(String)
+<==      Total: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b4fcf3e]

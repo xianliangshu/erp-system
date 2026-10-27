@@ -5,8 +5,7 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UserOutlined,
-    LogoutOutlined,
-    DashboardOutlined
+    LogoutOutlined
 } from '@ant-design/icons'
 import { useUserStore } from '@/store/userStore'
 import { useMenuStore } from '@/store/menuStore'
@@ -87,7 +86,7 @@ const MainLayout = () => {
         <Layout className="main-layout">
             <Sider trigger={null} collapsible collapsed={collapsed} className="main-sider">
                 <div className="logo">
-                    <h2>{collapsed ? 'ERP' : 'ERP管理系统'}</h2>
+                    <h2>慧采云仓ERP</h2>
                 </div>
                 <Spin spinning={loading}>
                     <Menu

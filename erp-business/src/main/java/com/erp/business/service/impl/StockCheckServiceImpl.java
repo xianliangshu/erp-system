@@ -12,6 +12,7 @@ import com.erp.business.mapper.StockCheckDetailMapper;
 import com.erp.business.mapper.StockCheckMapper;
 import com.erp.business.service.IProductStockService;
 import com.erp.business.service.IStockCheckService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCheck> implements IStockCheckService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final StockCheckDetailMapper checkDetailMapper;
     private final IProductStockService productStockService;
@@ -51,6 +53,10 @@ public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCh
             check.setCheckDate(LocalDate.parse(dto.getCheckDate(), DateTimeFormatter.ISO_DATE));
         check.setDescription(dto.getDescription());
         check.setStatus(0);
+        // 单据来源关联：盘点任务生成的差异单回填 planId；预先盘点单转来的回填 preSheetId。
+        // 手工在盘点单页面新建时两者均为 null，不影响原有流程。
+        check.setPlanId(dto.getPlanId());
+        check.setPreSheetId(dto.getPreSheetId());
 
         BigDecimal totalProfit = BigDecimal.ZERO;
         BigDecimal totalLoss = BigDecimal.ZERO;
@@ -91,12 +97,14 @@ public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCh
         StockCheck check = this.getById(dto.getId());
         if (check == null)
             throw new RuntimeException("盘点单不存在");
-        if (check.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(check.getStatus()))
             throw new RuntimeException("只有待审核的盘点单才能修改");
 
         if (dto.getCheckDate() != null)
             check.setCheckDate(LocalDate.parse(dto.getCheckDate(), DateTimeFormatter.ISO_DATE));
         check.setDescription(dto.getDescription());
+        // 注意：planId / preSheetId 是「单据来源」标识，仅在创建时写入，修改时不覆盖
+        // （前端编辑表单不会回传这两个字段，覆盖会把来源清空）。
 
         LambdaQueryWrapper<StockCheckDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(StockCheckDetail::getCheckId, check.getId());
@@ -136,7 +144,7 @@ public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCh
         StockCheck check = this.getById(id);
         if (check == null)
             throw new RuntimeException("盘点单不存在");
-        if (check.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(check.getStatus()))
             throw new RuntimeException("盘点单已审核");
 
         check.setStatus(1);
@@ -150,10 +158,13 @@ public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCh
         for (StockCheckDetail detail : details) {
             if (detail.getDiffNum().compareTo(BigDecimal.ZERO) > 0) {
                 // 盘盈 - 增加库存
-                productStockService.addStock(check.getScId(), detail.getProductId(), detail.getDiffNum(),
+                // 修复(2026-10-03)：盘盈只增加数量，成本价应保持库存原值不变。
+                // 原实现用 addStock 传盘点单上的 costPrice，会把成本价覆盖成盘点单填的价格
+                // （盘点单成本价来自前端输入，未必等于库存实际成本）⇒ 库存金额被改错。
+                productStockService.addStockKeepCost(check.getScId(), detail.getProductId(), detail.getDiffNum(),
                         detail.getCostPrice(), check.getId(), check.getCode(), ProductStockBizType.STOCK_CHECK_PROFIT);
             } else if (detail.getDiffNum().compareTo(BigDecimal.ZERO) < 0) {
-                // 盘亏 - 扣减库存
+                // 盘亏 - 扣减库存（出库走 subStock，不覆盖成本价）
                 productStockService.subStock(check.getScId(), detail.getProductId(), detail.getDiffNum().abs(),
                         detail.getCostPrice(), check.getId(), check.getCode(), ProductStockBizType.STOCK_CHECK_LOSS);
             }
@@ -161,17 +172,6 @@ public class StockCheckServiceImpl extends ServiceImpl<StockCheckMapper, StockCh
     }
 
     private String generateCheckCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "SC" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("STOCK_CHECK");
     }
 }

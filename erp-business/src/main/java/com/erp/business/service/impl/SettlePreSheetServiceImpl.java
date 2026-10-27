@@ -12,6 +12,7 @@ import com.erp.business.entity.SettlePreSheetDetail;
 import com.erp.business.mapper.SettlePreSheetDetailMapper;
 import com.erp.business.mapper.SettlePreSheetMapper;
 import com.erp.business.service.ISettlePreSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SettlePreSheetServiceImpl extends ServiceImpl<SettlePreSheetMapper, SettlePreSheet>
         implements ISettlePreSheetService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SettlePreSheetDetailMapper detailMapper;
 
@@ -105,7 +107,7 @@ public class SettlePreSheetServiceImpl extends ServiceImpl<SettlePreSheetMapper,
         SettlePreSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("预付款单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的预付款单才能修改");
 
         sheet.setSupplierId(dto.getSupplierId());
@@ -139,7 +141,7 @@ public class SettlePreSheetServiceImpl extends ServiceImpl<SettlePreSheetMapper,
         SettlePreSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("预付款单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的预付款单才能审核");
 
         sheet.setStatus(1);
@@ -154,7 +156,7 @@ public class SettlePreSheetServiceImpl extends ServiceImpl<SettlePreSheetMapper,
         SettlePreSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("预付款单不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的预付款单才能拒绝");
 
         sheet.setStatus(2);
@@ -170,7 +172,7 @@ public class SettlePreSheetServiceImpl extends ServiceImpl<SettlePreSheetMapper,
         SettlePreSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的预付款单才能删除");
 
         LambdaQueryWrapper<SettlePreSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
@@ -182,16 +184,6 @@ public class SettlePreSheetServiceImpl extends ServiceImpl<SettlePreSheetMapper,
 
     @Override
     public String generateCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "YF" + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length()) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SETTLE_PRE");
     }
 }

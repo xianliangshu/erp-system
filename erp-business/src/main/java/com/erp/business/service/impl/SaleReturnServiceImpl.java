@@ -14,6 +14,7 @@ import com.erp.business.mapper.SaleReturnMapper;
 import com.erp.business.service.ISaleDeliveryService;
 import com.erp.business.service.ISaleReturnService;
 import com.erp.business.service.IProductStockService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SaleReturnServiceImpl extends ServiceImpl<SaleReturnMapper, SaleReturn> implements ISaleReturnService {
+    private final ICodeGenerateService codeGenerateService;
 
     private final SaleReturnDetailMapper returnDetailMapper;
     private final ISaleDeliveryService saleDeliveryService;
@@ -50,7 +52,7 @@ public class SaleReturnServiceImpl extends ServiceImpl<SaleReturnMapper, SaleRet
         SaleDelivery delivery = saleDeliveryService.getById(dto.getDeliveryId());
         if (delivery == null)
             throw new RuntimeException("出库单不存在");
-        if (delivery.getStatus() != 1)
+        if (!Integer.valueOf(1).equals(delivery.getStatus()))
             throw new RuntimeException("只有已确认的出库单才能退货");
 
         SaleReturn saleReturn = new SaleReturn();
@@ -98,7 +100,7 @@ public class SaleReturnServiceImpl extends ServiceImpl<SaleReturnMapper, SaleRet
         SaleReturn saleReturn = this.getById(dto.getId());
         if (saleReturn == null)
             throw new RuntimeException("退货单不存在");
-        if (saleReturn.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(saleReturn.getStatus()))
             throw new RuntimeException("只有待确认的退货单才能修改");
 
         saleReturn.setDescription(dto.getDescription());
@@ -139,7 +141,7 @@ public class SaleReturnServiceImpl extends ServiceImpl<SaleReturnMapper, SaleRet
         SaleReturn saleReturn = this.getById(id);
         if (saleReturn == null)
             throw new RuntimeException("退货单不存在");
-        if (saleReturn.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(saleReturn.getStatus()))
             throw new RuntimeException("退货单已确认");
 
         saleReturn.setStatus(1);
@@ -151,7 +153,11 @@ public class SaleReturnServiceImpl extends ServiceImpl<SaleReturnMapper, SaleRet
 
         // 退货入库（增加库存）
         for (SaleReturnDetail detail : details) {
-            productStockService.addStock(
+            // 修复(2026-10-03)：退货入库必须走 addStockKeepCost，不能用 addStock。
+            // addStock 的 isAdd=true 会用传入价格覆盖库存成本价，而这里传的是**售价**，
+            // 会把售价写进成本价 → 同一商品退货一次，库存金额与毛利就全错一次。
+            // 退货只增加数量，成本价维持原值不变。
+            productStockService.addStockKeepCost(
                     saleReturn.getScId(),
                     detail.getProductId(),
                     detail.getReturnNum(),
@@ -174,17 +180,6 @@ public class SaleReturnServiceImpl extends ServiceImpl<SaleReturnMapper, SaleRet
     }
 
     private String generateReturnCode() {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = "SR" + dateStr;
-
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SALE_RETURN");
     }
 }

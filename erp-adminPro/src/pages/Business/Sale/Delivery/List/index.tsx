@@ -16,8 +16,8 @@ const SaleDeliveryList: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState<any[]>([]);
     const [total, setTotal] = useState(0);
-    const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // 分页与查询条件：唯一的取数依据，搜索/重置/翻页都只改它
+    const [query, setQuery] = useState<any>({ current: 1, size: 10 });
     const [searchCustomerId, setSearchCustomerId] = useState<number | undefined>(undefined);
     const [searchStatus, setSearchStatus] = useState<number | undefined>(undefined);
     const [customers, setCustomers] = useState<any[]>([]);
@@ -30,17 +30,17 @@ const SaleDeliveryList: React.FC = () => {
     const loadData = async () => {
         setLoading(true);
         try {
-            const data = await getSaleDeliveryPage({ current, size: pageSize, customerId: searchCustomerId, status: searchStatus });
+            const data = await getSaleDeliveryPage({ ...query, customerId: searchCustomerId, status: searchStatus });
             setDataSource(data.records); setTotal(data.total);
         } catch (error) { message.error('加载出库数据失败'); }
         finally { setLoading(false); }
     };
 
     useEffect(() => { loadCustomers(); }, []);
-    useEffect(() => { loadData(); }, [current, pageSize]);
+    useEffect(() => { loadData(); }, [query]);
 
-    const handleSearch = () => { setCurrent(1); loadData(); };
-    const handleReset = () => { setSearchCustomerId(undefined); setSearchStatus(undefined); setCurrent(1); loadData(); };
+    const handleSearch = () => { setQuery((q: any) => ({ ...q, current: 1 })); };
+    const handleReset = () => { setSearchCustomerId(undefined); setSearchStatus(undefined); setQuery((q: any) => ({ ...q, current: 1 })); };
     const handleConfirm = async (id: number) => {
         try { await confirmSaleDelivery(id); message.success('确认出库成功'); loadData(); }
         catch (error) { message.error('操作失败'); }
@@ -90,7 +90,7 @@ const SaleDeliveryList: React.FC = () => {
                     <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/business/sale/delivery/add')}>新增出库</Button>
                 </Space>
                 <Table loading={loading} columns={columns} dataSource={dataSource} rowKey="id"
-                    pagination={{ current, pageSize, total, showSizeChanger: true, showTotal: (t) => `共 ${t} 条`, onChange: (page, size) => { setCurrent(page); setPageSize(size); } }}
+                    pagination={{ current: query.current, pageSize: query.size, total, showSizeChanger: true, showTotal: (t) => `共 ${t} 条`, onChange: (page, size) => setQuery((q: any) => ({ ...q, current: page, size })), }}
                 />
             </Card>
         </div>

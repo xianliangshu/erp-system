@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.erp.common.core.result.Result;
 import com.erp.system.entity.SysDept;
 import com.erp.system.param.SysDeptQueryParam;
@@ -30,6 +31,7 @@ public class SysDeptController {
      * 查询部门列表(树形结构)
      */
     @Operation(summary = "查询部门列表", description = "根据条件查询部门列表")
+    @SaCheckPermission("system:dept:list")
     @GetMapping("/list")
     public Result<List<SysDept>> list(SysDeptQueryParam param) {
         // 调用Service业务方法
@@ -41,6 +43,7 @@ public class SysDeptController {
      * 获取部门树
      */
     @Operation(summary = "获取部门树", description = "获取部门树形结构(顶级部门列表)")
+    @SaCheckPermission("system:dept:list")
     @GetMapping("/tree")
     public Result<List<SysDept>> getTree() {
         List<SysDept> tree = deptService.buildTree();
@@ -51,6 +54,7 @@ public class SysDeptController {
      * 根据ID查询部门
      */
     @Operation(summary = "根据ID查询部门", description = "根据ID查询部门")
+    @SaCheckPermission("system:dept:list")
     @GetMapping("/{id}")
     public Result<SysDept> getById(@PathVariable Long id) {
         SysDept dept = deptService.getById(id);
@@ -61,6 +65,7 @@ public class SysDeptController {
      * 新增部门
      */
     @Operation(summary = "新增部门", description = "新增部门")
+    @SaCheckPermission("system:dept:add")
     @PostMapping
     public Result<Void> save(@RequestBody SysDept dept) {
         deptService.save(dept);
@@ -71,6 +76,7 @@ public class SysDeptController {
      * 修改部门
      */
     @Operation(summary = "修改部门", description = "修改部门")
+    @SaCheckPermission("system:dept:edit")
     @PutMapping
     public Result<Void> update(@RequestBody SysDept dept) {
         deptService.updateById(dept);
@@ -81,6 +87,7 @@ public class SysDeptController {
      * 删除部门
      */
     @Operation(summary = "删除部门", description = "删除部门")
+    @SaCheckPermission("system:dept:delete")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         deptService.removeById(id);
@@ -91,6 +98,7 @@ public class SysDeptController {
      * 统计部门用户数量
      */
     @Operation(summary = "统计部门用户数量", description = "统计指定部门下的用户数量")
+    @SaCheckPermission("system:dept:list")
     @GetMapping("/{id}/user-count")
     public Result<Long> countDeptUsers(
             @Parameter(description = "部门ID", required = true) @PathVariable Long id) {

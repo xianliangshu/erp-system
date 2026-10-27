@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.SaleReturnDTO;
@@ -23,6 +24,7 @@ public class SaleReturnController {
     private final ISaleReturnService saleReturnService;
     private final SaleReturnDetailMapper saleReturnDetailMapper;
 
+    @SaCheckPermission("business:sale:return")
     @GetMapping("/page")
     public Result<Page<SaleReturn>> page(
             @RequestParam(defaultValue = "1") Long current, @RequestParam(defaultValue = "10") Long size,
@@ -31,6 +33,7 @@ public class SaleReturnController {
         return Result.success(saleReturnService.getReturnPage(current, size, deliveryId, customerId, status));
     }
 
+    @SaCheckPermission("business:sale:return")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         SaleReturn saleReturn = saleReturnService.getById(id);
@@ -45,23 +48,27 @@ public class SaleReturnController {
         return Result.success(result);
     }
 
+    @SaCheckPermission("business:sale:return")
     @PostMapping
     public Result<Long> create(@RequestBody SaleReturnDTO dto) {
         return Result.success(saleReturnService.createReturn(dto));
     }
 
+    @SaCheckPermission("business:sale:return")
     @PutMapping
     public Result<Void> update(@RequestBody SaleReturnDTO dto) {
         saleReturnService.updateReturn(dto);
         return Result.success();
     }
 
+    @SaCheckPermission("business:sale:return")
     @PostMapping("/{id}/confirm")
     public Result<Void> confirm(@PathVariable Long id) {
         saleReturnService.confirmReturn(id);
         return Result.success();
     }
 
+    @SaCheckPermission("business:sale:return")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         saleReturnService.removeById(id);

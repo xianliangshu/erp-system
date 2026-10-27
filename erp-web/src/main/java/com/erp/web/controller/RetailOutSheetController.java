@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.entity.RetailOutSheet;
@@ -25,6 +26,7 @@ public class RetailOutSheetController {
     private IRetailOutSheetService retailOutSheetService;
 
     @Operation(summary = "分页查询")
+    @SaCheckPermission("business:retail:out")
     @GetMapping("/page")
     public Result<IPage<RetailOutSheet>> page(@RequestParam(defaultValue = "1") Integer current,
             @RequestParam(defaultValue = "10") Integer size,
@@ -41,19 +43,21 @@ public class RetailOutSheetController {
     }
 
     @Operation(summary = "获取详情")
+    @SaCheckPermission("business:retail:out")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> get(@PathVariable Long id) {
         return Result.success(retailOutSheetService.getDetailById(id));
     }
 
     @Operation(summary = "新增")
+    @SaCheckPermission("business:retail:out")
     @PostMapping
-    public Result<Void> add(@RequestBody Map<String, Object> data) {
-        retailOutSheetService.add(data);
-        return Result.success();
+    public Result<Map<String, Object>> add(@RequestBody Map<String, Object> data) {
+        return Result.success(retailOutSheetService.add(data));
     }
 
     @Operation(summary = "修改")
+    @SaCheckPermission("business:retail:out")
     @PutMapping
     public Result<Void> update(@RequestBody Map<String, Object> data) {
         retailOutSheetService.update(data);
@@ -61,6 +65,7 @@ public class RetailOutSheetController {
     }
 
     @Operation(summary = "审核通过")
+    @SaCheckPermission("business:retail:out")
     @PostMapping("/approve/{id}")
     public Result<Void> approve(@PathVariable Long id) {
         retailOutSheetService.approve(id);
@@ -68,6 +73,7 @@ public class RetailOutSheetController {
     }
 
     @Operation(summary = "审核拒绝")
+    @SaCheckPermission("business:retail:out")
     @PostMapping("/refuse/{id}")
     public Result<Void> refuse(@PathVariable Long id, @RequestBody Map<String, String> data) {
         retailOutSheetService.refuse(id, data.get("refuseReason"));
@@ -75,6 +81,7 @@ public class RetailOutSheetController {
     }
 
     @Operation(summary = "删除")
+    @SaCheckPermission("business:retail:out")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         retailOutSheetService.deleteById(id);

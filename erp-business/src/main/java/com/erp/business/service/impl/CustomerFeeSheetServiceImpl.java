@@ -12,6 +12,7 @@ import com.erp.business.entity.CustomerFeeSheetDetail;
 import com.erp.business.mapper.CustomerFeeSheetDetailMapper;
 import com.erp.business.mapper.CustomerFeeSheetMapper;
 import com.erp.business.service.ICustomerFeeSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CustomerFeeSheetServiceImpl extends ServiceImpl<CustomerFeeSheetMapper, CustomerFeeSheet>
         implements ICustomerFeeSheetService {
+    private final ICodeGenerateService codeGenerateService;
     private final CustomerFeeSheetDetailMapper detailMapper;
 
     @Override
@@ -93,7 +95,7 @@ public class CustomerFeeSheetServiceImpl extends ServiceImpl<CustomerFeeSheetMap
         CustomerFeeSheet sheet = this.getById(dto.getId());
         if (sheet == null)
             throw new RuntimeException("单据不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能修改");
         sheet.setCustomerId(dto.getCustomerId());
         sheet.setDescription(dto.getDescription());
@@ -123,7 +125,7 @@ public class CustomerFeeSheetServiceImpl extends ServiceImpl<CustomerFeeSheetMap
         CustomerFeeSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("单据不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能审核");
         sheet.setStatus(1);
         sheet.setApproveTime(LocalDateTime.now());
@@ -137,7 +139,7 @@ public class CustomerFeeSheetServiceImpl extends ServiceImpl<CustomerFeeSheetMap
         CustomerFeeSheet sheet = this.getById(id);
         if (sheet == null)
             throw new RuntimeException("单据不存在");
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能拒绝");
         sheet.setStatus(2);
         sheet.setApproveTime(LocalDateTime.now());
@@ -152,7 +154,7 @@ public class CustomerFeeSheetServiceImpl extends ServiceImpl<CustomerFeeSheetMap
         CustomerFeeSheet sheet = this.getById(id);
         if (sheet == null)
             return;
-        if (sheet.getStatus() != 0)
+        if (!Integer.valueOf(0).equals(sheet.getStatus()))
             throw new RuntimeException("只有待审核的单据才能删除");
         LambdaQueryWrapper<CustomerFeeSheetDetail> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(CustomerFeeSheetDetail::getSheetId, id);
@@ -162,12 +164,7 @@ public class CustomerFeeSheetServiceImpl extends ServiceImpl<CustomerFeeSheetMap
 
     @Override
     public String generateCode(Integer sheetType) {
-        String dateStr = DateUtil.format(new Date(), "yyyyMMdd");
-        String prefix = (sheetType != null && sheetType == 1 ? "KSK" : "KKK") + dateStr;
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length())
-            seq = Integer.parseInt(maxCode.substring(prefix.length())) + 1;
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate(
+                sheetType != null && sheetType == 1 ? "CUSTOMER_FEE_IN" : "CUSTOMER_FEE_OUT");
     }
 }

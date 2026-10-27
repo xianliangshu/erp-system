@@ -4,13 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.erp.business.entity.RetailConfig;
 import com.erp.business.entity.RetailReturn;
 import com.erp.business.entity.RetailReturnDetail;
 import com.erp.business.enums.ProductStockBizType;
 import com.erp.business.mapper.RetailReturnMapper;
 import com.erp.business.service.IProductStockService;
+import com.erp.business.service.IRetailConfigService;
 import com.erp.business.service.IRetailReturnDetailService;
 import com.erp.business.service.IRetailReturnService;
+import com.erp.common.exception.BusinessException;
+import com.erp.common.service.ICodeGenerateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,12 +34,17 @@ import java.util.stream.Collectors;
 @Service
 public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, RetailReturn>
         implements IRetailReturnService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Autowired
     private IRetailReturnDetailService detailService;
 
     @Autowired
     private IProductStockService productStockService;
+
+    @Autowired
+    private IRetailConfigService retailConfigService;
 
     @Override
     public IPage<RetailReturn> getPage(Page<RetailReturn> page, Map<String, Object> params) {
@@ -63,19 +72,13 @@ public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, Ret
     }
 
     private String generateCode() {
-        String prefix = "LT" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String maxCode = baseMapper.selectMaxCode();
-        int seq = 1;
-        if (maxCode != null && maxCode.startsWith(prefix)) {
-            seq = Integer.parseInt(maxCode.substring(prefix.length())) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("RETAIL_RETURN");
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     @SuppressWarnings("unchecked")
-    public void add(Map<String, Object> data) {
+    public Map<String, Object> add(Map<String, Object> data) {
         RetailReturn sheet = new RetailReturn();
         sheet.setCode(generateCode());
         sheet.setScId(Long.valueOf(data.get("scId").toString()));
@@ -111,6 +114,25 @@ public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, Ret
         }).collect(Collectors.toList());
 
         detailService.saveBatch(details);
+
+        // 自动审核：由「零售配置 → 零售退货单自动审核」控制
+        boolean autoApproved = isAutoApproveEnabled();
+        if (autoApproved) {
+            this.approve(sheet.getId());
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", sheet.getId());
+        result.put("code", sheet.getCode());
+        result.put("status", autoApproved ? 1 : 0);
+        result.put("autoApproved", autoApproved);
+        return result;
+    }
+
+    /** 读取零售配置：是否开启退货单自动审核 */
+    private boolean isAutoApproveEnabled() {
+        RetailConfig config = retailConfigService.getRetailConfig();
+        return config != null && Boolean.TRUE.equals(config.getReturnStockUnApprove());
     }
 
     @Override
@@ -119,8 +141,11 @@ public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, Ret
     public void update(Map<String, Object> data) {
         Long id = Long.valueOf(data.get("id").toString());
         RetailReturn sheet = this.getById(id);
-        if (sheet.getStatus() != 0) {
-            throw new RuntimeException("只能修改待审核状态的单据");
+        if (sheet == null) {
+            throw new BusinessException("零售退货单不存在：id=" + id);
+        }
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
+            throw new BusinessException("只能修改待审核状态的单据");
         }
 
         sheet.setScId(Long.valueOf(data.get("scId").toString()));
@@ -162,16 +187,24 @@ public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, Ret
     @Transactional(rollbackFor = Exception.class)
     public void approve(Long id) {
         RetailReturn sheet = this.getById(id);
-        if (sheet.getStatus() != 0) {
-            throw new RuntimeException("只能审核待审核状态的单据");
+        if (sheet == null) {
+            throw new BusinessException("零售退货单不存在：id=" + id);
+        }
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
+            throw new BusinessException("只能审核待审核状态的单据");
         }
 
         sheet.setStatus(1); // 已审核
         this.updateById(sheet);
 
         List<RetailReturnDetail> details = detailService.listByReturnId(id);
+        if (details.isEmpty()) {
+            throw new BusinessException("单据没有明细，不能审核");
+        }
         for (RetailReturnDetail detail : details) {
-            productStockService.addStock(
+            // 退货入库用 addStockKeepCost：数量加回去，但传入的是"售价"，
+            // 不能用它覆盖库存成本价，否则退货也会把成本价抬高。
+            productStockService.addStockKeepCost(
                     sheet.getScId(),
                     detail.getProductId(),
                     detail.getReturnNum(), // 退货为正数（入库）
@@ -186,11 +219,15 @@ public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, Ret
     @Transactional(rollbackFor = Exception.class)
     public void refuse(Long id, String refuseReason) {
         RetailReturn sheet = this.getById(id);
-        if (sheet.getStatus() != 0) {
-            throw new RuntimeException("只能审核待审核状态的单据");
+        if (sheet == null) {
+            throw new BusinessException("零售退货单不存在：id=" + id);
+        }
+        if (!Integer.valueOf(0).equals(sheet.getStatus())) {
+            throw new BusinessException("只能审核待审核状态的单据");
         }
         sheet.setStatus(2); // 已拒绝
-        sheet.setDescription(sheet.getDescription() + " [拒绝原因: " + refuseReason + "]");
+        String origin = StringUtils.hasText(sheet.getDescription()) ? sheet.getDescription() + " " : "";
+        sheet.setDescription(origin + "[拒绝原因: " + refuseReason + "]");
         this.updateById(sheet);
     }
 
@@ -198,8 +235,12 @@ public class RetailReturnServiceImpl extends ServiceImpl<RetailReturnMapper, Ret
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Long id) {
         RetailReturn sheet = this.getById(id);
-        if (sheet.getStatus() == 1) {
-            throw new RuntimeException("已审核的单据不能删除");
+        if (sheet == null) {
+            throw new BusinessException("零售退货单不存在：id=" + id);
+        }
+        // 已审核（1）的单据已经动过库存，不允许删除，否则库存会与单据对不上
+        if (Integer.valueOf(1).equals(sheet.getStatus())) {
+            throw new BusinessException("已审核的单据不能删除");
         }
         detailService.deleteByReturnId(id);
         this.removeById(id);

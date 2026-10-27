@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.erp.basedata.entity.BaseMaterialCategory;
 import com.erp.basedata.service.IBaseMaterialCategoryService;
 import com.erp.common.core.result.Result;
@@ -24,6 +25,7 @@ public class BaseMaterialCategoryController {
     /**
      * 获取分类树
      */
+    @SaCheckPermission("basedata:material:category")
     @GetMapping("/tree")
     public Result<List<BaseMaterialCategory>> getTree() {
         List<BaseMaterialCategory> tree = categoryService.getCategoryTree();
@@ -33,6 +35,7 @@ public class BaseMaterialCategoryController {
     /**
      * 根据ID获取分类
      */
+    @SaCheckPermission("basedata:material:category")
     @GetMapping("/{id}")
     public Result<BaseMaterialCategory> getById(@PathVariable Long id) {
         BaseMaterialCategory category = categoryService.getById(id);
@@ -42,6 +45,7 @@ public class BaseMaterialCategoryController {
     /**
      * 新增分类
      */
+    @SaCheckPermission("basedata:material:category")
     @PostMapping
     public Result<Void> save(@RequestBody BaseMaterialCategory category) {
         categoryService.saveCategory(category);
@@ -51,6 +55,7 @@ public class BaseMaterialCategoryController {
     /**
      * 更新分类
      */
+    @SaCheckPermission("basedata:material:category")
     @PutMapping("/{id}")
     public Result<Void> update(@PathVariable Long id, @RequestBody BaseMaterialCategory category) {
         category.setId(id);
@@ -61,6 +66,7 @@ public class BaseMaterialCategoryController {
     /**
      * 删除分类
      */
+    @SaCheckPermission("basedata:material:category")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         categoryService.deleteCategory(id);

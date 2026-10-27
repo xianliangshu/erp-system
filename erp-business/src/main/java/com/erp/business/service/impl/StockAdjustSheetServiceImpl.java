@@ -12,6 +12,7 @@ import com.erp.business.mapper.StockAdjustSheetMapper;
 import com.erp.business.service.IProductStockService;
 import com.erp.business.service.IStockAdjustSheetDetailService;
 import com.erp.business.service.IStockAdjustSheetService;
+import com.erp.common.service.ICodeGenerateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,8 @@ import java.util.List;
 @Service
 public class StockAdjustSheetServiceImpl extends ServiceImpl<StockAdjustSheetMapper, StockAdjustSheet>
         implements IStockAdjustSheetService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Autowired
     private IStockAdjustSheetDetailService detailService;
@@ -51,15 +54,7 @@ public class StockAdjustSheetServiceImpl extends ServiceImpl<StockAdjustSheetMap
 
     @Override
     public String generateCode() {
-        String prefix = "SA" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String maxCode = baseMapper.selectMaxCode();
-
-        int seq = 1;
-        if (maxCode != null && maxCode.startsWith(prefix)) {
-            String seqStr = maxCode.substring(prefix.length());
-            seq = Integer.parseInt(seqStr) + 1;
-        }
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("STOCK_ADJUST");
     }
 
     @Override
@@ -150,19 +145,29 @@ public class StockAdjustSheetServiceImpl extends ServiceImpl<StockAdjustSheetMap
         for (StockAdjustSheetDetail detail : details) {
             BigDecimal stockNum = detail.getStockNum();
             // 根据业务类型决定增减库存
+            // 修复(2026-10-03)：原实现对两个方向都调 addStock(..., BigDecimal.ZERO)，
+            // 而出库方向还写成 addStock(数量.negate())。addStock 的 updateCost=true 会
+            // 把传入的 ZERO 写进成本价 ⇒ 调整单一审核，该商品成本价与库存金额直接归零。
+            // 调整单只修正数量、不影响价格，故出库走 subStock、入库走 addStockKeepCost。
             if (sheet.getBizType() == StockAdjustBizType.OUT) {
-                stockNum = stockNum.negate(); // 出库调整为负数
+                productStockService.subStock(
+                        sheet.getScId(),
+                        detail.getProductId(),
+                        stockNum,
+                        BigDecimal.ZERO, // 库存调整不影响价格
+                        sheet.getId(),
+                        sheet.getCode(),
+                        ProductStockBizType.STOCK_ADJUST);
+            } else {
+                productStockService.addStockKeepCost(
+                        sheet.getScId(),
+                        detail.getProductId(),
+                        stockNum,
+                        BigDecimal.ZERO, // 库存调整不影响价格
+                        sheet.getId(),
+                        sheet.getCode(),
+                        ProductStockBizType.STOCK_ADJUST);
             }
-
-            // 更新库存
-            productStockService.addStock(
-                    sheet.getScId(),
-                    detail.getProductId(),
-                    stockNum,
-                    BigDecimal.ZERO, // 库存调整不影响价格
-                    sheet.getId(),
-                    sheet.getCode(),
-                    ProductStockBizType.STOCK_ADJUST);
         }
 
         return true;

@@ -12,8 +12,8 @@ const SettleSheetList: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState<any[]>([]);
     const [total, setTotal] = useState(0);
-    const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // 分页与查询条件：唯一的取数依据，搜索/重置/翻页都只改它
+    const [query, setQuery] = useState<any>({ current: 1, size: 10 });
     const [searchCode, setSearchCode] = useState('');
     const [searchSupplierId, setSearchSupplierId] = useState<number | undefined>(undefined);
     const [searchStatus, setSearchStatus] = useState<number | undefined>(undefined);
@@ -23,7 +23,7 @@ const SettleSheetList: React.FC = () => {
     const loadData = async () => {
         setLoading(true);
         try {
-            const res: any = await getSettleSheetPage({ current, size: pageSize, code: searchCode, supplierId: searchSupplierId, status: searchStatus });
+            const res: any = await getSettleSheetPage({ ...query, code: searchCode, supplierId: searchSupplierId, status: searchStatus });
             setDataSource(res?.records || []);
             setTotal(res?.total || 0);
         } catch (e) { message.error('加载数据失败'); }
@@ -31,10 +31,10 @@ const SettleSheetList: React.FC = () => {
     };
 
     useEffect(() => { loadOptions(); }, []);
-    useEffect(() => { loadData(); }, [current, pageSize]);
+    useEffect(() => { loadData(); }, [query]);
 
-    const handleSearch = () => { setCurrent(1); loadData(); };
-    const handleReset = () => { setSearchCode(''); setSearchSupplierId(undefined); setSearchStatus(undefined); setCurrent(1); loadData(); };
+    const handleSearch = () => { setQuery((q: any) => ({ ...q, current: 1 })); };
+    const handleReset = () => { setSearchCode(''); setSearchSupplierId(undefined); setSearchStatus(undefined); setQuery((q: any) => ({ ...q, current: 1 })); };
 
     const columns = [
         { title: '单据编号', dataIndex: 'code', key: 'code', width: 180 },
@@ -93,7 +93,7 @@ const SettleSheetList: React.FC = () => {
                     <Button icon={<ReloadOutlined />} onClick={handleReset}>重置</Button>
                     <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/business/settle/sheet/add')}>新增</Button>
                 </Space>
-                <Table loading={loading} columns={columns} dataSource={dataSource} rowKey="id" pagination={{ current, pageSize, total, showSizeChanger: true, onChange: (page, size) => { setCurrent(page); setPageSize(size); } }} />
+                <Table loading={loading} columns={columns} dataSource={dataSource} rowKey="id" pagination={{ current: query.current, pageSize: query.size, total, showSizeChanger: true, onChange: (page, size) => setQuery((q: any) => ({ ...q, current: page, size })), }} />
             </Card>
         </div>
     );

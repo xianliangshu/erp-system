@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.5.0</version>
     </parent>
     <packaging>pom</packaging>
     <modules>
@@ -22,14 +22,18 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 统一管理 mybatis-plus 的版本 -->
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <jjwt.version>0.11.5</jjwt.version>
         <hutool.version>5.8.30</hutool.version>
         <knife4j.version>4.5.0</knife4j.version>
+        <!-- Sa-Token 权限认证框架(Spring Boot 3.x 必须用 spring-boot3-starter) -->
+        <sa-token.version>1.46.0</sa-token.version>
+        <!-- EasyExcel: Excel 导入导出 -->
+        <easyexcel.version>3.3.4</easyexcel.version>
     </properties>
 
     <dependencyManagement>
@@ -38,7 +42,7 @@
             <!-- MyBatis-Plus, 简化数据库操作 -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
@@ -79,6 +83,36 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- EasyExcel: 注解驱动的 Excel 导入导出。
+                 注意 com.alibaba:easyexcel 只是聚合 POM, 实现类在 easyexcel-core(传递依赖) -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 主依赖,注意 Spring Boot 3.x 必须用 spring-boot3-starter
+                 (用 sa-token-spring-boot-starter 会 ClassNotFoundException: javax.servlet.Filter) -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 会话数据落 Redis(Jackson 序列化,便于排查) -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 内核: erp-common 只用到异常类型做 HTTP 状态码映射, 不引 web 集成 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-core</artifactId>
+                <version>${sa-token.version}</version>
             </dependency>
 
         </dependencies>

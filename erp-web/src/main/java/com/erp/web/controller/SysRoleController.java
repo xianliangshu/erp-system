@@ -1,8 +1,11 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.erp.common.core.page.PageResult;
 import com.erp.common.core.result.Result;
+import com.erp.system.annotation.Log;
 import com.erp.system.entity.SysRole;
+import com.erp.system.enums.BusinessType;
 import com.erp.system.param.AssignMenusParam;
 import com.erp.system.param.SysRolePageParam;
 import com.erp.system.service.ISysRoleService;
@@ -32,6 +35,7 @@ public class SysRoleController {
      * 分页查询角色列表
      */
     @Operation(summary = "分页查询角色", description = "根据条件分页查询角色列表")
+    @SaCheckPermission("system:role:list")
     @GetMapping("/page")
     public Result<PageResult<SysRole>> page(SysRolePageParam param) {
         // 调用Service业务方法
@@ -43,6 +47,7 @@ public class SysRoleController {
      * 根据ID查询角色
      */
     @Operation(summary = "根据ID查询角色", description = "根据ID查询角色")
+    @SaCheckPermission("system:role:list")
     @GetMapping("/{id}")
     public Result<SysRole> getById(@PathVariable Long id) {
         SysRole role = roleService.getById(id);
@@ -53,6 +58,7 @@ public class SysRoleController {
      * 新增角色
      */
     @Operation(summary = "新增角色", description = "新增角色")
+    @SaCheckPermission("system:role:add")
     @PostMapping
     public Result<Void> save(@RequestBody SysRole role) {
         roleService.save(role);
@@ -63,6 +69,7 @@ public class SysRoleController {
      * 修改角色
      */
     @Operation(summary = "修改角色", description = "修改角色")
+    @SaCheckPermission("system:role:edit")
     @PutMapping
     public Result<Void> update(@RequestBody SysRole role) {
         roleService.updateById(role);
@@ -73,6 +80,7 @@ public class SysRoleController {
      * 删除角色
      */
     @Operation(summary = "删除角色", description = "删除角色")
+    @SaCheckPermission("system:role:delete")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         roleService.removeById(id);
@@ -83,6 +91,8 @@ public class SysRoleController {
      * 分配菜单权限
      */
     @Operation(summary = "分配菜单权限", description = "为角色分配菜单权限")
+    @SaCheckPermission("system:role:assign")
+    @Log(title = "分配角色菜单权限", businessType = BusinessType.UPDATE)
     @PostMapping("/{id}/menus")
     public Result<Void> assignMenus(
             @Parameter(description = "角色ID", required = true) @PathVariable Long id,
@@ -95,6 +105,7 @@ public class SysRoleController {
      * 获取角色菜单
      */
     @Operation(summary = "获取角色菜单", description = "查询角色拥有的菜单ID列表")
+    @SaCheckPermission("system:role:list")
     @GetMapping("/{id}/menus")
     public Result<List<Long>> getRoleMenus(
             @Parameter(description = "角色ID", required = true) @PathVariable Long id) {
@@ -106,6 +117,7 @@ public class SysRoleController {
      * 获取所有角色
      */
     @Operation(summary = "获取所有角色", description = "获取所有启用的角色(用于下拉选择)")
+    @SaCheckPermission("system:role:list")
     @GetMapping("/all")
     public Result<List<SysRole>> getAllRoles() {
         List<SysRole> roles = roleService.getAllRoles();
@@ -116,6 +128,7 @@ public class SysRoleController {
      * 统计角色用户数量
      */
     @Operation(summary = "统计角色用户数量", description = "统计指定角色下的用户数量")
+    @SaCheckPermission("system:role:list")
     @GetMapping("/{id}/user-count")
     public Result<Long> countRoleUsers(
             @Parameter(description = "角色ID", required = true) @PathVariable Long id) {

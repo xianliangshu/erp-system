@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.erp.business.dto.*;
 import com.erp.business.service.IChartService;
 import com.erp.common.core.result.Result;
@@ -20,12 +21,14 @@ public class ChartController {
     private final IChartService chartService;
 
     @Operation(summary = "获取仪表盘数据")
+    @SaCheckPermission("chart:dashboard")
     @GetMapping("/dashboard")
     public Result<DashboardDTO> getDashboard() {
         return Result.success(chartService.getDashboard());
     }
 
     @Operation(summary = "获取采购统计")
+    @SaCheckPermission("chart:purchase")
     @GetMapping("/purchase")
     public Result<PurchaseChartDTO> getPurchaseStats(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
@@ -34,6 +37,7 @@ public class ChartController {
     }
 
     @Operation(summary = "获取销售统计")
+    @SaCheckPermission("chart:sales")
     @GetMapping("/sales")
     public Result<SalesChartDTO> getSalesStats(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
@@ -42,6 +46,7 @@ public class ChartController {
     }
 
     @Operation(summary = "获取库存报表")
+    @SaCheckPermission("chart:stock")
     @GetMapping("/stock")
     public Result<StockReportDTO> getStockReport(
             @RequestParam(required = false) Long warehouseId) {
@@ -49,6 +54,7 @@ public class ChartController {
     }
 
     @Operation(summary = "获取进销存汇总")
+    @SaCheckPermission("chart:summary")
     @GetMapping("/summary")
     public Result<SummaryReportDTO> getSummaryReport(
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,

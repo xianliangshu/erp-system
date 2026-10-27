@@ -1,0 +1,552 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.0)
+
+2026-10-01T16:10:50.752+08:00  INFO 4372 --- [erp-system] [           main] com.erp.ErpApplication                   : Starting ErpApplication v1.0-SNAPSHOT using Java 21.0.12 with PID 4372 (D:\code\java\java_study\erp-system\erp-web\target\erp-web-1.0-SNAPSHOT.jar started by shu in D:\code\java\java_study\erp-system)
+2026-10-01T16:10:50.752+08:00  INFO 4372 --- [erp-system] [           main] com.erp.ErpApplication                   : No active profile set, falling back to 1 default profile: "default"
+2026-10-01T16:10:53.776+08:00  INFO 4372 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-10-01T16:10:53.786+08:00  INFO 4372 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-10-01T16:10:53.914+08:00  INFO 4372 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85 ms. Found 0 Redis repository interfaces.
+2026-10-01T16:10:55.288+08:00  INFO 4372 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-10-01T16:10:55.305+08:00  INFO 4372 --- [erp-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-01T16:10:55.305+08:00  INFO 4372 --- [erp-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2026-10-01T16:10:55.354+08:00  INFO 4372 --- [erp-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2026-10-01T16:10:55.355+08:00  INFO 4372 --- [erp-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4519 ms
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+Get /192.168.31.194 network interface 
+Get network interface info: name:wireless_32768 (Intel(R) Wi-Fi 6 AX201 160MHz)
+Initialization Sequence datacenterId:5 workerId:15
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.7 
+2026-10-01T16:10:58.755+08:00  INFO 4372 --- [erp-system] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-10-01T16:11:00.291+08:00  INFO 4372 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/api'
+2026-10-01T16:11:00.305+08:00  INFO 4372 --- [erp-system] [           main] com.erp.ErpApplication                   : Started ErpApplication in 10.265 seconds (process running for 10.853)
+2026-10-01T16:11:10.305+08:00  INFO 4372 --- [erp-system] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-01T16:11:10.305+08:00  INFO 4372 --- [erp-system] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-01T16:11:10.305+08:00  INFO 4372 --- [erp-system] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@798e6232] was not registered for synchronization because synchronization is not active
+2026-10-01T16:11:10.424+08:00  INFO 4372 --- [erp-system] [nio-8081-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-01T16:11:10.736+08:00  INFO 4372 --- [erp-system] [nio-8081-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4480c323
+2026-10-01T16:11:10.736+08:00  INFO 4372 --- [erp-system] [nio-8081-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+JDBC Connection [HikariProxyConnection@1187560482 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will not be managed by Spring
+==>  Preparing: SELECT id,parent_id,code,name,title,menu_type,path,component,permission,icon,sort,visible,status,remark,create_time,update_time,create_by,update_by,is_deleted FROM sys_menu WHERE is_deleted=0
+==> Parameters: 
+<==    Columns: id, parent_id, code, name, title, menu_type, path, component, permission, icon, sort, visible, status, remark, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, 0, M000200, inventory, 库存管理, 0, /inventory, null, null, StockOutlined, 3, 1, 1, 库存管理模块, 2026-08-01 19:14:40, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 2, 1, M000201, stock-query, 库存查询, 1, /business/stock/query, Business/Stock/Query, business:stock:query, SearchOutlined, 1, 1, 1, 实时库存查询, 2026-08-01 19:14:40, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 3, 0, M000300, purchase, 采购管理, 0, /purchase, null, null, ShoppingCartOutlined, 4, 1, 1, 采购管理模块, 2026-08-01 19:14:55, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 4, 3, M000301, purchase-order, 采购订单, 1, /business/purchase/order, Business/Purchase/Order/List, business:purchase:order, FileTextOutlined, 1, 1, 1, 采购订单管理, 2026-08-01 19:14:55, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 5, 9, M000102, material, 物料管理, 0, /basedata/material, null, null, AppstoreOutlined, 2, 1, 1, 物料管理模块, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 6, 5, M000103, material-category, 物料分类, 1, /basedata/material/category, Basedata/Material/Category, basedata:material:category, FolderOutlined, 1, 1, 1, 物料分类管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 7, 5, M000104, unit, 计量单位, 1, /basedata/material/unit, Basedata/Material/Unit, basedata:material:unit, CalculatorOutlined, 2, 1, 1, 计量单位管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 8, 5, M000105, material-info, 物料信息, 1, /basedata/material/info, Basedata/Material/Info, basedata:material:info, InboxOutlined, 3, 1, 1, 物料信息管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 9, 0, M000100, basedata, 基础数据, 0, /basedata, null, null, DatabaseOutlined, 2, 1, 1, 基础数据管理模块, 2026-08-01 19:16:12, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 10, 9, M000101, warehouse, 仓库管理, 1, /basedata/warehouse, Basedata/Warehouse, basedata:warehouse:list, HomeOutlined, 1, 1, 1, 仓库信息管理, 2026-08-01 19:16:12, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 11, 10, B000101, WarehouseAdd, 新增仓库, 2, null, null, basedata:warehouse:add, null, 1, 1, 1, 新增仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 12, 10, B000102, WarehouseEdit, 编辑仓库, 2, null, null, basedata:warehouse:edit, null, 2, 1, 1, 编辑仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 13, 10, B000103, WarehouseDelete, 删除仓库, 2, null, null, basedata:warehouse:delete, null, 3, 1, 1, 删除仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 14, 10, B000104, WarehouseSetDefault, 设置默认, 2, null, null, basedata:warehouse:setDefault, null, 4, 1, 1, 设置默认仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 15, 3, M000303, purchase-return, 采购退货, 1, /business/purchase/return, Business/Purchase/Return/List, business:purchase:return, RollbackOutlined, 3, 1, 1, 采购退货管理, 2026-08-01 19:21:34, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 16, 9, M000106, supplier, 供应商管理, 1, /basedata/supplier, Basedata/Supplier, basedata:supplier:list, TeamOutlined, 3, 1, 1, 供应商信息管理, 2026-08-01 19:22:06, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 17, 0, M000001, system, 系统管理, 0, /system, null, null, SettingOutlined, 1, 1, 1, 系统管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 18, 0, M000400, sale, 销售管理, 0, /sale, null, null, ShoppingOutlined, 5, 1, 1, 销售管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 19, 0, M000600, retail, 零售管理, 0, /retail, null, null, ShopOutlined, 6, 1, 1, 零售管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 20, 0, M000700, settle, 结算管理, 0, /settle, null, null, DollarOutlined, 7, 1, 1, 结算管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 21, 0, M000800, chart, 统计报表, 0, /chart, null, null, AreaChartOutlined, 8, 1, 1, 统计报表模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 25, 17, M000002, user, 用户管理, 1, /system/user, System/User, system:user:list, UserOutlined, 1, 1, 1, 用户信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 26, 25, M000003, user-add, 新增用户, 2, null, null, system:user:add, null, 1, 1, 1, 新增用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 27, 25, M000004, user-edit, 修改用户, 2, null, null, system:user:edit, null, 2, 1, 1, 修改用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 28, 25, M000005, user-delete, 删除用户, 2, null, null, system:user:delete, null, 3, 1, 1, 删除用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 29, 25, M000006, user-reset, 重置密码, 2, null, null, system:user:resetPwd, null, 4, 1, 1, 重置密码按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 30, 17, M000007, role, 角色管理, 1, /system/role, System/Role, system:role:list, TeamOutlined, 2, 1, 1, 角色与授权管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 31, 30, M000008, role-add, 新增角色, 2, null, null, system:role:add, null, 1, 1, 1, 新增角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 32, 30, M000009, role-edit, 修改角色, 2, null, null, system:role:edit, null, 2, 1, 1, 修改角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 33, 30, M000010, role-delete, 删除角色, 2, null, null, system:role:delete, null, 3, 1, 1, 删除角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 34, 30, M000011, role-assign, 分配权限, 2, null, null, system:role:assign, null, 4, 1, 1, 角色分配菜单权限, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 35, 17, M000012, dept, 部门管理, 1, /system/dept, System/Dept, system:dept:list, ApartmentOutlined, 3, 1, 1, 组织部门管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 36, 35, M000013, dept-add, 新增部门, 2, null, null, system:dept:add, null, 1, 1, 1, 新增部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 37, 35, M000014, dept-edit, 修改部门, 2, null, null, system:dept:edit, null, 2, 1, 1, 修改部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 38, 35, M000015, dept-delete, 删除部门, 2, null, null, system:dept:delete, null, 3, 1, 1, 删除部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 39, 17, M000016, menu, 菜单管理, 1, /system/menu, System/Menu, system:menu:list, MenuOutlined, 4, 1, 1, 菜单与权限项管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 40, 39, M000017, menu-add, 新增菜单, 2, null, null, system:menu:add, null, 1, 1, 1, 新增菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 41, 39, M000018, menu-edit, 修改菜单, 2, null, null, system:menu:edit, null, 2, 1, 1, 修改菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 42, 39, M000019, menu-delete, 删除菜单, 2, null, null, system:menu:delete, null, 3, 1, 1, 删除菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 43, 17, M000020, dict, 字典管理, 1, /system/dict, System/Dict, system:dict:list, BookOutlined, 5, 1, 1, 数据字典管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 44, 43, M000021, dict-add, 新增字典, 2, null, null, system:dict:add, null, 1, 1, 1, 新增字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 45, 43, M000022, dict-edit, 修改字典, 2, null, null, system:dict:edit, null, 2, 1, 1, 修改字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 46, 43, M000023, dict-delete, 删除字典, 2, null, null, system:dict:delete, null, 3, 1, 1, 删除字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 47, 9, M000107, customer, 客户管理, 1, /basedata/customer, Basedata/Customer, basedata:customer:list, UserOutlined, 4, 1, 1, 客户信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 48, 9, M000108, brand, 品牌管理, 1, /basedata/brand, Basedata/Brand, basedata:brand:list, TagOutlined, 5, 1, 1, 品牌信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 55, 1, M000202, stock-log, 库存流水, 1, /business/stock/log, Business/Stock/Log, business:stock:log, HistoryOutlined, 2, 1, 1, 库存出入库变动记录, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 56, 1, M000203, stock-adjust-sheet, 库存调整, 1, /stock/adjust/sheet, Business/Stock/Adjust/Sheet/List, stock:adjust:query, SwapOutlined, 3, 1, 1, 库存调整单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 57, 1, M000204, stock-adjust-reason, 调整原因, 1, /stock/adjust/reason, Business/Stock/Adjust/Reason, stock:adjust:reason:query, SettingOutlined, 4, 1, 1, 库存调整原因维护, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 58, 1, M000205, stock-check, 库存盘点, 1, /business/stock/check, Business/Stock/Check/List, business:stock:check, AuditOutlined, 5, 1, 1, 库存盘点管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 59, 1, M000206, stock-transfer, 库存调拨, 1, /business/stock/transfer, Business/Stock/Transfer/List, business:stock:transfer, NodeIndexOutlined, 6, 1, 1, 仓库间调拨管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 61, 3, M000302, purchase-receipt, 采购收货, 1, /business/purchase/receipt, Business/Purchase/Receipt/List, business:purchase:receipt, InboxOutlined, 2, 1, 1, 采购收货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 64, 18, M000401, sale-order, 销售订单, 1, /business/sale/order, Business/Sale/Order/List, business:sale:order, FileTextOutlined, 1, 1, 1, 销售订单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 65, 18, M000402, sale-delivery, 销售出库, 1, /business/sale/delivery, Business/Sale/Delivery/List, business:sale:delivery, ExportOutlined, 2, 1, 1, 销售出库单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 66, 18, M000403, sale-return, 销售退货, 1, /business/sale/return, Business/Sale/Return/List, business:sale:return, ImportOutlined, 3, 1, 1, 销售退货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 67, 19, M000601, retail-config, 零售配置, 1, /business/retail/config, Business/Retail/Config, business:retail:config, SettingOutlined, 1, 1, 1, 零售参数配置, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 68, 19, M000602, retail-out, 零售出库, 1, /business/retail/out, Business/Retail/Outbound/List, business:retail:out, ExportOutlined, 2, 1, 1, 零售出库单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 69, 19, M000603, retail-return, 零售退货, 1, /business/retail/return, Business/Retail/Return/List, business:retail:return, ImportOutlined, 3, 1, 1, 零售退货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 70, 20, M000701, settle-in-out-item, 收支项目, 1, /business/settle/item, Business/Settle/IncomeExpenseItem/List, business:settle:item, BarsOutlined, 1, 1, 1, 收入/支出项目维护, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 71, 20, M000702, settle-fee-sheet, 供应商费用单, 1, /business/settle/fee, Business/Settle/FeeSheet/List, business:settle:fee, AccountBookOutlined, 2, 1, 1, 供应商费用单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 72, 20, M000703, settle-pre-sheet, 供应商预付款单, 1, /business/settle/pre, Business/Settle/PreSheet/List, business:settle:pre, MoneyCollectOutlined, 3, 1, 1, 供应商预付款单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 73, 20, M000704, settle-check-sheet, 供应商对账单, 1, /business/settle/check, Business/Settle/CheckSheet/List, business:settle:check, ReconciliationOutlined, 4, 1, 1, 供应商对账单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 74, 20, M000705, settle-sheet, 供应商结算单, 1, /business/settle/sheet, Business/Settle/SettleSheet/List, business:settle:sheet, TransactionOutlined, 5, 1, 1, 供应商结算单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 75, 20, M000706, customer-fee-sheet, 客户费用单, 1, /business/settle/customer/fee, Business/Settle/CustomerFeeSheet/List, business:settle:customer:fee, AccountBookOutlined, 6, 1, 1, 客户费用单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 76, 20, M000707, customer-pre-sheet, 客户预收款单, 1, /business/settle/customer/pre, Business/Settle/CustomerPreSheet/List, business:settle:customer:pre, MoneyCollectOutlined, 7, 1, 1, 客户预收款单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 77, 20, M000708, customer-check-sheet, 客户对账单, 1, /business/settle/customer/check, Business/Settle/CustomerCheckSheet/List, business:settle:customer:check, ReconciliationOutlined, 8, 1, 1, 客户对账单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 78, 20, M000709, customer-settle-sheet, 客户结算单, 1, /business/settle/customer/sheet, Business/Settle/CustomerSettleSheet/List, business:settle:customer:sheet, TransactionOutlined, 9, 1, 1, 客户结算单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 79, 21, M000801, chart-dashboard, 数据看板, 1, /chart/dashboard, Business/Chart/Dashboard, chart:dashboard, DashboardOutlined, 1, 1, 1, 经营数据看板, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 80, 21, M000802, chart-purchase, 采购统计, 1, /chart/purchase, Business/Chart/Purchase, chart:purchase, ShoppingCartOutlined, 2, 1, 1, 采购金额/数量统计, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 81, 21, M000803, chart-sales, 销售统计, 1, /chart/sales, Business/Chart/Sales, chart:sales, RiseOutlined, 3, 1, 1, 销售金额/数量统计, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 82, 21, M000804, chart-stock, 库存报表, 1, /chart/stock, Business/Chart/Stock, chart:stock, DatabaseOutlined, 4, 1, 1, 库存金额/库龄报表, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 83, 21, M000805, chart-summary, 进销存汇总, 1, /chart/summary, Business/Chart/Summary, chart:summary, FundOutlined, 5, 1, 1, 进销存综合分析, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==      Total: 71
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@798e6232]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b64b08a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1522262522 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will not be managed by Spring
+==>  Preparing: SELECT DISTINCT m.id, m.parent_id, m.code, m.name, m.title, m.menu_type, m.path, m.component, m.permission, m.icon, m.sort, m.visible, m.status, m.is_deleted, m.remark, m.create_by, m.create_time, m.update_by, m.update_time FROM sys_menu m INNER JOIN sys_role_menu rm ON m.id = rm.menu_id INNER JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.status = 1 AND m.visible = 1 AND m.is_deleted = 0 ORDER BY m.sort ASC
+==> Parameters: 2(Long)
+<==    Columns: id, parent_id, code, name, title, menu_type, path, component, permission, icon, sort, visible, status, is_deleted, remark, create_by, create_time, update_by, update_time
+<==        Row: 2, 1, M000201, stock-query, 库存查询, 1, /business/stock/query, Business/Stock/Query, business:stock:query, SearchOutlined, 1, 1, 1, 0, 实时库存查询, null, 2026-08-01 19:14:40, null, 2026-10-01 15:47:50
+<==        Row: 4, 3, M000301, purchase-order, 采购订单, 1, /business/purchase/order, Business/Purchase/Order/List, business:purchase:order, FileTextOutlined, 1, 1, 1, 0, 采购订单管理, null, 2026-08-01 19:14:55, null, 2026-10-01 15:47:50
+<==        Row: 6, 5, M000103, material-category, 物料分类, 1, /basedata/material/category, Basedata/Material/Category, basedata:material:category, FolderOutlined, 1, 1, 1, 0, 物料分类管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 10, 9, M000101, warehouse, 仓库管理, 1, /basedata/warehouse, Basedata/Warehouse, basedata:warehouse:list, HomeOutlined, 1, 1, 1, 0, 仓库信息管理, null, 2026-08-01 19:16:12, null, 2026-10-01 15:47:50
+<==        Row: 70, 20, M000701, settle-in-out-item, 收支项目, 1, /business/settle/item, Business/Settle/IncomeExpenseItem/List, business:settle:item, BarsOutlined, 1, 1, 1, 0, 收入/支出项目维护, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 80, 21, M000802, chart-purchase, 采购统计, 1, /chart/purchase, Business/Chart/Purchase, chart:purchase, ShoppingCartOutlined, 2, 1, 1, 0, 采购金额/数量统计, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 5, 9, M000102, material, 物料管理, 0, /basedata/material, null, null, AppstoreOutlined, 2, 1, 1, 0, 物料管理模块, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 7, 5, M000104, unit, 计量单位, 1, /basedata/material/unit, Basedata/Material/Unit, basedata:material:unit, CalculatorOutlined, 2, 1, 1, 0, 计量单位管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 9, 0, M000100, basedata, 基础数据, 0, /basedata, null, null, DatabaseOutlined, 2, 1, 1, 0, 基础数据管理模块, null, 2026-08-01 19:16:12, null, 2026-10-01 15:47:50
+<==        Row: 71, 20, M000702, settle-fee-sheet, 供应商费用单, 1, /business/settle/fee, Business/Settle/FeeSheet/List, business:settle:fee, AccountBookOutlined, 2, 1, 1, 0, 供应商费用单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 61, 3, M000302, purchase-receipt, 采购收货, 1, /business/purchase/receipt, Business/Purchase/Receipt/List, business:purchase:receipt, InboxOutlined, 2, 1, 1, 0, 采购收货单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 16, 9, M000106, supplier, 供应商管理, 1, /basedata/supplier, Basedata/Supplier, basedata:supplier:list, TeamOutlined, 3, 1, 1, 0, 供应商信息管理, null, 2026-08-01 19:22:06, null, 2026-10-01 15:47:50
+<==        Row: 72, 20, M000703, settle-pre-sheet, 供应商预付款单, 1, /business/settle/pre, Business/Settle/PreSheet/List, business:settle:pre, MoneyCollectOutlined, 3, 1, 1, 0, 供应商预付款单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 1, 0, M000200, inventory, 库存管理, 0, /inventory, null, null, StockOutlined, 3, 1, 1, 0, 库存管理模块, null, 2026-08-01 19:14:40, null, 2026-10-01 15:47:50
+<==        Row: 15, 3, M000303, purchase-return, 采购退货, 1, /business/purchase/return, Business/Purchase/Return/List, business:purchase:return, RollbackOutlined, 3, 1, 1, 0, 采购退货管理, null, 2026-08-01 19:21:34, null, 2026-10-01 15:47:50
+<==        Row: 8, 5, M000105, material-info, 物料信息, 1, /basedata/material/info, Basedata/Material/Info, basedata:material:info, InboxOutlined, 3, 1, 1, 0, 物料信息管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 73, 20, M000704, settle-check-sheet, 供应商对账单, 1, /business/settle/check, Business/Settle/CheckSheet/List, business:settle:check, ReconciliationOutlined, 4, 1, 1, 0, 供应商对账单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 3, 0, M000300, purchase, 采购管理, 0, /purchase, null, null, ShoppingCartOutlined, 4, 1, 1, 0, 采购管理模块, null, 2026-08-01 19:14:55, null, 2026-10-01 15:47:50
+<==        Row: 82, 21, M000804, chart-stock, 库存报表, 1, /chart/stock, Business/Chart/Stock, chart:stock, DatabaseOutlined, 4, 1, 1, 0, 库存金额/库龄报表, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 74, 20, M000705, settle-sheet, 供应商结算单, 1, /business/settle/sheet, Business/Settle/SettleSheet/List, business:settle:sheet, TransactionOutlined, 5, 1, 1, 0, 供应商结算单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 83, 21, M000805, chart-summary, 进销存汇总, 1, /chart/summary, Business/Chart/Summary, chart:summary, FundOutlined, 5, 1, 1, 0, 进销存综合分析, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 20, 0, M000700, settle, 结算管理, 0, /settle, null, null, DollarOutlined, 7, 1, 1, 0, 结算管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 21, 0, M000800, chart, 统计报表, 0, /chart, null, null, AreaChartOutlined, 8, 1, 1, 0, 统计报表模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==      Total: 23
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b64b08a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@172d3a11] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@434816644 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will not be managed by Spring
+==>  Preparing: SELECT DISTINCT m.id, m.parent_id, m.code, m.name, m.title, m.menu_type, m.path, m.component, m.permission, m.icon, m.sort, m.visible, m.status, m.is_deleted, m.remark, m.create_by, m.create_time, m.update_by, m.update_time FROM sys_menu m INNER JOIN sys_role_menu rm ON m.id = rm.menu_id INNER JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = ? AND m.status = 1 AND m.visible = 1 AND m.is_deleted = 0 ORDER BY m.sort ASC
+==> Parameters: 3(Long)
+<==    Columns: id, parent_id, code, name, title, menu_type, path, component, permission, icon, sort, visible, status, is_deleted, remark, create_by, create_time, update_by, update_time
+<==        Row: 2, 1, M000201, stock-query, 库存查询, 1, /business/stock/query, Business/Stock/Query, business:stock:query, SearchOutlined, 1, 1, 1, 0, 实时库存查询, null, 2026-08-01 19:14:40, null, 2026-10-01 15:47:50
+<==        Row: 6, 5, M000103, material-category, 物料分类, 1, /basedata/material/category, Basedata/Material/Category, basedata:material:category, FolderOutlined, 1, 1, 1, 0, 物料分类管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 11, 10, B000101, WarehouseAdd, 新增仓库, 2, null, null, basedata:warehouse:add, null, 1, 1, 1, 0, 新增仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 10, 9, M000101, warehouse, 仓库管理, 1, /basedata/warehouse, Basedata/Warehouse, basedata:warehouse:list, HomeOutlined, 1, 1, 1, 0, 仓库信息管理, null, 2026-08-01 19:16:12, null, 2026-10-01 15:47:50
+<==        Row: 61, 3, M000302, purchase-receipt, 采购收货, 1, /business/purchase/receipt, Business/Purchase/Receipt/List, business:purchase:receipt, InboxOutlined, 2, 1, 1, 0, 采购收货单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 65, 18, M000402, sale-delivery, 销售出库, 1, /business/sale/delivery, Business/Sale/Delivery/List, business:sale:delivery, ExportOutlined, 2, 1, 1, 0, 销售出库单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 55, 1, M000202, stock-log, 库存流水, 1, /business/stock/log, Business/Stock/Log, business:stock:log, HistoryOutlined, 2, 1, 1, 0, 库存出入库变动记录, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 68, 19, M000602, retail-out, 零售出库, 1, /business/retail/out, Business/Retail/Outbound/List, business:retail:out, ExportOutlined, 2, 1, 1, 0, 零售出库单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 12, 10, B000102, WarehouseEdit, 编辑仓库, 2, null, null, basedata:warehouse:edit, null, 2, 1, 1, 0, 编辑仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 9, 0, M000100, basedata, 基础数据, 0, /basedata, null, null, DatabaseOutlined, 2, 1, 1, 0, 基础数据管理模块, null, 2026-08-01 19:16:12, null, 2026-10-01 15:47:50
+<==        Row: 7, 5, M000104, unit, 计量单位, 1, /basedata/material/unit, Basedata/Material/Unit, basedata:material:unit, CalculatorOutlined, 2, 1, 1, 0, 计量单位管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 5, 9, M000102, material, 物料管理, 0, /basedata/material, null, null, AppstoreOutlined, 2, 1, 1, 0, 物料管理模块, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 8, 5, M000105, material-info, 物料信息, 1, /basedata/material/info, Basedata/Material/Info, basedata:material:info, InboxOutlined, 3, 1, 1, 0, 物料信息管理, null, 2026-08-01 19:16:01, null, 2026-10-01 15:47:50
+<==        Row: 13, 10, B000103, WarehouseDelete, 删除仓库, 2, null, null, basedata:warehouse:delete, null, 3, 1, 1, 0, 删除仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 1, 0, M000200, inventory, 库存管理, 0, /inventory, null, null, StockOutlined, 3, 1, 1, 0, 库存管理模块, null, 2026-08-01 19:14:40, null, 2026-10-01 15:47:50
+<==        Row: 56, 1, M000203, stock-adjust-sheet, 库存调整, 1, /stock/adjust/sheet, Business/Stock/Adjust/Sheet/List, stock:adjust:query, SwapOutlined, 3, 1, 1, 0, 库存调整单管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 14, 10, B000104, WarehouseSetDefault, 设置默认, 2, null, null, basedata:warehouse:setDefault, null, 4, 1, 1, 0, 设置默认仓库按钮, null, 2026-08-01 19:16:12, null, 2026-08-01 19:16:12
+<==        Row: 82, 21, M000804, chart-stock, 库存报表, 1, /chart/stock, Business/Chart/Stock, chart:stock, DatabaseOutlined, 4, 1, 1, 0, 库存金额/库龄报表, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 57, 1, M000204, stock-adjust-reason, 调整原因, 1, /stock/adjust/reason, Business/Stock/Adjust/Reason, stock:adjust:reason:query, SettingOutlined, 4, 1, 1, 0, 库存调整原因维护, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 3, 0, M000300, purchase, 采购管理, 0, /purchase, null, null, ShoppingCartOutlined, 4, 1, 1, 0, 采购管理模块, null, 2026-08-01 19:14:55, null, 2026-10-01 15:47:50
+<==        Row: 83, 21, M000805, chart-summary, 进销存汇总, 1, /chart/summary, Business/Chart/Summary, chart:summary, FundOutlined, 5, 1, 1, 0, 进销存综合分析, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 58, 1, M000205, stock-check, 库存盘点, 1, /business/stock/check, Business/Stock/Check/List, business:stock:check, AuditOutlined, 5, 1, 1, 0, 库存盘点管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 18, 0, M000400, sale, 销售管理, 0, /sale, null, null, ShoppingOutlined, 5, 1, 1, 0, 销售管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 59, 1, M000206, stock-transfer, 库存调拨, 1, /business/stock/transfer, Business/Stock/Transfer/List, business:stock:transfer, NodeIndexOutlined, 6, 1, 1, 0, 仓库间调拨管理, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 19, 0, M000600, retail, 零售管理, 0, /retail, null, null, ShopOutlined, 6, 1, 1, 0, 零售管理模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==        Row: 21, 0, M000800, chart, 统计报表, 0, /chart, null, null, AreaChartOutlined, 8, 1, 1, 0, 统计报表模块, null, 2026-10-01 15:47:50, null, 2026-10-01 15:47:50
+<==      Total: 26
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@172d3a11]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d222593] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@870698055 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will not be managed by Spring
+==>  Preparing: SELECT id,parent_id,code,name,title,menu_type,path,component,permission,icon,sort,visible,status,remark,create_time,update_time,create_by,update_by,is_deleted FROM sys_menu WHERE is_deleted=0
+==> Parameters: 
+<==    Columns: id, parent_id, code, name, title, menu_type, path, component, permission, icon, sort, visible, status, remark, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, 0, M000200, inventory, 库存管理, 0, /inventory, null, null, StockOutlined, 3, 1, 1, 库存管理模块, 2026-08-01 19:14:40, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 2, 1, M000201, stock-query, 库存查询, 1, /business/stock/query, Business/Stock/Query, business:stock:query, SearchOutlined, 1, 1, 1, 实时库存查询, 2026-08-01 19:14:40, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 3, 0, M000300, purchase, 采购管理, 0, /purchase, null, null, ShoppingCartOutlined, 4, 1, 1, 采购管理模块, 2026-08-01 19:14:55, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 4, 3, M000301, purchase-order, 采购订单, 1, /business/purchase/order, Business/Purchase/Order/List, business:purchase:order, FileTextOutlined, 1, 1, 1, 采购订单管理, 2026-08-01 19:14:55, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 5, 9, M000102, material, 物料管理, 0, /basedata/material, null, null, AppstoreOutlined, 2, 1, 1, 物料管理模块, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 6, 5, M000103, material-category, 物料分类, 1, /basedata/material/category, Basedata/Material/Category, basedata:material:category, FolderOutlined, 1, 1, 1, 物料分类管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 7, 5, M000104, unit, 计量单位, 1, /basedata/material/unit, Basedata/Material/Unit, basedata:material:unit, CalculatorOutlined, 2, 1, 1, 计量单位管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 8, 5, M000105, material-info, 物料信息, 1, /basedata/material/info, Basedata/Material/Info, basedata:material:info, InboxOutlined, 3, 1, 1, 物料信息管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 9, 0, M000100, basedata, 基础数据, 0, /basedata, null, null, DatabaseOutlined, 2, 1, 1, 基础数据管理模块, 2026-08-01 19:16:12, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 10, 9, M000101, warehouse, 仓库管理, 1, /basedata/warehouse, Basedata/Warehouse, basedata:warehouse:list, HomeOutlined, 1, 1, 1, 仓库信息管理, 2026-08-01 19:16:12, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 11, 10, B000101, WarehouseAdd, 新增仓库, 2, null, null, basedata:warehouse:add, null, 1, 1, 1, 新增仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 12, 10, B000102, WarehouseEdit, 编辑仓库, 2, null, null, basedata:warehouse:edit, null, 2, 1, 1, 编辑仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 13, 10, B000103, WarehouseDelete, 删除仓库, 2, null, null, basedata:warehouse:delete, null, 3, 1, 1, 删除仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 14, 10, B000104, WarehouseSetDefault, 设置默认, 2, null, null, basedata:warehouse:setDefault, null, 4, 1, 1, 设置默认仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 15, 3, M000303, purchase-return, 采购退货, 1, /business/purchase/return, Business/Purchase/Return/List, business:purchase:return, RollbackOutlined, 3, 1, 1, 采购退货管理, 2026-08-01 19:21:34, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 16, 9, M000106, supplier, 供应商管理, 1, /basedata/supplier, Basedata/Supplier, basedata:supplier:list, TeamOutlined, 3, 1, 1, 供应商信息管理, 2026-08-01 19:22:06, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 17, 0, M000001, system, 系统管理, 0, /system, null, null, SettingOutlined, 1, 1, 1, 系统管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 18, 0, M000400, sale, 销售管理, 0, /sale, null, null, ShoppingOutlined, 5, 1, 1, 销售管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 19, 0, M000600, retail, 零售管理, 0, /retail, null, null, ShopOutlined, 6, 1, 1, 零售管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 20, 0, M000700, settle, 结算管理, 0, /settle, null, null, DollarOutlined, 7, 1, 1, 结算管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 21, 0, M000800, chart, 统计报表, 0, /chart, null, null, AreaChartOutlined, 8, 1, 1, 统计报表模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 25, 17, M000002, user, 用户管理, 1, /system/user, System/User, system:user:list, UserOutlined, 1, 1, 1, 用户信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 26, 25, M000003, user-add, 新增用户, 2, null, null, system:user:add, null, 1, 1, 1, 新增用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 27, 25, M000004, user-edit, 修改用户, 2, null, null, system:user:edit, null, 2, 1, 1, 修改用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 28, 25, M000005, user-delete, 删除用户, 2, null, null, system:user:delete, null, 3, 1, 1, 删除用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 29, 25, M000006, user-reset, 重置密码, 2, null, null, system:user:resetPwd, null, 4, 1, 1, 重置密码按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 30, 17, M000007, role, 角色管理, 1, /system/role, System/Role, system:role:list, TeamOutlined, 2, 1, 1, 角色与授权管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 31, 30, M000008, role-add, 新增角色, 2, null, null, system:role:add, null, 1, 1, 1, 新增角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 32, 30, M000009, role-edit, 修改角色, 2, null, null, system:role:edit, null, 2, 1, 1, 修改角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 33, 30, M000010, role-delete, 删除角色, 2, null, null, system:role:delete, null, 3, 1, 1, 删除角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 34, 30, M000011, role-assign, 分配权限, 2, null, null, system:role:assign, null, 4, 1, 1, 角色分配菜单权限, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 35, 17, M000012, dept, 部门管理, 1, /system/dept, System/Dept, system:dept:list, ApartmentOutlined, 3, 1, 1, 组织部门管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 36, 35, M000013, dept-add, 新增部门, 2, null, null, system:dept:add, null, 1, 1, 1, 新增部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 37, 35, M000014, dept-edit, 修改部门, 2, null, null, system:dept:edit, null, 2, 1, 1, 修改部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 38, 35, M000015, dept-delete, 删除部门, 2, null, null, system:dept:delete, null, 3, 1, 1, 删除部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 39, 17, M000016, menu, 菜单管理, 1, /system/menu, System/Menu, system:menu:list, MenuOutlined, 4, 1, 1, 菜单与权限项管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 40, 39, M000017, menu-add, 新增菜单, 2, null, null, system:menu:add, null, 1, 1, 1, 新增菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 41, 39, M000018, menu-edit, 修改菜单, 2, null, null, system:menu:edit, null, 2, 1, 1, 修改菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 42, 39, M000019, menu-delete, 删除菜单, 2, null, null, system:menu:delete, null, 3, 1, 1, 删除菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 43, 17, M000020, dict, 字典管理, 1, /system/dict, System/Dict, system:dict:list, BookOutlined, 5, 1, 1, 数据字典管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 44, 43, M000021, dict-add, 新增字典, 2, null, null, system:dict:add, null, 1, 1, 1, 新增字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 45, 43, M000022, dict-edit, 修改字典, 2, null, null, system:dict:edit, null, 2, 1, 1, 修改字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 46, 43, M000023, dict-delete, 删除字典, 2, null, null, system:dict:delete, null, 3, 1, 1, 删除字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 47, 9, M000107, customer, 客户管理, 1, /basedata/customer, Basedata/Customer, basedata:customer:list, UserOutlined, 4, 1, 1, 客户信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 48, 9, M000108, brand, 品牌管理, 1, /basedata/brand, Basedata/Brand, basedata:brand:list, TagOutlined, 5, 1, 1, 品牌信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 55, 1, M000202, stock-log, 库存流水, 1, /business/stock/log, Business/Stock/Log, business:stock:log, HistoryOutlined, 2, 1, 1, 库存出入库变动记录, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 56, 1, M000203, stock-adjust-sheet, 库存调整, 1, /stock/adjust/sheet, Business/Stock/Adjust/Sheet/List, stock:adjust:query, SwapOutlined, 3, 1, 1, 库存调整单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 57, 1, M000204, stock-adjust-reason, 调整原因, 1, /stock/adjust/reason, Business/Stock/Adjust/Reason, stock:adjust:reason:query, SettingOutlined, 4, 1, 1, 库存调整原因维护, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 58, 1, M000205, stock-check, 库存盘点, 1, /business/stock/check, Business/Stock/Check/List, business:stock:check, AuditOutlined, 5, 1, 1, 库存盘点管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 59, 1, M000206, stock-transfer, 库存调拨, 1, /business/stock/transfer, Business/Stock/Transfer/List, business:stock:transfer, NodeIndexOutlined, 6, 1, 1, 仓库间调拨管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 61, 3, M000302, purchase-receipt, 采购收货, 1, /business/purchase/receipt, Business/Purchase/Receipt/List, business:purchase:receipt, InboxOutlined, 2, 1, 1, 采购收货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 64, 18, M000401, sale-order, 销售订单, 1, /business/sale/order, Business/Sale/Order/List, business:sale:order, FileTextOutlined, 1, 1, 1, 销售订单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 65, 18, M000402, sale-delivery, 销售出库, 1, /business/sale/delivery, Business/Sale/Delivery/List, business:sale:delivery, ExportOutlined, 2, 1, 1, 销售出库单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 66, 18, M000403, sale-return, 销售退货, 1, /business/sale/return, Business/Sale/Return/List, business:sale:return, ImportOutlined, 3, 1, 1, 销售退货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 67, 19, M000601, retail-config, 零售配置, 1, /business/retail/config, Business/Retail/Config, business:retail:config, SettingOutlined, 1, 1, 1, 零售参数配置, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 68, 19, M000602, retail-out, 零售出库, 1, /business/retail/out, Business/Retail/Outbound/List, business:retail:out, ExportOutlined, 2, 1, 1, 零售出库单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 69, 19, M000603, retail-return, 零售退货, 1, /business/retail/return, Business/Retail/Return/List, business:retail:return, ImportOutlined, 3, 1, 1, 零售退货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 70, 20, M000701, settle-in-out-item, 收支项目, 1, /business/settle/item, Business/Settle/IncomeExpenseItem/List, business:settle:item, BarsOutlined, 1, 1, 1, 收入/支出项目维护, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 71, 20, M000702, settle-fee-sheet, 供应商费用单, 1, /business/settle/fee, Business/Settle/FeeSheet/List, business:settle:fee, AccountBookOutlined, 2, 1, 1, 供应商费用单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 72, 20, M000703, settle-pre-sheet, 供应商预付款单, 1, /business/settle/pre, Business/Settle/PreSheet/List, business:settle:pre, MoneyCollectOutlined, 3, 1, 1, 供应商预付款单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 73, 20, M000704, settle-check-sheet, 供应商对账单, 1, /business/settle/check, Business/Settle/CheckSheet/List, business:settle:check, ReconciliationOutlined, 4, 1, 1, 供应商对账单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 74, 20, M000705, settle-sheet, 供应商结算单, 1, /business/settle/sheet, Business/Settle/SettleSheet/List, business:settle:sheet, TransactionOutlined, 5, 1, 1, 供应商结算单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 75, 20, M000706, customer-fee-sheet, 客户费用单, 1, /business/settle/customer/fee, Business/Settle/CustomerFeeSheet/List, business:settle:customer:fee, AccountBookOutlined, 6, 1, 1, 客户费用单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 76, 20, M000707, customer-pre-sheet, 客户预收款单, 1, /business/settle/customer/pre, Business/Settle/CustomerPreSheet/List, business:settle:customer:pre, MoneyCollectOutlined, 7, 1, 1, 客户预收款单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 77, 20, M000708, customer-check-sheet, 客户对账单, 1, /business/settle/customer/check, Business/Settle/CustomerCheckSheet/List, business:settle:customer:check, ReconciliationOutlined, 8, 1, 1, 客户对账单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 78, 20, M000709, customer-settle-sheet, 客户结算单, 1, /business/settle/customer/sheet, Business/Settle/CustomerSettleSheet/List, business:settle:customer:sheet, TransactionOutlined, 9, 1, 1, 客户结算单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 79, 21, M000801, chart-dashboard, 数据看板, 1, /chart/dashboard, Business/Chart/Dashboard, chart:dashboard, DashboardOutlined, 1, 1, 1, 经营数据看板, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 80, 21, M000802, chart-purchase, 采购统计, 1, /chart/purchase, Business/Chart/Purchase, chart:purchase, ShoppingCartOutlined, 2, 1, 1, 采购金额/数量统计, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 81, 21, M000803, chart-sales, 销售统计, 1, /chart/sales, Business/Chart/Sales, chart:sales, RiseOutlined, 3, 1, 1, 销售金额/数量统计, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 82, 21, M000804, chart-stock, 库存报表, 1, /chart/stock, Business/Chart/Stock, chart:stock, DatabaseOutlined, 4, 1, 1, 库存金额/库龄报表, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 83, 21, M000805, chart-summary, 进销存汇总, 1, /chart/summary, Business/Chart/Summary, chart:summary, FundOutlined, 5, 1, 1, 进销存综合分析, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==      Total: 71
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d222593]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec774c8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@554452097 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will not be managed by Spring
+==>  Preparing: SELECT id,role_id,menu_id,create_time FROM sys_role_menu WHERE (role_id = ?)
+==> Parameters: 4(Long)
+<==    Columns: id, role_id, menu_id, create_time
+<==        Row: 253, 4, 1, 2026-10-01 16:07:57
+<==        Row: 254, 4, 2, 2026-10-01 16:07:57
+<==        Row: 255, 4, 3, 2026-10-01 16:07:57
+<==        Row: 256, 4, 5, 2026-10-01 16:07:57
+<==        Row: 257, 4, 6, 2026-10-01 16:07:57
+<==        Row: 258, 4, 7, 2026-10-01 16:07:57
+<==        Row: 259, 4, 8, 2026-10-01 16:07:57
+<==        Row: 260, 4, 9, 2026-10-01 16:07:57
+<==        Row: 261, 4, 10, 2026-10-01 16:07:57
+<==        Row: 262, 4, 11, 2026-10-01 16:07:57
+<==        Row: 263, 4, 12, 2026-10-01 16:07:57
+<==        Row: 264, 4, 13, 2026-10-01 16:07:57
+<==        Row: 265, 4, 14, 2026-10-01 16:07:57
+<==        Row: 266, 4, 18, 2026-10-01 16:07:57
+<==        Row: 267, 4, 19, 2026-10-01 16:07:57
+<==        Row: 268, 4, 21, 2026-10-01 16:07:57
+<==        Row: 269, 4, 55, 2026-10-01 16:07:57
+<==        Row: 270, 4, 56, 2026-10-01 16:07:57
+<==        Row: 271, 4, 57, 2026-10-01 16:07:57
+<==        Row: 272, 4, 58, 2026-10-01 16:07:57
+<==        Row: 273, 4, 59, 2026-10-01 16:07:57
+<==        Row: 274, 4, 61, 2026-10-01 16:07:57
+<==        Row: 275, 4, 65, 2026-10-01 16:07:57
+<==        Row: 276, 4, 68, 2026-10-01 16:07:57
+<==        Row: 277, 4, 82, 2026-10-01 16:07:57
+<==        Row: 278, 4, 83, 2026-10-01 16:07:57
+<==      Total: 26
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2ec774c8]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+JDBC Connection [HikariProxyConnection@1453652937 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will be managed by Spring
+==>  Preparing: SELECT id,code,name,permission_code,data_scope,status,remark,create_time,update_time,create_by,update_by,is_deleted FROM sys_role WHERE id=? AND is_deleted=0
+==> Parameters: 4(Long)
+<==    Columns: id, code, name, permission_code, data_scope, status, remark, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 4, R000004, 仓库管理员, warehouse_admin, 3, 1, 仓库管理权限, 2026-08-01 19:16:57, 2026-08-01 19:16:57, system, null, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: DELETE FROM sys_role_menu WHERE (role_id = ?)
+==> Parameters: 4(Long)
+<==    Updates: 26
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: SELECT id,parent_id,code,name,title,menu_type,path,component,permission,icon,sort,visible,status,remark,create_time,update_time,create_by,update_by,is_deleted FROM sys_menu WHERE is_deleted=0
+==> Parameters: 
+<==    Columns: id, parent_id, code, name, title, menu_type, path, component, permission, icon, sort, visible, status, remark, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, 0, M000200, inventory, 库存管理, 0, /inventory, null, null, StockOutlined, 3, 1, 1, 库存管理模块, 2026-08-01 19:14:40, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 2, 1, M000201, stock-query, 库存查询, 1, /business/stock/query, Business/Stock/Query, business:stock:query, SearchOutlined, 1, 1, 1, 实时库存查询, 2026-08-01 19:14:40, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 3, 0, M000300, purchase, 采购管理, 0, /purchase, null, null, ShoppingCartOutlined, 4, 1, 1, 采购管理模块, 2026-08-01 19:14:55, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 4, 3, M000301, purchase-order, 采购订单, 1, /business/purchase/order, Business/Purchase/Order/List, business:purchase:order, FileTextOutlined, 1, 1, 1, 采购订单管理, 2026-08-01 19:14:55, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 5, 9, M000102, material, 物料管理, 0, /basedata/material, null, null, AppstoreOutlined, 2, 1, 1, 物料管理模块, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 6, 5, M000103, material-category, 物料分类, 1, /basedata/material/category, Basedata/Material/Category, basedata:material:category, FolderOutlined, 1, 1, 1, 物料分类管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 7, 5, M000104, unit, 计量单位, 1, /basedata/material/unit, Basedata/Material/Unit, basedata:material:unit, CalculatorOutlined, 2, 1, 1, 计量单位管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 8, 5, M000105, material-info, 物料信息, 1, /basedata/material/info, Basedata/Material/Info, basedata:material:info, InboxOutlined, 3, 1, 1, 物料信息管理, 2026-08-01 19:16:01, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 9, 0, M000100, basedata, 基础数据, 0, /basedata, null, null, DatabaseOutlined, 2, 1, 1, 基础数据管理模块, 2026-08-01 19:16:12, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 10, 9, M000101, warehouse, 仓库管理, 1, /basedata/warehouse, Basedata/Warehouse, basedata:warehouse:list, HomeOutlined, 1, 1, 1, 仓库信息管理, 2026-08-01 19:16:12, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 11, 10, B000101, WarehouseAdd, 新增仓库, 2, null, null, basedata:warehouse:add, null, 1, 1, 1, 新增仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 12, 10, B000102, WarehouseEdit, 编辑仓库, 2, null, null, basedata:warehouse:edit, null, 2, 1, 1, 编辑仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 13, 10, B000103, WarehouseDelete, 删除仓库, 2, null, null, basedata:warehouse:delete, null, 3, 1, 1, 删除仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 14, 10, B000104, WarehouseSetDefault, 设置默认, 2, null, null, basedata:warehouse:setDefault, null, 4, 1, 1, 设置默认仓库按钮, 2026-08-01 19:16:12, 2026-08-01 19:16:12, null, null, 0
+<==        Row: 15, 3, M000303, purchase-return, 采购退货, 1, /business/purchase/return, Business/Purchase/Return/List, business:purchase:return, RollbackOutlined, 3, 1, 1, 采购退货管理, 2026-08-01 19:21:34, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 16, 9, M000106, supplier, 供应商管理, 1, /basedata/supplier, Basedata/Supplier, basedata:supplier:list, TeamOutlined, 3, 1, 1, 供应商信息管理, 2026-08-01 19:22:06, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 17, 0, M000001, system, 系统管理, 0, /system, null, null, SettingOutlined, 1, 1, 1, 系统管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 18, 0, M000400, sale, 销售管理, 0, /sale, null, null, ShoppingOutlined, 5, 1, 1, 销售管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 19, 0, M000600, retail, 零售管理, 0, /retail, null, null, ShopOutlined, 6, 1, 1, 零售管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 20, 0, M000700, settle, 结算管理, 0, /settle, null, null, DollarOutlined, 7, 1, 1, 结算管理模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 21, 0, M000800, chart, 统计报表, 0, /chart, null, null, AreaChartOutlined, 8, 1, 1, 统计报表模块, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 25, 17, M000002, user, 用户管理, 1, /system/user, System/User, system:user:list, UserOutlined, 1, 1, 1, 用户信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 26, 25, M000003, user-add, 新增用户, 2, null, null, system:user:add, null, 1, 1, 1, 新增用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 27, 25, M000004, user-edit, 修改用户, 2, null, null, system:user:edit, null, 2, 1, 1, 修改用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 28, 25, M000005, user-delete, 删除用户, 2, null, null, system:user:delete, null, 3, 1, 1, 删除用户按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 29, 25, M000006, user-reset, 重置密码, 2, null, null, system:user:resetPwd, null, 4, 1, 1, 重置密码按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 30, 17, M000007, role, 角色管理, 1, /system/role, System/Role, system:role:list, TeamOutlined, 2, 1, 1, 角色与授权管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 31, 30, M000008, role-add, 新增角色, 2, null, null, system:role:add, null, 1, 1, 1, 新增角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 32, 30, M000009, role-edit, 修改角色, 2, null, null, system:role:edit, null, 2, 1, 1, 修改角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 33, 30, M000010, role-delete, 删除角色, 2, null, null, system:role:delete, null, 3, 1, 1, 删除角色按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 34, 30, M000011, role-assign, 分配权限, 2, null, null, system:role:assign, null, 4, 1, 1, 角色分配菜单权限, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 35, 17, M000012, dept, 部门管理, 1, /system/dept, System/Dept, system:dept:list, ApartmentOutlined, 3, 1, 1, 组织部门管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 36, 35, M000013, dept-add, 新增部门, 2, null, null, system:dept:add, null, 1, 1, 1, 新增部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 37, 35, M000014, dept-edit, 修改部门, 2, null, null, system:dept:edit, null, 2, 1, 1, 修改部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 38, 35, M000015, dept-delete, 删除部门, 2, null, null, system:dept:delete, null, 3, 1, 1, 删除部门按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 39, 17, M000016, menu, 菜单管理, 1, /system/menu, System/Menu, system:menu:list, MenuOutlined, 4, 1, 1, 菜单与权限项管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 40, 39, M000017, menu-add, 新增菜单, 2, null, null, system:menu:add, null, 1, 1, 1, 新增菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 41, 39, M000018, menu-edit, 修改菜单, 2, null, null, system:menu:edit, null, 2, 1, 1, 修改菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 42, 39, M000019, menu-delete, 删除菜单, 2, null, null, system:menu:delete, null, 3, 1, 1, 删除菜单按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 43, 17, M000020, dict, 字典管理, 1, /system/dict, System/Dict, system:dict:list, BookOutlined, 5, 1, 1, 数据字典管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 44, 43, M000021, dict-add, 新增字典, 2, null, null, system:dict:add, null, 1, 1, 1, 新增字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 45, 43, M000022, dict-edit, 修改字典, 2, null, null, system:dict:edit, null, 2, 1, 1, 修改字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 46, 43, M000023, dict-delete, 删除字典, 2, null, null, system:dict:delete, null, 3, 1, 1, 删除字典按钮, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 47, 9, M000107, customer, 客户管理, 1, /basedata/customer, Basedata/Customer, basedata:customer:list, UserOutlined, 4, 1, 1, 客户信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 48, 9, M000108, brand, 品牌管理, 1, /basedata/brand, Basedata/Brand, basedata:brand:list, TagOutlined, 5, 1, 1, 品牌信息管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 55, 1, M000202, stock-log, 库存流水, 1, /business/stock/log, Business/Stock/Log, business:stock:log, HistoryOutlined, 2, 1, 1, 库存出入库变动记录, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 56, 1, M000203, stock-adjust-sheet, 库存调整, 1, /stock/adjust/sheet, Business/Stock/Adjust/Sheet/List, stock:adjust:query, SwapOutlined, 3, 1, 1, 库存调整单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 57, 1, M000204, stock-adjust-reason, 调整原因, 1, /stock/adjust/reason, Business/Stock/Adjust/Reason, stock:adjust:reason:query, SettingOutlined, 4, 1, 1, 库存调整原因维护, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 58, 1, M000205, stock-check, 库存盘点, 1, /business/stock/check, Business/Stock/Check/List, business:stock:check, AuditOutlined, 5, 1, 1, 库存盘点管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 59, 1, M000206, stock-transfer, 库存调拨, 1, /business/stock/transfer, Business/Stock/Transfer/List, business:stock:transfer, NodeIndexOutlined, 6, 1, 1, 仓库间调拨管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 61, 3, M000302, purchase-receipt, 采购收货, 1, /business/purchase/receipt, Business/Purchase/Receipt/List, business:purchase:receipt, InboxOutlined, 2, 1, 1, 采购收货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 64, 18, M000401, sale-order, 销售订单, 1, /business/sale/order, Business/Sale/Order/List, business:sale:order, FileTextOutlined, 1, 1, 1, 销售订单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 65, 18, M000402, sale-delivery, 销售出库, 1, /business/sale/delivery, Business/Sale/Delivery/List, business:sale:delivery, ExportOutlined, 2, 1, 1, 销售出库单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 66, 18, M000403, sale-return, 销售退货, 1, /business/sale/return, Business/Sale/Return/List, business:sale:return, ImportOutlined, 3, 1, 1, 销售退货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 67, 19, M000601, retail-config, 零售配置, 1, /business/retail/config, Business/Retail/Config, business:retail:config, SettingOutlined, 1, 1, 1, 零售参数配置, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 68, 19, M000602, retail-out, 零售出库, 1, /business/retail/out, Business/Retail/Outbound/List, business:retail:out, ExportOutlined, 2, 1, 1, 零售出库单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 69, 19, M000603, retail-return, 零售退货, 1, /business/retail/return, Business/Retail/Return/List, business:retail:return, ImportOutlined, 3, 1, 1, 零售退货单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 70, 20, M000701, settle-in-out-item, 收支项目, 1, /business/settle/item, Business/Settle/IncomeExpenseItem/List, business:settle:item, BarsOutlined, 1, 1, 1, 收入/支出项目维护, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 71, 20, M000702, settle-fee-sheet, 供应商费用单, 1, /business/settle/fee, Business/Settle/FeeSheet/List, business:settle:fee, AccountBookOutlined, 2, 1, 1, 供应商费用单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 72, 20, M000703, settle-pre-sheet, 供应商预付款单, 1, /business/settle/pre, Business/Settle/PreSheet/List, business:settle:pre, MoneyCollectOutlined, 3, 1, 1, 供应商预付款单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 73, 20, M000704, settle-check-sheet, 供应商对账单, 1, /business/settle/check, Business/Settle/CheckSheet/List, business:settle:check, ReconciliationOutlined, 4, 1, 1, 供应商对账单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 74, 20, M000705, settle-sheet, 供应商结算单, 1, /business/settle/sheet, Business/Settle/SettleSheet/List, business:settle:sheet, TransactionOutlined, 5, 1, 1, 供应商结算单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 75, 20, M000706, customer-fee-sheet, 客户费用单, 1, /business/settle/customer/fee, Business/Settle/CustomerFeeSheet/List, business:settle:customer:fee, AccountBookOutlined, 6, 1, 1, 客户费用单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 76, 20, M000707, customer-pre-sheet, 客户预收款单, 1, /business/settle/customer/pre, Business/Settle/CustomerPreSheet/List, business:settle:customer:pre, MoneyCollectOutlined, 7, 1, 1, 客户预收款单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 77, 20, M000708, customer-check-sheet, 客户对账单, 1, /business/settle/customer/check, Business/Settle/CustomerCheckSheet/List, business:settle:customer:check, ReconciliationOutlined, 8, 1, 1, 客户对账单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 78, 20, M000709, customer-settle-sheet, 客户结算单, 1, /business/settle/customer/sheet, Business/Settle/CustomerSettleSheet/List, business:settle:customer:sheet, TransactionOutlined, 9, 1, 1, 客户结算单管理, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 79, 21, M000801, chart-dashboard, 数据看板, 1, /chart/dashboard, Business/Chart/Dashboard, chart:dashboard, DashboardOutlined, 1, 1, 1, 经营数据看板, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 80, 21, M000802, chart-purchase, 采购统计, 1, /chart/purchase, Business/Chart/Purchase, chart:purchase, ShoppingCartOutlined, 2, 1, 1, 采购金额/数量统计, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 81, 21, M000803, chart-sales, 销售统计, 1, /chart/sales, Business/Chart/Sales, chart:sales, RiseOutlined, 3, 1, 1, 销售金额/数量统计, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 82, 21, M000804, chart-stock, 库存报表, 1, /chart/stock, Business/Chart/Stock, chart:stock, DatabaseOutlined, 4, 1, 1, 库存金额/库龄报表, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==        Row: 83, 21, M000805, chart-summary, 进销存汇总, 1, /chart/summary, Business/Chart/Summary, chart:summary, FundOutlined, 5, 1, 1, 进销存综合分析, 2026-10-01 15:47:50, 2026-10-01 15:47:50, null, null, 0
+<==      Total: 71
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 2(Long), 2026-10-01T16:11:56.569435400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 6(Long), 2026-10-01T16:11:56.605279600(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 7(Long), 2026-10-01T16:11:56.638462500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 8(Long), 2026-10-01T16:11:56.671373200(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 11(Long), 2026-10-01T16:11:56.688347300(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 12(Long), 2026-10-01T16:11:56.731457100(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 13(Long), 2026-10-01T16:11:56.747471(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 14(Long), 2026-10-01T16:11:56.755719300(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 55(Long), 2026-10-01T16:11:56.780778400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 56(Long), 2026-10-01T16:11:56.805092300(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 57(Long), 2026-10-01T16:11:56.830788(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 58(Long), 2026-10-01T16:11:56.851244500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 59(Long), 2026-10-01T16:11:56.870877900(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 61(Long), 2026-10-01T16:11:56.887687200(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 65(Long), 2026-10-01T16:11:56.904324500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 68(Long), 2026-10-01T16:11:56.925671600(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 82(Long), 2026-10-01T16:11:56.948437700(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 83(Long), 2026-10-01T16:11:56.989525700(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 1(Long), 2026-10-01T16:11:57.022710200(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 5(Long), 2026-10-01T16:11:57.049446500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 9(Long), 2026-10-01T16:11:57.080864600(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 10(Long), 2026-10-01T16:11:57.096977700(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 3(Long), 2026-10-01T16:11:57.112515500(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 18(Long), 2026-10-01T16:11:57.142887100(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 19(Long), 2026-10-01T16:11:57.171153400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346] from current transaction
+==>  Preparing: INSERT INTO sys_role_menu ( role_id, menu_id, create_time ) VALUES ( ?, ?, ? )
+==> Parameters: 4(Long), 21(Long), 2026-10-01T16:11:57.185278400(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7908f346]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@110baab4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@934258191 wrapping com.mysql.cj.jdbc.ConnectionImpl@4480c323] will not be managed by Spring
+==>  Preparing: SELECT id,role_id,menu_id,create_time FROM sys_role_menu WHERE (role_id = ?)
+==> Parameters: 4(Long)
+<==    Columns: id, role_id, menu_id, create_time
+<==        Row: 348, 4, 1, 2026-10-01 16:11:57
+<==        Row: 330, 4, 2, 2026-10-01 16:11:57
+<==        Row: 352, 4, 3, 2026-10-01 16:11:57
+<==        Row: 349, 4, 5, 2026-10-01 16:11:57
+<==        Row: 331, 4, 6, 2026-10-01 16:11:57
+<==        Row: 332, 4, 7, 2026-10-01 16:11:57
+<==        Row: 333, 4, 8, 2026-10-01 16:11:57
+<==        Row: 350, 4, 9, 2026-10-01 16:11:57
+<==        Row: 351, 4, 10, 2026-10-01 16:11:57
+<==        Row: 334, 4, 11, 2026-10-01 16:11:57
+<==        Row: 335, 4, 12, 2026-10-01 16:11:57
+<==        Row: 336, 4, 13, 2026-10-01 16:11:57
+<==        Row: 337, 4, 14, 2026-10-01 16:11:57
+<==        Row: 353, 4, 18, 2026-10-01 16:11:57
+<==        Row: 354, 4, 19, 2026-10-01 16:11:57
+<==        Row: 355, 4, 21, 2026-10-01 16:11:57
+<==        Row: 338, 4, 55, 2026-10-01 16:11:57
+<==        Row: 339, 4, 56, 2026-10-01 16:11:57
+<==        Row: 340, 4, 57, 2026-10-01 16:11:57
+<==        Row: 341, 4, 58, 2026-10-01 16:11:57
+<==        Row: 342, 4, 59, 2026-10-01 16:11:57
+<==        Row: 343, 4, 61, 2026-10-01 16:11:57
+<==        Row: 344, 4, 65, 2026-10-01 16:11:57
+<==        Row: 345, 4, 68, 2026-10-01 16:11:57
+<==        Row: 346, 4, 82, 2026-10-01 16:11:57
+<==        Row: 347, 4, 83, 2026-10-01 16:11:57
+<==      Total: 26
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@110baab4]

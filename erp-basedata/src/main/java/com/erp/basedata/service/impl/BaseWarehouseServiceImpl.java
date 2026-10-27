@@ -10,6 +10,8 @@ import com.erp.basedata.dto.WarehousePageParam;
 import com.erp.basedata.entity.BaseWarehouse;
 import com.erp.basedata.mapper.BaseWarehouseMapper;
 import com.erp.basedata.service.IBaseWarehouseService;
+import com.erp.common.service.ICodeGenerateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ import java.util.List;
 @Service
 public class BaseWarehouseServiceImpl extends ServiceImpl<BaseWarehouseMapper, BaseWarehouse>
         implements IBaseWarehouseService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Override
     public Page<BaseWarehouse> getWarehousePage(WarehousePageParam param) {
@@ -170,19 +174,6 @@ public class BaseWarehouseServiceImpl extends ServiceImpl<BaseWarehouseMapper, B
      * @return 仓库编号
      */
     private String generateWarehouseCode() {
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCode();
-
-        if (maxCode == null || StrUtil.isBlank(maxCode)) {
-            // 如果没有仓库,从WH000001开始
-            return "WH000001";
-        }
-
-        // 提取数字部分并加1
-        String numberPart = maxCode.substring(2); // 去掉前缀WH
-        int nextNumber = Integer.parseInt(numberPart) + 1;
-
-        // 格式化为6位数字
-        return String.format("WH%06d", nextNumber);
+        return codeGenerateService.generate("BASE_WAREHOUSE");
     }
 }

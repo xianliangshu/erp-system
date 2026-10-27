@@ -12,8 +12,8 @@
     <artifactId>erp-common</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -41,6 +41,29 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
             <version>6.0.1</version>
+        </dependency>
+
+        <!-- Sa-Token 内核: 只为在 GlobalExceptionHandler 里把
+             NotLoginException/NotPermissionException 映射成 401/403,
+             这里不引 starter, 避免让 common 依赖 webmvc 集成 -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-core</artifactId>
+        </dependency>
+
+        <!-- MyBatis-Plus：编号规则(sys_code_rule)需要 BaseMapper / @TableName / @TableLogic。
+             版本由父 pom 统一管理；erp-basedata / erp-business 本已引入同版本，无冲突。
+             common 因此不再是「纯工具库」，但它是 basedata 与 business 唯一共同依赖的模块，
+             编号生成作为横切能力只能落在这里（放 erp-system 会导致 basedata 用不了）。 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+        </dependency>
+
+        <!-- EasyExcel：通用 Excel 导入导出能力（供各业务模块复用） -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
         </dependency>
 
     </dependencies>

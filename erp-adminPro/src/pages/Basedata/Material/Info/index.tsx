@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Space, Modal, message, Form, Input, InputNumber, Select, Card, TreeSelect, App } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { getMaterialPage, saveMaterial, updateMaterial, deleteMaterial } from '@/api/material/material';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined, DownloadOutlined } from '@ant-design/icons';
+import {
+    getMaterialPage,
+    saveMaterial,
+    updateMaterial,
+    deleteMaterial,
+    exportMaterial,
+    downloadMaterialTemplate,
+    importMaterial,
+} from '@/api/material/material';
 import { getCategoryTree } from '@/api/material/category';
 import { getUnitList } from '@/api/material/unit';
+import { getSpuList } from '@/api/basedata/spu';
+import ExcelImportButton from '@/components/ExcelImport/ExcelImportButton';
 
 const { Search } = Input;
 
@@ -12,18 +22,20 @@ const MaterialManagement: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [dataSource, setDataSource] = useState([]);
     const [total, setTotal] = useState(0);
-    const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // 分页与查询条件：唯一的取数依据，搜索/重置/翻页都只改它
+    const [query, setQuery] = useState<any>({ current: 1, size: 10 });
 
     // 搜索条件
     const [searchName, setSearchName] = useState('');
     const [searchCode, setSearchCode] = useState('');
     const [searchCategoryId, setSearchCategoryId] = useState<number | undefined>(undefined);
+    const [searchSpuId, setSearchSpuId] = useState<number | undefined>(undefined);
     const [searchStatus, setSearchStatus] = useState<number | undefined>(undefined);
 
     // 下拉选项
     const [categoryTree, setCategoryTree] = useState([]);
     const [unitList, setUnitList] = useState([]);
+    const [spuList, setSpuList] = useState<any[]>([]);
 
     const [modalVisible, setModalVisible] = useState(false);
     const [modalTitle, setModalTitle] = useState('');
@@ -51,6 +63,16 @@ const MaterialManagement: React.FC = () => {
         }
     };
 
+    // 加载 SPU 列表（商品中心）
+    const loadSpuList = async () => {
+        try {
+            const data = await getSpuList();
+            setSpuList(data || []);
+        } catch (error) {
+            console.error('加载商品列表失败', error);
+        }
+    };
+
     // 转换为TreeSelect需要的格式
     const convertToTreeSelect = (data: any[]): any[] => {
         return data.map((item) => ({
@@ -63,6 +85,7 @@ const MaterialManagement: React.FC = () => {
     useEffect(() => {
         loadCategoryTree();
         loadUnitList();
+        loadSpuList();
     }, []);
 
     // 加载数据
@@ -70,11 +93,11 @@ const MaterialManagement: React.FC = () => {
         setLoading(true);
         try {
             const params = {
-                current,
-                size: pageSize,
+                ...query,
                 name: searchName || undefined,
                 code: searchCode || undefined,
                 categoryId: searchCategoryId,
+                spuId: searchSpuId,
                 status: searchStatus,
             };
             const data = await getMaterialPage(params);
@@ -89,12 +112,11 @@ const MaterialManagement: React.FC = () => {
 
     useEffect(() => {
         loadData();
-    }, [current, pageSize]);
+    }, [query]);
 
     // 搜索
     const handleSearch = () => {
-        setCurrent(1);
-        loadData();
+        setQuery((q: any) => ({ ...q, current: 1 }));
     };
 
     // 重置
@@ -102,9 +124,20 @@ const MaterialManagement: React.FC = () => {
         setSearchName('');
         setSearchCode('');
         setSearchCategoryId(undefined);
+        setSearchSpuId(undefined);
         setSearchStatus(undefined);
-        setCurrent(1);
-        loadData();
+        setQuery((q: any) => ({ ...q, current: 1 }));
+    };
+
+    // 导出：沿用当前筛选条件，但不分页，导出全量匹配数据
+    const handleExport = () => {
+        exportMaterial({
+            name: searchName || undefined,
+            code: searchCode || undefined,
+            categoryId: searchCategoryId,
+            spuId: searchSpuId,
+            status: searchStatus,
+        });
     };
 
     // 新增
@@ -195,6 +228,23 @@ const MaterialManagement: React.FC = () => {
             width: 120,
         },
         {
+            title: '所属商品',
+            dataIndex: 'spuName',
+            key: 'spuName',
+            width: 140,
+            render: (name: string) =>
+                name ? name : <span style={{ color: '#999' }}>—</span>,
+        },
+        {
+            title: '销售属性',
+            dataIndex: 'salePropertyText',
+            key: 'salePropertyText',
+            width: 180,
+            ellipsis: true,
+            render: (text: string) =>
+                text ? text : <span style={{ color: '#999' }}>—</span>,
+        },
+        {
             title: '单位',
             dataIndex: 'unitName',
             key: 'unitName',
@@ -282,6 +332,16 @@ const MaterialManagement: React.FC = () => {
                         style={{ width: 180 }}
                     />
                     <Select
+                        placeholder="所属商品"
+                        value={searchSpuId}
+                        onChange={setSearchSpuId}
+                        allowClear
+                        showSearch
+                        optionFilterProp="label"
+                        style={{ width: 180 }}
+                        options={spuList.map((s: any) => ({ label: `${s.name}`, value: s.id }))}
+                    />
+                    <Select
                         placeholder="状态"
                         value={searchStatus}
                         onChange={setSearchStatus}
@@ -295,6 +355,19 @@ const MaterialManagement: React.FC = () => {
                         搜索
                     </Button>
                     <Button onClick={handleReset}>重置</Button>
+                    <Button icon={<DownloadOutlined />} onClick={handleExport}>
+                        导出
+                    </Button>
+                    <ExcelImportButton
+                        bizName="物料"
+                        importApi={importMaterial}
+                        templateApi={downloadMaterialTemplate}
+                        onSuccess={() => {
+                            loadData();
+                            loadCategoryTree();
+                            loadUnitList();
+                        }}
+                    />
                     <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
                         新增物料
                     </Button>
@@ -306,18 +379,15 @@ const MaterialManagement: React.FC = () => {
                     columns={columns}
                     dataSource={dataSource}
                     rowKey="id"
-                    scroll={{ x: 1400 }}
+                    scroll={{ x: 1700 }}
                     pagination={{
-                        current,
-                        pageSize,
+                        current: query.current,
+                        pageSize: query.size,
                         total,
                         showSizeChanger: true,
                         showQuickJumper: true,
                         showTotal: (total) => `共 ${total} 条`,
-                        onChange: (page, size) => {
-                            setCurrent(page);
-                            setPageSize(size);
-                        },
+                        onChange: (page, size) => setQuery((q: any) => ({ ...q, current: page, size })),
                     }}
                 />
             </Card>
@@ -374,6 +444,22 @@ const MaterialManagement: React.FC = () => {
                                 </Select.Option>
                             ))}
                         </Select>
+                    </Form.Item>
+                    <Form.Item
+                        label="所属商品"
+                        name="spuId"
+                        tooltip="关联到商品中心的 SPU；同款不同规格的 SKU 应归入同一个商品"
+                    >
+                        <Select
+                            placeholder="请选择所属商品（可留空）"
+                            allowClear
+                            showSearch
+                            optionFilterProp="label"
+                            options={spuList.map((s: any) => ({
+                                label: `${s.name}${s.code ? ' (' + s.code + ')' : ''}`,
+                                value: s.id,
+                            }))}
+                        />
                     </Form.Item>
                     <Form.Item label="采购价格" name="purchasePrice" initialValue={0}>
                         <InputNumber min={0} precision={2} style={{ width: '100%' }} placeholder="请输入采购价格" />

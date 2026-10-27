@@ -1,0 +1,255 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""把技术文档 Markdown 转成排版好的 Word 文档。"""
+import re
+import sys
+
+from docx import Document
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.shared import Pt, RGBColor, Cm
+
+SRC = r"D:/code/java/java_study/erp-system/docs/ERP系统技术文档.md"
+DST = r"D:/code/java/java_study/erp-system/docs/ERP系统技术文档.docx"
+
+CN_FONT = "微软雅黑"
+ACCENT = RGBColor(0x1F, 0x4E, 0x79)
+MUTED = RGBColor(0x59, 0x59, 0x59)
+
+
+def set_cn_font(run, name=CN_FONT):
+    run.font.name = name
+    rpr = run._element.get_or_add_rPr()
+    rfonts = rpr.find(qn("w:rFonts"))
+    if rfonts is None:
+        rfonts = OxmlElement("w:rFonts")
+        rpr.append(rfonts)
+    rfonts.set(qn("w:eastAsia"), name)
+    rfonts.set(qn("w:ascii"), name)
+    rfonts.set(qn("w:hAnsi"), name)
+
+
+def style_doc(doc):
+    normal = doc.styles["Normal"]
+    normal.font.size = Pt(10.5)
+    normal.font.color.rgb = RGBColor(0x26, 0x26, 0x26)
+    set_cn_font(normal.element.xpath(".")[0] and normal, CN_FONT) if False else None
+    rpr = normal.element.get_or_add_rPr()
+    rfonts = rpr.find(qn("w:rFonts"))
+    if rfonts is None:
+        rfonts = OxmlElement("w:rFonts")
+        rpr.append(rfonts)
+    for attr in ("w:eastAsia", "w:ascii", "w:hAnsi"):
+        rfonts.set(qn(attr), CN_FONT)
+
+
+def add_hr(doc):
+    p = doc.add_paragraph()
+    pPr = p._p.get_or_add_pPr()
+    borders = OxmlElement("w:pBdr")
+    bottom = OxmlElement("w:bottom")
+    bottom.set(qn("w:val"), "single")
+    bottom.set(qn("w:sz"), "6")
+    bottom.set(qn("w:color"), "D0D0D0")
+    bottom.set(qn("w:space"), "1")
+    borders.append(bottom)
+    pPr.append(borders)
+    p.paragraph_format.space_before = Pt(2)
+    p.paragraph_format.space_after = Pt(8)
+
+
+INLINE = re.compile(r"(\*\*.+?\*\*|`[^`]+`)")
+
+
+def add_runs(par, text):
+    for part in INLINE.split(text):
+        if not part:
+            continue
+        if part.startswith("**") and part.endswith("**"):
+            r = par.add_run(part[2:-2])
+            r.bold = True
+        elif part.startswith("`") and part.endswith("`"):
+            r = par.add_run(part[1:-1])
+            r.font.name = "Consolas"
+            r.font.size = Pt(9.5)
+            r.font.color.rgb = RGBColor(0xA3, 0x1D, 0x1D)
+        else:
+            r = par.add_run(part)
+        set_cn_font(r)
+
+
+def shade(cell, hexcolor):
+    tcPr = cell._tc.get_or_add_tcPr()
+    sh = OxmlElement("w:shd")
+    sh.set(qn("w:val"), "clear")
+    sh.set(qn("w:fill"), hexcolor)
+    tcPr.append(sh)
+
+
+def main():
+    with open(SRC, encoding="utf-8") as f:
+        lines = f.read().split("\n")
+
+    doc = Document()
+    style_doc(doc)
+    for s in doc.sections:
+        s.top_margin = Cm(2.2)
+        s.bottom_margin = Cm(2.2)
+        s.left_margin = Cm(2.4)
+        s.right_margin = Cm(2.4)
+
+    i = 0
+    while i < len(lines):
+        line = lines[i].rstrip()
+        stripped = line.strip()
+
+        if not stripped:
+            i += 1
+            continue
+
+        if stripped.startswith("---"):
+            i += 1
+            continue
+
+        # 表格
+        if stripped.startswith("|") and i + 1 < len(lines) and re.match(
+            r"^\|[\s\-:|]+\|$", lines[i + 1].strip()
+        ):
+            header = [c.strip() for c in stripped.strip("|").split("|")]
+            i += 2
+            rows = []
+            while i < len(lines) and lines[i].strip().startswith("|"):
+                rows.append([c.strip() for c in lines[i].strip().strip("|").split("|")])
+                i += 1
+            table = doc.add_table(rows=1, cols=len(header))
+            table.style = "Table Grid"
+            table.alignment = WD_TABLE_ALIGNMENT.CENTER
+            for idx, h in enumerate(header):
+                cell = table.rows[0].cells[idx]
+                cell.text = ""
+                p = cell.paragraphs[0]
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                r = p.add_run(h)
+                r.bold = True
+                r.font.size = Pt(10)
+                r.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+                set_cn_font(r)
+                shade(cell, "2F5597")
+            for ri, row in enumerate(rows):
+                cells = table.add_row().cells
+                for ci in range(len(header)):
+                    val = row[ci] if ci < len(row) else ""
+                    cell = cells[ci]
+                    cell.text = ""
+                    p = cell.paragraphs[0]
+                    add_runs(p, val)
+                    for r in p.runs:
+                        r.font.size = Pt(9.5)
+                    if ri % 2 == 1:
+                        shade(cell, "F2F5FA")
+            doc.add_paragraph().paragraph_format.space_after = Pt(6)
+            continue
+
+        # 标题
+        m = re.match(r"^(#{1,4})\s+(.*)$", stripped)
+        if m:
+            level = len(m.group(1))
+            text = m.group(2).strip()
+            if level == 1:
+                p = doc.add_paragraph()
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                r = p.add_run(text)
+                r.bold = True
+                r.font.size = Pt(20)
+                r.font.color.rgb = ACCENT
+                set_cn_font(r)
+                p.paragraph_format.space_after = Pt(4)
+            elif level == 2:
+                p = doc.add_paragraph()
+                r = p.add_run(text)
+                r.bold = True
+                r.font.size = Pt(14.5)
+                r.font.color.rgb = ACCENT
+                set_cn_font(r)
+                p.paragraph_format.space_before = Pt(14)
+                p.paragraph_format.space_after = Pt(6)
+            else:
+                p = doc.add_paragraph()
+                r = p.add_run(text)
+                r.bold = True
+                r.font.size = Pt(11.5)
+                r.font.color.rgb = RGBColor(0x2E, 0x5C, 0x8A)
+                set_cn_font(r)
+                p.paragraph_format.space_before = Pt(10)
+                p.paragraph_format.space_after = Pt(4)
+            i += 1
+            continue
+
+        # 引用块
+        if stripped.startswith(">"):
+            body = stripped.lstrip(">").strip()
+            if body:
+                p = doc.add_paragraph()
+                p.paragraph_format.left_indent = Cm(0.6)
+                add_runs(p, body)
+                for r in p.runs:
+                    r.font.size = Pt(10)
+                    r.font.color.rgb = MUTED
+                    r.italic = True
+                p.paragraph_format.space_after = Pt(6)
+            i += 1
+            continue
+
+        # 列表
+        m = re.match(r"^(\s*)([-*]|\d+\.)\s+(.*)$", line)
+        if m:
+            indent = len(m.group(1)) // 2
+            ordered = m.group(2)[0].isdigit()
+            text = m.group(3)
+            p = doc.add_paragraph(style="List Number" if ordered else "List Bullet")
+            p.paragraph_format.left_indent = Cm(0.75 + indent * 0.6)
+            p.paragraph_format.space_after = Pt(2)
+            add_runs(p, text)
+            for r in p.runs:
+                r.font.size = Pt(10.5)
+            i += 1
+            continue
+
+        # 代码块
+        if stripped.startswith("```"):
+            i += 1
+            buf = []
+            while i < len(lines) and not lines[i].strip().startswith("```"):
+                buf.append(lines[i])
+                i += 1
+            i += 1
+            for bl in buf:
+                p = doc.add_paragraph()
+                p.paragraph_format.left_indent = Cm(0.6)
+                p.paragraph_format.space_after = Pt(0)
+                p.paragraph_format.line_spacing = 1.0
+                r = p.add_run(bl if bl.strip() else " ")
+                r.font.name = "Consolas"
+                r.font.size = Pt(9)
+                r.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
+            doc.add_paragraph().paragraph_format.space_after = Pt(4)
+            continue
+
+        # 普通段落
+        p = doc.add_paragraph()
+        p.paragraph_format.line_spacing = 1.45
+        p.paragraph_format.space_after = Pt(6)
+        add_runs(p, stripped)
+        for r in p.runs:
+            if r.font.size is None:
+                r.font.size = Pt(10.5)
+        i += 1
+
+    doc.save(DST)
+    print("saved:", DST)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

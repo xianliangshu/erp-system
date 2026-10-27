@@ -8,6 +8,8 @@ import com.erp.business.dto.SettleInOutItemQueryDTO;
 import com.erp.business.entity.SettleInOutItem;
 import com.erp.business.mapper.SettleInOutItemMapper;
 import com.erp.business.service.ISettleInOutItemService;
+import com.erp.common.service.ICodeGenerateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.List;
 @Service
 public class SettleInOutItemServiceImpl extends ServiceImpl<SettleInOutItemMapper, SettleInOutItem>
         implements ISettleInOutItemService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Override
     public Page<SettleInOutItem> queryPage(Long current, Long size, SettleInOutItemQueryDTO queryDTO) {
@@ -56,19 +60,6 @@ public class SettleInOutItemServiceImpl extends ServiceImpl<SettleInOutItemMappe
 
     @Override
     public String generateCode() {
-        String prefix = "SZ";
-        String maxCode = baseMapper.selectMaxCodeByPrefix(prefix);
-
-        int seq = 1;
-        if (maxCode != null && maxCode.length() > prefix.length()) {
-            try {
-                String seqStr = maxCode.substring(prefix.length());
-                seq = Integer.parseInt(seqStr) + 1;
-            } catch (NumberFormatException e) {
-                // Ignore
-            }
-        }
-
-        return prefix + String.format("%04d", seq);
+        return codeGenerateService.generate("SETTLE_IN_OUT_ITEM");
     }
 }

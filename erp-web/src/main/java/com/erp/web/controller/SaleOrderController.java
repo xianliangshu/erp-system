@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.dto.SaleOrderDTO;
@@ -29,6 +30,7 @@ public class SaleOrderController {
     /**
      * 分页查询销售订单
      */
+    @SaCheckPermission("business:sale:order")
     @GetMapping("/page")
     public Result<Page<SaleOrder>> page(
             @RequestParam(defaultValue = "1") Long current,
@@ -41,6 +43,7 @@ public class SaleOrderController {
     /**
      * 获取订单详情（包含明细）
      */
+    @SaCheckPermission("business:sale:order")
     @GetMapping("/{id}")
     public Result<Map<String, Object>> getById(@PathVariable Long id) {
         SaleOrder order = saleOrderService.getById(id);
@@ -62,6 +65,7 @@ public class SaleOrderController {
     /**
      * 创建销售订单
      */
+    @SaCheckPermission("business:sale:order")
     @PostMapping
     public Result<Long> create(@RequestBody SaleOrderDTO dto) {
         Long orderId = saleOrderService.createOrder(dto);
@@ -71,6 +75,7 @@ public class SaleOrderController {
     /**
      * 更新销售订单
      */
+    @SaCheckPermission("business:sale:order")
     @PutMapping
     public Result<Void> update(@RequestBody SaleOrderDTO dto) {
         saleOrderService.updateOrder(dto);
@@ -80,6 +85,7 @@ public class SaleOrderController {
     /**
      * 审核通过
      */
+    @SaCheckPermission("business:sale:order")
     @PostMapping("/{id}/approve")
     public Result<Void> approve(@PathVariable Long id) {
         saleOrderService.approveOrder(id);
@@ -89,6 +95,7 @@ public class SaleOrderController {
     /**
      * 审核拒绝
      */
+    @SaCheckPermission("business:sale:order")
     @PostMapping("/{id}/reject")
     public Result<Void> reject(@PathVariable Long id, @RequestParam String reason) {
         saleOrderService.rejectOrder(id, reason);
@@ -98,6 +105,7 @@ public class SaleOrderController {
     /**
      * 取消订单
      */
+    @SaCheckPermission("business:sale:order")
     @PostMapping("/{id}/cancel")
     public Result<Void> cancel(@PathVariable Long id) {
         saleOrderService.cancelOrder(id);
@@ -107,6 +115,7 @@ public class SaleOrderController {
     /**
      * 删除订单
      */
+    @SaCheckPermission("business:sale:order")
     @DeleteMapping("/{id}")
     public Result<Void> delete(@PathVariable Long id) {
         saleOrderService.removeById(id);

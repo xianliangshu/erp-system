@@ -23,8 +23,13 @@ public interface IRetailReturnService extends IService<RetailReturn> {
 
     /**
      * 新增
+     * <p>
+     * 若零售配置开启了「零售退货单自动审核」，本方法会在保存明细后直接完成审核
+     * 并增加库存。
+     *
+     * @return 含 id / code / status / autoApproved 的结果，供前端提示用
      */
-    void add(Map<String, Object> data);
+    Map<String, Object> add(Map<String, Object> data);
 
     /**
      * 修改

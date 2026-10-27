@@ -9,6 +9,8 @@ import com.erp.basedata.entity.BaseBrand;
 import com.erp.basedata.mapper.BaseBrandMapper;
 import com.erp.basedata.service.IBaseBrandService;
 import com.erp.common.exception.BusinessException;
+import com.erp.common.service.ICodeGenerateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,8 @@ import java.util.List;
 @Service
 public class BaseBrandServiceImpl extends ServiceImpl<BaseBrandMapper, BaseBrand>
         implements IBaseBrandService {
+    @Autowired
+    private ICodeGenerateService codeGenerateService;
 
     @Override
     public Page<BaseBrand> getBrandPage(BrandPageParam param) {
@@ -123,20 +127,7 @@ public class BaseBrandServiceImpl extends ServiceImpl<BaseBrandMapper, BaseBrand
      * @return 品牌编号
      */
     private String generateBrandCode() {
-        // 使用自定义SQL查询最大编号（绕过软删除过滤）
-        String maxCode = baseMapper.selectMaxCode();
-
-        if (maxCode == null || StrUtil.isBlank(maxCode)) {
-            // 如果没有品牌,从BRD000001开始
-            return "BRD000001";
-        }
-
-        // 提取数字部分并加1
-        String numberPart = maxCode.substring(3); // 去掉前缀BRD
-        int nextNumber = Integer.parseInt(numberPart) + 1;
-
-        // 格式化为6位数字
-        return String.format("BRD%06d", nextNumber);
+        return codeGenerateService.generate("BASE_BRAND");
     }
 
     /**

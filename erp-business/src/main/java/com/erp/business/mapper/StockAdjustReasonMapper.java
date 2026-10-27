@@ -10,10 +10,4 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface StockAdjustReasonMapper extends BaseMapper<StockAdjustReason> {
-
-    /**
-     * 查询最大编号（忽略软删除）
-     */
-    @Select("SELECT MAX(code) FROM stock_adjust_reason")
-    String selectMaxCode();
 }

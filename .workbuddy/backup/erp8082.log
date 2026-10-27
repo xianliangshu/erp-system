@@ -1,0 +1,1549 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.0)
+
+2026-10-03T15:15:30.082+08:00  INFO 24392 --- [erp-system] [           main] com.erp.ErpApplication                   : Starting ErpApplication v1.0-SNAPSHOT using Java 21.0.12 with PID 24392 (D:\code\java\java_study\erp-system\erp-web\target\erp-web-1.0-SNAPSHOT.jar started by shu in D:\code\java\java_study\erp-system)
+2026-10-03T15:15:30.085+08:00  INFO 24392 --- [erp-system] [           main] com.erp.ErpApplication                   : No active profile set, falling back to 1 default profile: "default"
+2026-10-03T15:15:33.106+08:00  INFO 24392 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-10-03T15:15:33.116+08:00  INFO 24392 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-10-03T15:15:33.308+08:00  INFO 24392 --- [erp-system] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 127 ms. Found 0 Redis repository interfaces.
+2026-10-03T15:15:36.915+08:00  INFO 24392 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-10-03T15:15:36.978+08:00  INFO 24392 --- [erp-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-03T15:15:36.979+08:00  INFO 24392 --- [erp-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2026-10-03T15:15:37.127+08:00  INFO 24392 --- [erp-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2026-10-03T15:15:37.130+08:00  INFO 24392 --- [erp-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6926 ms
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+Get /192.168.31.194 network interface 
+Get network interface info: name:wireless_32768 (Intel(R) Wi-Fi 6 AX201 160MHz)
+Initialization Sequence datacenterId:5 workerId:21
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.7 
+2026-10-03T15:15:56.118+08:00  INFO 24392 --- [erp-system] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+____ ____    ___ ____ _  _ ____ _  _ 
+[__  |__| __  |  |  | |_/  |___ |\ | 
+___] |  |     |  |__| | \_ |___ | \| 
+https://sa-token.com (v1.46.0)
+2026-10-03T15:15:59.668+08:00  INFO 24392 --- [erp-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/api'
+2026-10-03T15:15:59.716+08:00  INFO 24392 --- [erp-system] [           main] com.erp.ErpApplication                   : Started ErpApplication in 30.541 seconds (process running for 31.458)
+2026-10-03T15:16:17.690+08:00  INFO 24392 --- [erp-system] [nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-03T15:16:17.690+08:00  INFO 24392 --- [erp-system] [nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-03T15:16:17.693+08:00  INFO 24392 --- [erp-system] [nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@968a591] was not registered for synchronization because synchronization is not active
+2026-10-03T15:16:18.481+08:00  INFO 24392 --- [erp-system] [nio-8082-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-03T15:16:19.254+08:00  INFO 24392 --- [erp-system] [nio-8082-exec-2] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c46c512
+2026-10-03T15:16:19.259+08:00  INFO 24392 --- [erp-system] [nio-8082-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+JDBC Connection [HikariProxyConnection@1843579134 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,username,password,nickname,real_name,email,phone,gender,avatar,status,remark,last_login_time,last_login_ip,create_time,update_time,create_by,update_by,is_deleted FROM sys_user WHERE is_deleted=0 AND (username = ?)
+==> Parameters: admin(String)
+<==    Columns: id, code, username, password, nickname, real_name, email, phone, gender, avatar, status, remark, last_login_time, last_login_ip, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, U000001, admin, 123456, ÏµÍ³¹ÜÀíÔ±, ¹ÜÀíÔ±, admin@erp.com, 13800138000, 1, null, 1, null, 2026-10-03 14:50:50, 127.0.0.1, 2026-08-01 19:01:31, 2026-10-03 14:50:50, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@968a591]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c]
+JDBC Connection [HikariProxyConnection@1993935702 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,username,password,nickname,real_name,email,phone,gender,avatar,status,remark,last_login_time,last_login_ip,create_time,update_time,create_by,update_by,is_deleted FROM sys_user WHERE id=? AND is_deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, username, password, nickname, real_name, email, phone, gender, avatar, status, remark, last_login_time, last_login_ip, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, U000001, admin, 123456, ÏµÍ³¹ÜÀíÔ±, ¹ÜÀíÔ±, admin@erp.com, 13800138000, 1, null, 1, null, 2026-10-03 14:50:50, 127.0.0.1, 2026-08-01 19:01:31, 2026-10-03 14:50:50, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c] from current transaction
+==>  Preparing: UPDATE sys_user SET last_login_time=?, last_login_ip=?, update_time=?, update_by=? WHERE id=? AND is_deleted=0
+==> Parameters: 2026-10-03T15:16:22.540506800(LocalDateTime), 127.0.0.1(String), 2026-10-03T15:16:22.605554100(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4fde125c]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@243a4041]
+JDBC Connection [HikariProxyConnection@862318294 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_login_log ( username, login_ip, browser, os, status, msg, login_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: admin(String), 127.0.0.1(String), ÆäËü(String), ÆäËü(String), 0(Integer), µÇÂ¼³É¹¦(String), 2026-10-03T15:16:22.663578(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@243a4041]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@243a4041]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@243a4041]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@243a4041]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d89290] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@453085033 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT DISTINCT r.code FROM sys_role r INNER JOIN sys_user_role ur ON ur.role_id = r.id WHERE ur.user_id = ? AND r.status = 1 AND r.is_deleted = 0
+==> Parameters: 1(Long)
+<==    Columns: code
+<==        Row: R000001
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d89290]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ee0425d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1334665923 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 ORDER BY id DESC LIMIT ?
+==> Parameters: 10(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5ee0425d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13a80f3b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@497404 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13a80f3b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78df81b9] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@727554126 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78df81b9]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73dc9f03] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1997150856 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73dc9f03]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d5879ee] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@277112259 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 0, 1, 24, 2026-10-03 15:06:17, 2026-10-03 15:06:17, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d5879ee]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1222f9d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@843829071 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 0, 1, 24, 2026-10-03 15:06:17, 2026-10-03 15:06:17, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1222f9d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d0cebf8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@403212487 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 0, 1, 24, 2026-10-03 15:06:17, 2026-10-03 15:06:17, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d0cebf8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca90325] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@648049763 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: UPDATE take_stock_config SET show_product=?, show_stock=?, auto_change_stock=?, allow_change_num=?, cancel_hours=?, update_time=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 0(Integer), 1(Integer), 1(Integer), 0(Integer), 48(Integer), 2026-10-03T15:16:23.642407800(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ca90325]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3216d621]
+JDBC Connection [HikariProxyConnection@2031810500 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ÅÌµã²ÎÊýÉèÖÃ(String), 2(Integer), TakeStockConfigController.saveConfig()(String), PUT(String), 1(Integer), admin(String), /api/stock/take/config(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"showProduct":0,"showStock":1,"autoChangeStock":1,"allowChangeNum":0,"cancelHours":48}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:23.669436100(LocalDateTime), 63(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3216d621]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3216d621]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3216d621]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3216d621]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e5a5f52] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1084078313 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, 1, 1, 0, 48, 2026-10-03 15:06:17, 2026-10-03 15:16:24, null, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e5a5f52]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@12d4fc7c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@558159933 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, 1, 1, 0, 48, 2026-10-03 15:06:17, 2026-10-03 15:16:24, null, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@12d4fc7c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29fcdacd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@478082194 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, 1, 1, 0, 48, 2026-10-03 15:06:17, 2026-10-03 15:16:24, null, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29fcdacd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69376ea8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@651361265 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: UPDATE take_stock_config SET show_product=?, show_stock=?, auto_change_stock=?, allow_change_num=?, cancel_hours=?, update_time=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 1(Integer), 1(Integer), 0(Integer), 1(Integer), 24(Integer), 2026-10-03T15:16:23.903991600(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69376ea8]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3476f6b3]
+JDBC Connection [HikariProxyConnection@1473969893 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ÅÌµã²ÎÊýÉèÖÃ(String), 2(Integer), TakeStockConfigController.saveConfig()(String), PUT(String), 1(Integer), admin(String), /api/stock/take/config(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"showProduct":1,"showStock":1,"autoChangeStock":0,"allowChangeNum":1,"cancelHours":24}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:23.925979900(LocalDateTime), 45(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3476f6b3]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3476f6b3]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3476f6b3]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3476f6b3]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fcab120] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@822954153 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,show_product,show_stock,auto_change_stock,allow_change_num,cancel_hours,create_time,update_time,create_by,update_by,deleted FROM take_stock_config WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, show_product, show_stock, auto_change_stock, allow_change_num, cancel_hours, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, 0, 1, 24, 2026-10-03 15:06:17, 2026-10-03 15:16:24, null, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fcab120]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73778a5c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2080217738 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM stock_warning WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73778a5c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cb277c2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1129855330 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: INSERT INTO stock_warning ( sc_id, product_id, min_limit, status, remark, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 2(Long), 1(Long), 100.0(BigDecimal), 1(Integer), ½Ó¿Ú²âÊÔ(String), 2026-10-03T15:16:24.101998700(LocalDateTime), 2026-10-03T15:16:24.101998700(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cb277c2]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b15cb78]
+JDBC Connection [HikariProxyConnection@1862111676 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 1(Integer), StockWarningController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/warning(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"scId":2,"productId":1,"maxLimit":null,"minLimit":100.0,"status":1,"remark":"½Ó¿Ú²âÊÔ","scName":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null,"stockNum":null,"hitType":null}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:24.133106400(LocalDateTime), 38(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b15cb78]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b15cb78]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b15cb78]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b15cb78]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e45005e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@840500647 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM stock_warning WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,max_limit,min_limit,status,remark,create_time,update_time,create_by,update_by,deleted FROM stock_warning WHERE deleted=0 ORDER BY id DESC LIMIT ?
+==> Parameters: 10(Long)
+<==    Columns: id, sc_id, product_id, max_limit, min_limit, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, null, 100.0000, 1, ½Ó¿Ú²âÊÔ, 2026-10-03 15:16:24, 2026-10-03 15:16:24, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4e45005e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2912ba19] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1363534360 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2912ba19]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b136b4d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1716811321 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b136b4d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@367638d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@751803308 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id IN (?) AND product_id IN (?))
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@367638d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14a932ea] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@997993339 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT w.id, w.sc_id, w.product_id, w.max_limit, w.min_limit, w.status, w.remark, w.create_time, w.update_time, wh.name AS sc_name, m.code AS product_code, m.name AS product_name, m.specification AS specification, m.sale_property_text AS sale_property_text, COALESCE(s.stock_num, 0) AS stock_num, CASE WHEN w.min_limit IS NOT NULL AND COALESCE(s.stock_num, 0) < w.min_limit THEN 1 WHEN w.max_limit IS NOT NULL AND COALESCE(s.stock_num, 0) > w.max_limit THEN 2 ELSE 0 END AS hit_type FROM stock_warning w LEFT JOIN product_stock s ON s.sc_id = w.sc_id AND s.product_id = w.product_id AND s.deleted = 0 LEFT JOIN base_material m ON m.id = w.product_id AND m.deleted = 0 LEFT JOIN base_warehouse wh ON wh.id = w.sc_id WHERE w.deleted = 0 AND w.status = 1 AND ((w.min_limit IS NOT NULL AND COALESCE(s.stock_num, 0) < w.min_limit) OR (w.max_limit IS NOT NULL AND COALESCE(s.stock_num, 0) > w.max_limit)) AND w.sc_id = ? ORDER BY hit_type, m.code
+==> Parameters: 2(Long)
+<==    Columns: id, sc_id, product_id, max_limit, min_limit, status, remark, create_time, update_time, sc_name, product_code, product_name, specification, sale_property_text, stock_num, hit_type
+<==        Row: 1, 2, 1, null, 100.0000, 1, ½Ó¿Ú²âÊÔ, 2026-10-03 15:16:24, 2026-10-03 15:16:24, ·Ö²Ö¿âA, MAT000001, ¸Ö°åQ235, 1200*2400*3mm, , 90.0000, 1
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14a932ea]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ec46044] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@805538284 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,max_limit,min_limit,status,remark,create_time,update_time,create_by,update_by,deleted FROM stock_warning WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, sc_id, product_id, max_limit, min_limit, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, null, 100.0000, 1, ½Ó¿Ú²âÊÔ, 2026-10-03 15:16:24, 2026-10-03 15:16:24, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ec46044]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@713e83d7] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1818561524 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM stock_warning WHERE deleted=0 AND (sc_id = ? AND product_id = ? AND id <> ?)
+==> Parameters: 2(Long), 1(Long), 1(Long)
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@713e83d7]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14b465e2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@286358680 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: UPDATE stock_warning SET sc_id=?, product_id=?, min_limit=?, status=?, update_time=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 2(Long), 1(Long), 80.0(BigDecimal), 1(Integer), 2026-10-03T15:16:24.487076900(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14b465e2]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@389c307e]
+JDBC Connection [HikariProxyConnection@358580520 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 2(Integer), StockWarningController.modify()(String), PUT(String), 1(Integer), admin(String), /api/stock/warning(String), 127.0.0.1(String), [{"id":1,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"scId":2,"productId":1,"maxLimit":null,"minLimit":80.0,"status":1,"remark":null,"scName":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null,"stockNum":null,"hitType":null}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:24.519257600(LocalDateTime), 71(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@389c307e]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@389c307e]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@389c307e]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@389c307e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a0b2d2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@488430971 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT w.id, w.sc_id, w.product_id, w.max_limit, w.min_limit, w.status, w.remark, w.create_time, w.update_time, wh.name AS sc_name, m.code AS product_code, m.name AS product_name, m.specification AS specification, m.sale_property_text AS sale_property_text, COALESCE(s.stock_num, 0) AS stock_num, CASE WHEN w.min_limit IS NOT NULL AND COALESCE(s.stock_num, 0) < w.min_limit THEN 1 WHEN w.max_limit IS NOT NULL AND COALESCE(s.stock_num, 0) > w.max_limit THEN 2 ELSE 0 END AS hit_type FROM stock_warning w LEFT JOIN product_stock s ON s.sc_id = w.sc_id AND s.product_id = w.product_id AND s.deleted = 0 LEFT JOIN base_material m ON m.id = w.product_id AND m.deleted = 0 LEFT JOIN base_warehouse wh ON wh.id = w.sc_id WHERE w.deleted = 0 AND w.status = 1 AND ((w.min_limit IS NOT NULL AND COALESCE(s.stock_num, 0) < w.min_limit) OR (w.max_limit IS NOT NULL AND COALESCE(s.stock_num, 0) > w.max_limit)) AND w.sc_id = ? ORDER BY hit_type, m.code
+==> Parameters: 2(Long)
+<==      Total: 0
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a0b2d2]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@273dc29b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@758933206 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM stock_warning WHERE deleted=0 AND (sc_id = ? AND product_id = ?)
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@273dc29b]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@23cd7add]
+JDBC Connection [HikariProxyConnection@1990180949 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 1(Integer), StockWarningController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/warning(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"scId":2,"productId":1,"maxLimit":null,"minLimit":1,"status":1,"remark":null,"scName":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null,"stockNum":null,"hitType":null}](String), 1(Integer), ¸Ã²Ö¿âÏÂ´ËÉÌÆ·ÒÑ´æÔÚÔ¤¾¯ÅäÖÃ£¬ÇëÖ±½Ó±à¼­Ô­¼ÇÂ¼(String), 2026-10-03T15:16:24.737689900(LocalDateTime), 55(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@23cd7add]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@23cd7add]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@23cd7add]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@23cd7add]
+2026-10-03T15:16:24.778+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-3] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: è¯¥ä»“åº“ä¸‹æ­¤å•†å“å·²å­˜åœ¨é¢„è­¦é…ç½®ï¼Œè¯·ç›´æŽ¥ç¼–è¾‘åŽŸè®°å½•
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@70304292] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@437890565 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,max_limit,min_limit,status,remark,create_time,update_time,create_by,update_by,deleted FROM stock_warning WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, sc_id, product_id, max_limit, min_limit, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, null, 80.0000, 1, ½Ó¿Ú²âÊÔ, 2026-10-03 15:16:24, 2026-10-03 15:16:24, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@70304292]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@624947d4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@270515677 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT( * ) AS total FROM stock_warning WHERE deleted=0 AND (sc_id = ? AND product_id = ? AND id <> ?)
+==> Parameters: 2(Long), 1(Long), 1(Long)
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@624947d4]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5112f0db] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2035116746 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: UPDATE stock_warning SET sc_id=?, product_id=?, max_limit=?, status=?, update_time=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 2(Long), 1(Long), 80.0(BigDecimal), 1(Integer), 2026-10-03T15:16:24.842828(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5112f0db]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59bfc804]
+JDBC Connection [HikariProxyConnection@233065933 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 2(Integer), StockWarningController.modify()(String), PUT(String), 1(Integer), admin(String), /api/stock/warning(String), 127.0.0.1(String), [{"id":1,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"scId":2,"productId":1,"maxLimit":80.0,"minLimit":null,"status":1,"remark":null,"scName":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null,"stockNum":null,"hitType":null}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:24.897630500(LocalDateTime), 63(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59bfc804]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59bfc804]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59bfc804]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59bfc804]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f5576c4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@116063431 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT w.id, w.sc_id, w.product_id, w.max_limit, w.min_limit, w.status, w.remark, w.create_time, w.update_time, wh.name AS sc_name, m.code AS product_code, m.name AS product_name, m.specification AS specification, m.sale_property_text AS sale_property_text, COALESCE(s.stock_num, 0) AS stock_num, CASE WHEN w.min_limit IS NOT NULL AND COALESCE(s.stock_num, 0) < w.min_limit THEN 1 WHEN w.max_limit IS NOT NULL AND COALESCE(s.stock_num, 0) > w.max_limit THEN 2 ELSE 0 END AS hit_type FROM stock_warning w LEFT JOIN product_stock s ON s.sc_id = w.sc_id AND s.product_id = w.product_id AND s.deleted = 0 LEFT JOIN base_material m ON m.id = w.product_id AND m.deleted = 0 LEFT JOIN base_warehouse wh ON wh.id = w.sc_id WHERE w.deleted = 0 AND w.status = 1 AND ((w.min_limit IS NOT NULL AND COALESCE(s.stock_num, 0) < w.min_limit) OR (w.max_limit IS NOT NULL AND COALESCE(s.stock_num, 0) > w.max_limit)) AND w.sc_id = ? ORDER BY hit_type, m.code
+==> Parameters: 2(Long)
+<==    Columns: id, sc_id, product_id, max_limit, min_limit, status, remark, create_time, update_time, sc_name, product_code, product_name, specification, sale_property_text, stock_num, hit_type
+<==        Row: 1, 2, 1, 80.0000, 80.0000, 1, ½Ó¿Ú²âÊÔ, 2026-10-03 15:16:24, 2026-10-03 15:16:25, ·Ö²Ö¿âA, MAT000001, ¸Ö°åQ235, 1200*2400*3mm, , 90.0000, 2
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f5576c4]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66942854]
+JDBC Connection [HikariProxyConnection@1840645734 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 1(Integer), StockWarningController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/warning(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"scId":2,"productId":1,"maxLimit":null,"minLimit":null,"status":1,"remark":null,"scName":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null,"stockNum":null,"hitType":null}](String), 1(Integer), Ô¤¾¯ÉÏÏÞÓëÏÂÏÞÖÁÉÙÌîÐ´Ò»¸ö(String), 2026-10-03T15:16:25.038732900(LocalDateTime), 0(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66942854]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66942854]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66942854]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66942854]
+2026-10-03T15:16:25.106+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-2] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: é¢„è­¦ä¸Šé™ä¸Žä¸‹é™è‡³å°‘å¡«å†™ä¸€ä¸ª
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@654f2c87]
+JDBC Connection [HikariProxyConnection@64030104 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 1(Integer), StockWarningController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/warning(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"scId":2,"productId":1,"maxLimit":10,"minLimit":100,"status":1,"remark":null,"scName":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null,"stockNum":null,"hitType":null}](String), 1(Integer), Ô¤¾¯ÏÂÏÞ²»ÄÜ´óÓÚÔ¤¾¯ÉÏÏÞ(String), 2026-10-03T15:16:25.162840300(LocalDateTime), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@654f2c87]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@654f2c87]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@654f2c87]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@654f2c87]
+2026-10-03T15:16:25.194+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-6] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: é¢„è­¦ä¸‹é™ä¸èƒ½å¤§äºŽé¢„è­¦ä¸Šé™
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+JDBC Connection [HikariProxyConnection@1092508390 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?) ORDER BY id ASC
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce] from current transaction
+==>  Preparing: SELECT * FROM sys_code_rule WHERE rule_code = ? AND is_deleted = 0 FOR UPDATE
+==> Parameters: STOCK_COST_ADJUST(String)
+<==    Columns: id, rule_code, rule_name, prefix, date_format, seq_length, seq_start, seq_step, current_value, seq_date, reset_by_date, status, remark, is_deleted, create_by, create_time, update_by, update_time
+<==        Row: 64, STOCK_COST_ADJUST, ¿â´æ³É±¾µ÷Õûµ¥, CB, yyyyMMdd, 4, 1, 1, 0, , 1, 1, ¿â´æ³É±¾µ÷Õûµ¥±àºÅ, 0, null, 2026-10-03 15:06:18, null, 2026-10-03 15:06:18
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce] from current transaction
+==>  Preparing: UPDATE sys_code_rule SET rule_code=?, rule_name=?, prefix=?, date_format=?, seq_length=?, seq_start=?, seq_step=?, current_value=?, seq_date=?, reset_by_date=?, status=?, remark=?, create_time=?, update_time=?, update_by=? WHERE id=? AND is_deleted=0
+==> Parameters: STOCK_COST_ADJUST(String), ¿â´æ³É±¾µ÷Õûµ¥(String), CB(String), yyyyMMdd(String), 4(Integer), 1(Integer), 1(Integer), 1(Integer), 20261003(String), 1(Integer), 1(Integer), ¿â´æ³É±¾µ÷Õûµ¥±àºÅ(String), 2026-10-03T15:06:18(LocalDateTime), 2026-10-03T15:06:18(LocalDateTime), system(String), 64(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce] from current transaction
+==>  Preparing: INSERT INTO stock_cost_adjust_sheet ( code, sc_id, product_num, diff_amount, status, description, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CB202610030001(String), 2(Long), 1(Integer), 3600.00000000(BigDecimal), 0(Integer), ½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý(String), 2026-10-03T15:16:25.369392900(LocalDateTime), 2026-10-03T15:16:25.369392900(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce] from current transaction
+==>  Preparing: INSERT INTO stock_cost_adjust_sheet_detail ( sheet_id, product_id, stock_num, ori_price, price, diff_amount, order_no ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 1(Long), 1(Long), 90.0000(BigDecimal), 110.0000(BigDecimal), 150.0(BigDecimal), 3600.00000000(BigDecimal), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@728cc5ce]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bc93912]
+JDBC Connection [HikariProxyConnection@1884369212 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"code":null,"scId":2,"productNum":null,"diffAmount":null,"status":null,"description":"½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý","approveBy":null,"approveTime":null,"refuseReason":null,"scName":null,"details":[{"id":null,"sheetId":null,"productId":1,"stockNum":null,"purchasePrice":null,"oriPrice":null,"price":150.0,"diffAmount":null,"description":null,"orderNo":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null}]}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:25.415738900(LocalDateTime), 106(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bc93912]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bc93912]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bc93912]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bc93912]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d648956] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@382993125 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, CB202610030001, 2, 1, 3600.0000, 0, ½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý, null, null, null, 2026-10-03 15:16:25, 2026-10-03 15:16:25, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d648956]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50663a67] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1119133435 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50663a67]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@119a6f3d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1277949024 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,sheet_id,product_id,stock_num,purchase_price,ori_price,price,diff_amount,description,order_no FROM stock_cost_adjust_sheet_detail WHERE (sheet_id = ?) ORDER BY order_no ASC,id ASC
+==> Parameters: 1(Long)
+<==    Columns: id, sheet_id, product_id, stock_num, purchase_price, ori_price, price, diff_amount, description, order_no
+<==        Row: 1, 1, 1, 90.0000, null, 110.0000, 150.0000, 3600.0000, null, 1
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@119a6f3d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2eb5ff31] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1509973429 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2eb5ff31]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f24d5ef] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1755654748 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock WHERE deleted = 0 AND (sc_id = ?)
+==> Parameters: 2(Long)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ?) ORDER BY id DESC LIMIT ?
+==> Parameters: 2(Long), 10(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f24d5ef]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a7c9cce] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1003142679 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7a7c9cce]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53c9031b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1296924480 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53c9031b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27932afe] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1012475084 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27932afe]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+JDBC Connection [HikariProxyConnection@1490388275 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, CB202610030001, 2, 1, 3600.0000, 0, ½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý, null, null, null, 2026-10-03 15:16:25, 2026-10-03 15:16:25, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b] from current transaction
+==>  Preparing: SELECT id,sheet_id,product_id,stock_num,purchase_price,ori_price,price,diff_amount,description,order_no FROM stock_cost_adjust_sheet_detail WHERE (sheet_id = ?) ORDER BY order_no ASC,id ASC
+==> Parameters: 1(Long)
+<==    Columns: id, sheet_id, product_id, stock_num, purchase_price, ori_price, price, diff_amount, description, order_no
+<==        Row: 1, 1, 1, 90.0000, null, 110.0000, 150.0000, 3600.0000, null, 1
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b] from current transaction
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?) ORDER BY id ASC
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b] from current transaction
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b] from current transaction
+==>  Preparing: UPDATE product_stock SET sc_id=?, product_id=?, stock_num=?, tax_price=?, tax_amount=?, create_time=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: 2(Long), 1(Long), 90.0000(BigDecimal), 150.0000(BigDecimal), 13500.00000000(BigDecimal), 2026-10-01T22:44:47(LocalDateTime), 2026-10-01T22:44:47(LocalDateTime), system(String), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b] from current transaction
+==>  Preparing: INSERT INTO product_stock_log ( sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 2(Long), 1(Long), 90.0000(BigDecimal), 90.0000(BigDecimal), 0(BigDecimal), 1(Long), CB202610030001(String), 13(Integer), system(String), 2026-10-03T15:16:25.864733300(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b] from current transaction
+==>  Preparing: UPDATE stock_cost_adjust_sheet SET code=?, sc_id=?, product_num=?, diff_amount=?, status=?, description=?, approve_by=?, approve_time=?, create_time=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: CB202610030001(String), 2(Long), 1(Integer), 3600.00000000(BigDecimal), 1(Integer), ½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý(String), admin(String), 2026-10-03T15:16:25.886418800(LocalDateTime), 2026-10-03T15:16:25(LocalDateTime), 2026-10-03T15:16:25(LocalDateTime), system(String), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@449b603b]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5068d35b]
+JDBC Connection [HikariProxyConnection@1155825609 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.approvePass()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost/approve/1(String), 127.0.0.1(String), [1](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:25.931438500(LocalDateTime), 190(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5068d35b]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5068d35b]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5068d35b]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5068d35b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65bd45da] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@444834770 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock WHERE deleted = 0 AND (sc_id = ?)
+==> Parameters: 2(Long)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ?) ORDER BY id DESC LIMIT ?
+==> Parameters: 2(Long), 10(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 150.0000, 13500.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65bd45da]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65c1d0bb] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1650160354 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65c1d0bb]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@deb7667] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1724132201 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@deb7667]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35ae247b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1663050983 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@35ae247b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e92745a] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@867268412 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log WHERE (biz_type = ?)
+==> Parameters: 13(Integer)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log WHERE (biz_type = ?) ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 13(Integer), 20(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 7, 2, 1, 90.0000, 90.0000, 0.0000, 1, CB202610030001, 13, system, 2026-10-03 15:16:26
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3e92745a]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5294343e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@56168993 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5294343e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@658cd454] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@953308564 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@658cd454]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20ee5f84] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@618860178 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20ee5f84]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73794c56]
+JDBC Connection [HikariProxyConnection@908666479 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, CB202610030001, 2, 1, 3600.0000, 1, ½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý, admin, 2026-10-03 15:16:26, null, 2026-10-03 15:16:25, 2026-10-03 15:16:25, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73794c56]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73794c56]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73794c56]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36d25d63]
+JDBC Connection [HikariProxyConnection@1671721243 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.approvePass()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost/approve/1(String), 127.0.0.1(String), [1](String), 1(Integer), Ö»ÄÜÉóºË´ýÉóºË×´Ì¬µÄµ¥¾Ý(String), 2026-10-03T15:16:26.354666500(LocalDateTime), 72(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36d25d63]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36d25d63]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36d25d63]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36d25d63]
+2026-10-03T15:16:26.410+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-6] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: åªèƒ½å®¡æ ¸å¾…å®¡æ ¸çŠ¶æ€çš„å•æ®
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8c9bb24]
+JDBC Connection [HikariProxyConnection@133872688 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, CB202610030001, 2, 1, 3600.0000, 1, ½Ó¿Ú²âÊÔ-ÉóºËÍ¨¹ý, admin, 2026-10-03 15:16:26, null, 2026-10-03 15:16:25, 2026-10-03 15:16:25, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8c9bb24]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8c9bb24]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8c9bb24]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f231ee]
+JDBC Connection [HikariProxyConnection@1885642533 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 3(Integer), StockCostAdjustController.delete()(String), DELETE(String), 1(Integer), admin(String), /api/stock/adjust/cost/1(String), 127.0.0.1(String), [1](String), 1(Integer), ÉóºËÍ¨¹ýµÄ³É±¾µ÷Õûµ¥²»ÄÜÉ¾³ý(String), 2026-10-03T15:16:26.512773700(LocalDateTime), 55(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f231ee]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f231ee]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f231ee]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f231ee]
+2026-10-03T15:16:26.549+08:00 ERROR 24392 --- [erp-system] [io-8082-exec-10] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: å®¡æ ¸é€šè¿‡çš„æˆæœ¬è°ƒæ•´å•ä¸èƒ½åˆ é™¤
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+JDBC Connection [HikariProxyConnection@1375722451 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?) ORDER BY id ASC
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 150.0000, 13500.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926] from current transaction
+==>  Preparing: SELECT * FROM sys_code_rule WHERE rule_code = ? AND is_deleted = 0 FOR UPDATE
+==> Parameters: STOCK_COST_ADJUST(String)
+<==    Columns: id, rule_code, rule_name, prefix, date_format, seq_length, seq_start, seq_step, current_value, seq_date, reset_by_date, status, remark, is_deleted, create_by, create_time, update_by, update_time
+<==        Row: 64, STOCK_COST_ADJUST, ¿â´æ³É±¾µ÷Õûµ¥, CB, yyyyMMdd, 4, 1, 1, 1, 20261003, 1, 1, ¿â´æ³É±¾µ÷Õûµ¥±àºÅ, 0, null, 2026-10-03 15:06:18, system, 2026-10-03 15:06:18
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926] from current transaction
+==>  Preparing: UPDATE sys_code_rule SET rule_code=?, rule_name=?, prefix=?, date_format=?, seq_length=?, seq_start=?, seq_step=?, current_value=?, seq_date=?, reset_by_date=?, status=?, remark=?, create_time=?, update_time=?, update_by=? WHERE id=? AND is_deleted=0
+==> Parameters: STOCK_COST_ADJUST(String), ¿â´æ³É±¾µ÷Õûµ¥(String), CB(String), yyyyMMdd(String), 4(Integer), 1(Integer), 1(Integer), 2(Integer), 20261003(String), 1(Integer), 1(Integer), ¿â´æ³É±¾µ÷Õûµ¥±àºÅ(String), 2026-10-03T15:06:18(LocalDateTime), 2026-10-03T15:06:18(LocalDateTime), system(String), 64(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926] from current transaction
+==>  Preparing: INSERT INTO stock_cost_adjust_sheet ( code, sc_id, product_num, diff_amount, status, description, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CB202610030002(String), 2(Long), 1(Integer), 76410.00000000(BigDecimal), 0(Integer), ½Ó¿Ú²âÊÔ-ÉóºË¾Ü¾ø(String), 2026-10-03T15:16:26.670808300(LocalDateTime), 2026-10-03T15:16:26.670808300(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926] from current transaction
+==>  Preparing: INSERT INTO stock_cost_adjust_sheet_detail ( sheet_id, product_id, stock_num, ori_price, price, diff_amount, order_no ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 2(Long), 1(Long), 90.0000(BigDecimal), 150.0000(BigDecimal), 999(BigDecimal), 76410.00000000(BigDecimal), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77d3a926]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25bc1869]
+JDBC Connection [HikariProxyConnection@1527640285 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"code":null,"scId":2,"productNum":null,"diffAmount":null,"status":null,"description":"½Ó¿Ú²âÊÔ-ÉóºË¾Ü¾ø","approveBy":null,"approveTime":null,"refuseReason":null,"scName":null,"details":[{"id":null,"sheetId":null,"productId":1,"stockNum":null,"purchasePrice":null,"oriPrice":null,"price":999,"diffAmount":null,"description":null,"orderNo":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null}]}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:26.753345800(LocalDateTime), 124(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25bc1869]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25bc1869]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25bc1869]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25bc1869]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b]
+JDBC Connection [HikariProxyConnection@713090897 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, CB202610030002, 2, 1, 76410.0000, 0, ½Ó¿Ú²âÊÔ-ÉóºË¾Ü¾ø, null, null, null, 2026-10-03 15:16:27, 2026-10-03 15:16:27, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b] from current transaction
+==>  Preparing: UPDATE stock_cost_adjust_sheet SET code=?, sc_id=?, product_num=?, diff_amount=?, status=?, description=?, approve_by=?, approve_time=?, refuse_reason=?, create_time=?, update_time=?, create_by=?, update_by=? WHERE id=? AND deleted=0
+==> Parameters: CB202610030002(String), 2(Long), 1(Integer), 76410.0000(BigDecimal), 2(Integer), ½Ó¿Ú²âÊÔ-ÉóºË¾Ü¾ø(String), admin(String), 2026-10-03T15:16:26.893881300(LocalDateTime), ½Ó¿Ú²âÊÔ¾Ü¾ø(String), 2026-10-03T15:16:27(LocalDateTime), 2026-10-03T15:16:27(LocalDateTime), system(String), system(String), 2(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75de9c6b]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40b3a8ab]
+JDBC Connection [HikariProxyConnection@653495067 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.approveRefuse()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost/refuse/2(String), 127.0.0.1(String), [2,{"refuseReason":"½Ó¿Ú²âÊÔ¾Ü¾ø"}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:26.952635600(LocalDateTime), 99(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40b3a8ab]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40b3a8ab]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40b3a8ab]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@40b3a8ab]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ff53133] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@143130931 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock WHERE deleted = 0 AND (sc_id = ?)
+==> Parameters: 2(Long)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ?) ORDER BY id DESC LIMIT ?
+==> Parameters: 2(Long), 10(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 150.0000, 13500.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ff53133]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f0c1509] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@927273538 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f0c1509]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@89222a0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@397003494 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@89222a0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3972b851] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@552344317 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3972b851]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@241fe37] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@605326979 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, CB202610030002, 2, 1, 76410.0000, 2, ½Ó¿Ú²âÊÔ-ÉóºË¾Ü¾ø, admin, 2026-10-03 15:16:27, ½Ó¿Ú²âÊÔ¾Ü¾ø, 2026-10-03 15:16:27, 2026-10-03 15:16:27, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@241fe37]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6e0795ac] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@355582696 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6e0795ac]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77be9331] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@633782943 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,sheet_id,product_id,stock_num,purchase_price,ori_price,price,diff_amount,description,order_no FROM stock_cost_adjust_sheet_detail WHERE (sheet_id = ?) ORDER BY order_no ASC,id ASC
+==> Parameters: 2(Long)
+<==    Columns: id, sheet_id, product_id, stock_num, purchase_price, ori_price, price, diff_amount, description, order_no
+<==        Row: 2, 2, 1, 90.0000, null, 150.0000, 999.0000, 76410.0000, null, 1
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@77be9331]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65d2ad86] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1989368217 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65d2ad86]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+JDBC Connection [HikariProxyConnection@1736740764 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?) ORDER BY id ASC
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 150.0000, 13500.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18] from current transaction
+==>  Preparing: SELECT * FROM sys_code_rule WHERE rule_code = ? AND is_deleted = 0 FOR UPDATE
+==> Parameters: STOCK_COST_ADJUST(String)
+<==    Columns: id, rule_code, rule_name, prefix, date_format, seq_length, seq_start, seq_step, current_value, seq_date, reset_by_date, status, remark, is_deleted, create_by, create_time, update_by, update_time
+<==        Row: 64, STOCK_COST_ADJUST, ¿â´æ³É±¾µ÷Õûµ¥, CB, yyyyMMdd, 4, 1, 1, 2, 20261003, 1, 1, ¿â´æ³É±¾µ÷Õûµ¥±àºÅ, 0, null, 2026-10-03 15:06:18, system, 2026-10-03 15:06:18
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18] from current transaction
+==>  Preparing: UPDATE sys_code_rule SET rule_code=?, rule_name=?, prefix=?, date_format=?, seq_length=?, seq_start=?, seq_step=?, current_value=?, seq_date=?, reset_by_date=?, status=?, remark=?, create_time=?, update_time=?, update_by=? WHERE id=? AND is_deleted=0
+==> Parameters: STOCK_COST_ADJUST(String), ¿â´æ³É±¾µ÷Õûµ¥(String), CB(String), yyyyMMdd(String), 4(Integer), 1(Integer), 1(Integer), 3(Integer), 20261003(String), 1(Integer), 1(Integer), ¿â´æ³É±¾µ÷Õûµ¥±àºÅ(String), 2026-10-03T15:06:18(LocalDateTime), 2026-10-03T15:06:18(LocalDateTime), system(String), 64(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18] from current transaction
+==>  Preparing: INSERT INTO stock_cost_adjust_sheet ( code, sc_id, product_num, diff_amount, status, create_time, update_time, create_by, update_by ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: CB202610030003(String), 2(Long), 1(Integer), -3600.00000000(BigDecimal), 0(Integer), 2026-10-03T15:16:27.291938200(LocalDateTime), 2026-10-03T15:16:27.291938200(LocalDateTime), system(String), system(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18] from current transaction
+==>  Preparing: INSERT INTO stock_cost_adjust_sheet_detail ( sheet_id, product_id, stock_num, ori_price, price, diff_amount, order_no ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 3(Long), 1(Long), 90.0000(BigDecimal), 150.0000(BigDecimal), 110.0(BigDecimal), -3600.00000000(BigDecimal), 1(Integer)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39857d18]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a118c03]
+JDBC Connection [HikariProxyConnection@1926929543 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"code":null,"scId":2,"productNum":null,"diffAmount":null,"status":null,"description":null,"approveBy":null,"approveTime":null,"refuseReason":null,"scName":null,"details":[{"id":null,"sheetId":null,"productId":1,"stockNum":null,"purchasePrice":null,"oriPrice":null,"price":110.0,"diffAmount":null,"description":null,"orderNo":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null}]}](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:27.351599400(LocalDateTime), 92(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a118c03]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a118c03]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a118c03]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a118c03]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18d2c240]
+JDBC Connection [HikariProxyConnection@207688676 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?) ORDER BY id ASC
+==> Parameters: 2(Long), 1(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 150.0000, 13500.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18d2c240]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18d2c240] from current transaction
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18d2c240]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18d2c240]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18d2c240]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da9d506]
+JDBC Connection [HikariProxyConnection@857424422 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"code":null,"scId":2,"productNum":null,"diffAmount":null,"status":null,"description":null,"approveBy":null,"approveTime":null,"refuseReason":null,"scName":null,"details":[{"id":null,"sheetId":null,"productId":1,"stockNum":null,"purchasePrice":null,"oriPrice":null,"price":1,"diffAmount":null,"description":null,"orderNo":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null},{"id":null,"sheetId":null,"productId":1,"stockNum":null,"purchasePrice":null,"oriPrice":null,"price":2,"diffAmount":null,"description":null,"orderNo":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null}]}](String), 1(Integer), ÉÌÆ·¡¾¸Ö°åQ235(MAT000001)¡¿ÔÚÃ÷Ï¸ÖÐÖØ¸´£¬ÇëºÏ²¢ºóÖØÊÔ(String), 2026-10-03T15:16:27.522316100(LocalDateTime), 48(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da9d506]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da9d506]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da9d506]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@da9d506]
+2026-10-03T15:16:27.559+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-4] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: å•†å“ã€é’¢æ¿Q235(MAT000001)ã€‘åœ¨æ˜Žç»†ä¸­é‡å¤ï¼Œè¯·åˆå¹¶åŽé‡è¯•
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13ce2286]
+JDBC Connection [HikariProxyConnection@1521284696 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"code":null,"scId":2,"productNum":null,"diffAmount":null,"status":null,"description":null,"approveBy":null,"approveTime":null,"refuseReason":null,"scName":null,"details":[]}](String), 1(Integer), ÇëÖÁÉÙÌí¼ÓÒ»Ìõµ÷¼ÛÃ÷Ï¸(String), 2026-10-03T15:16:27.638804500(LocalDateTime), 20(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13ce2286]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13ce2286]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13ce2286]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13ce2286]
+2026-10-03T15:16:27.708+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-8] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: è¯·è‡³å°‘æ·»åŠ ä¸€æ¡è°ƒä»·æ˜Žç»†
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51f1da30]
+JDBC Connection [HikariProxyConnection@1413128732 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 AND (sc_id = ? AND product_id = ?) ORDER BY id ASC
+==> Parameters: 2(Long), 99999999(Long)
+<==      Total: 0
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51f1da30]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51f1da30] from current transaction
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 99999999(Long)
+<==      Total: 0
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51f1da30]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51f1da30]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51f1da30]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@383e978e]
+JDBC Connection [HikariProxyConnection@1259639944 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, status, error_msg, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 1(Integer), StockCostAdjustController.add()(String), POST(String), 1(Integer), admin(String), /api/stock/adjust/cost(String), 127.0.0.1(String), [{"id":null,"createTime":null,"updateTime":null,"createBy":null,"updateBy":null,"deleted":null,"code":null,"scId":2,"productNum":null,"diffAmount":null,"status":null,"description":null,"approveBy":null,"approveTime":null,"refuseReason":null,"scName":null,"details":[{"id":null,"sheetId":null,"productId":99999999,"stockNum":null,"purchasePrice":null,"oriPrice":null,"price":1,"diffAmount":null,"description":null,"orderNo":null,"productCode":null,"productName":null,"specification":null,"salePropertyText":null}]}](String), 1(Integer), ÉÌÆ·¡¾#99999999¡¿ÔÚ¸Ã²Ö¿âÃ»ÓÐ¿â´æ¼ÇÂ¼£¬ÎÞ·¨µ÷Õû³É±¾¼Û(String), 2026-10-03T15:16:27.861068600(LocalDateTime), 33(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@383e978e]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@383e978e]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@383e978e]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@383e978e]
+2026-10-03T15:16:27.887+08:00 ERROR 24392 --- [erp-system] [nio-8082-exec-5] c.e.c.exception.GlobalExceptionHandler   : ä¸šåŠ¡å¼‚å¸¸: å•†å“ã€#99999999ã€‘åœ¨è¯¥ä»“åº“æ²¡æœ‰åº“å­˜è®°å½•ï¼Œæ— æ³•è°ƒæ•´æˆæœ¬ä»·
+2026-10-03T15:16:27.896+08:00  WARN 24392 --- [erp-system] [nio-8082-exec-2] c.e.c.exception.GlobalExceptionHandler   : é‰´æƒå¤±è´¥(æœªç™»å½•): type=-1, msg=æœªæä¾›ç™»å½•å‡­è¯,è¯·å…ˆç™»å½•
+2026-10-03T15:16:27.909+08:00  WARN 24392 --- [erp-system] [nio-8082-exec-6] c.e.c.exception.GlobalExceptionHandler   : é‰´æƒå¤±è´¥(æœªç™»å½•): type=-1, msg=æœªæä¾›ç™»å½•å‡­è¯,è¯·å…ˆç™»å½•
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+JDBC Connection [HikariProxyConnection@363284462 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 3(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 3, CB202610030003, 2, 1, -3600.0000, 0, null, null, null, null, 2026-10-03 15:16:27, 2026-10-03 15:16:27, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03] from current transaction
+==>  Preparing: DELETE FROM stock_cost_adjust_sheet_detail WHERE (sheet_id = ?)
+==> Parameters: 3(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03] from current transaction
+==>  Preparing: UPDATE stock_cost_adjust_sheet SET update_time=?,update_by=?, deleted=1 WHERE id=? AND deleted=0
+==> Parameters: 2026-10-03T15:16:28.080131600(LocalDateTime), system(String), 3(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c01b03]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55e36d73]
+JDBC Connection [HikariProxyConnection@1619925781 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 3(Integer), StockCostAdjustController.delete()(String), DELETE(String), 1(Integer), admin(String), /api/stock/adjust/cost/3(String), 127.0.0.1(String), [3](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:28.106001100(LocalDateTime), 104(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55e36d73]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55e36d73]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55e36d73]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55e36d73]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+JDBC Connection [HikariProxyConnection@1735503493 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,sc_id,product_num,diff_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM stock_cost_adjust_sheet WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, sc_id, product_num, diff_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, CB202610030002, 2, 1, 76410.0000, 2, ½Ó¿Ú²âÊÔ-ÉóºË¾Ü¾ø, admin, 2026-10-03 15:16:27, ½Ó¿Ú²âÊÔ¾Ü¾ø, 2026-10-03 15:16:27, 2026-10-03 15:16:27, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234] from current transaction
+==>  Preparing: DELETE FROM stock_cost_adjust_sheet_detail WHERE (sheet_id = ?)
+==> Parameters: 2(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234] from current transaction
+==>  Preparing: UPDATE stock_cost_adjust_sheet SET update_time=?,update_by=?, deleted=1 WHERE id=? AND deleted=0
+==> Parameters: 2026-10-03T15:16:28.290708500(LocalDateTime), system(String), 2(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47c13234]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6918258d]
+JDBC Connection [HikariProxyConnection@1362889297 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æ³É±¾µ÷Õû(String), 3(Integer), StockCostAdjustController.delete()(String), DELETE(String), 1(Integer), admin(String), /api/stock/adjust/cost/2(String), 127.0.0.1(String), [2](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:28.313279500(LocalDateTime), 103(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6918258d]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6918258d]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6918258d]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6918258d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17dc48b2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1462820859 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: UPDATE stock_warning SET update_time=?,update_by=?, deleted=1 WHERE id=? AND deleted=0
+==> Parameters: 2026-10-03T15:16:28.449966100(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17dc48b2]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18949ac7]
+JDBC Connection [HikariProxyConnection@1013325292 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_operation_log ( title, business_type, method, request_method, operator_type, oper_name, oper_url, oper_ip, oper_param, json_result, status, oper_time, cost_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: ¿â´æÔ¤¾¯(String), 3(Integer), StockWarningController.delete()(String), DELETE(String), 1(Integer), admin(String), /api/stock/warning/1(String), 127.0.0.1(String), [1](String), {"code":200,"message":"²Ù×÷³É¹¦"}(String), 0(Integer), 2026-10-03T15:16:28.470099600(LocalDateTime), 19(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18949ac7]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18949ac7]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18949ac7]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@18949ac7]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@41d03680] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@824053153 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,username,password,nickname,real_name,email,phone,gender,avatar,status,remark,last_login_time,last_login_ip,create_time,update_time,create_by,update_by,is_deleted FROM sys_user WHERE is_deleted=0 AND (username = ?)
+==> Parameters: admin(String)
+<==    Columns: id, code, username, password, nickname, real_name, email, phone, gender, avatar, status, remark, last_login_time, last_login_ip, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, U000001, admin, 123456, ÏµÍ³¹ÜÀíÔ±, ¹ÜÀíÔ±, admin@erp.com, 13800138000, 1, null, 1, null, 2026-10-03 15:16:23, 127.0.0.1, 2026-08-01 19:01:31, 2026-10-03 15:16:23, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@41d03680]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65]
+JDBC Connection [HikariProxyConnection@1191094123 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: SELECT id,code,username,password,nickname,real_name,email,phone,gender,avatar,status,remark,last_login_time,last_login_ip,create_time,update_time,create_by,update_by,is_deleted FROM sys_user WHERE id=? AND is_deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, code, username, password, nickname, real_name, email, phone, gender, avatar, status, remark, last_login_time, last_login_ip, create_time, update_time, create_by, update_by, is_deleted
+<==        Row: 1, U000001, admin, 123456, ÏµÍ³¹ÜÀíÔ±, ¹ÜÀíÔ±, admin@erp.com, 13800138000, 1, null, 1, null, 2026-10-03 15:16:23, 127.0.0.1, 2026-08-01 19:01:31, 2026-10-03 15:16:23, system, system, 0
+<==      Total: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65]
+Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65] from current transaction
+==>  Preparing: UPDATE sys_user SET last_login_time=?, last_login_ip=?, update_time=?, update_by=? WHERE id=? AND is_deleted=0
+==> Parameters: 2026-10-03T15:16:51.300915500(LocalDateTime), 127.0.0.1(String), 2026-10-03T15:16:51.316931900(LocalDateTime), system(String), 1(Long)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22ac8d65]
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cdf73]
+JDBC Connection [HikariProxyConnection@937109669 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will be managed by Spring
+==>  Preparing: INSERT INTO sys_login_log ( username, login_ip, browser, os, status, msg, login_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: admin(String), 127.0.0.1(String), ÆäËü(String), ÆäËü(String), 0(Integer), µÇÂ¼³É¹¦(String), 2026-10-03T15:16:51.347567800(LocalDateTime)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cdf73]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cdf73]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cdf73]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@688cdf73]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@635745c8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1669107214 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM base_material WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 4
+<==      Total: 1
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE deleted=0 ORDER BY create_time DESC LIMIT ?
+==> Parameters: 5(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 2, 1, 2, MAT000002, ÂÁºÏ½ð6061, ÂÁºÏ½ð, 1000*2000*2mm, , null, 0, 5, 28000.00, 32000.00, 35000.00, 50.00, 500.00, 1, ÂÁÃ¾¹èºÏ½ð, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 3, 4, 3, MAT000003, ÂÝË¨M8*20, ÂÝË¨, M8*20 304²»Ðâ¸Ö, , null, 0, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, ²»Ðâ¸ÖÂÝË¨, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 4, 5, 4, MAT000004, Ö½Ïä, Ö½Ïä, 500*400*300mm, , null, 0, 1, 5.00, 8.00, 10.00, 100.00, 1000.00, 1, Îå²ãÍßÀãÖ½Ïä, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 4
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@635745c8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@76c50a86] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2044234876 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,parent_id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material_category WHERE id IN ( ? , ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 4(Long), 5(Long)
+<==    Columns: id, parent_id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, MC000001, Ô­²ÄÁÏ, 1, 1, Éú²úÓÃÔ­²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==        Row: 4, 0, MC000004, ¸¨ÁÏ, 4, 1, Éú²ú¸¨Öú²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==        Row: 5, 0, MC000005, °ü×°Îï, 5, 1, °ü×°ÓÃ²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@76c50a86]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64df3455] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1087310345 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, ¸ö, 1, 1, Í¨ÓÃ¼ÆÊýµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64df3455]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@46befd95] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@434352503 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,brand_id,unit_id,code,name,short_name,specification,main_image,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_spu WHERE id IN ( ? , ? , ? , ? ) AND deleted=0
+==> Parameters: 1(Long), 2(Long), 3(Long), 4(Long)
+<==    Columns: id, category_id, brand_id, unit_id, code, name, short_name, specification, main_image, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, null, 5, SPU000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, null, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-10-03 14:31:35, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 2, 1, null, 5, SPU000002, ÂÁºÏ½ð6061, ÂÁºÏ½ð, 1000*2000*2mm, null, 1, ÂÁÃ¾¹èºÏ½ð, 2026-10-03 14:31:35, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 3, 4, null, 1, SPU000003, ÂÝË¨M8*20, ÂÝË¨, M8*20 304²»Ðâ¸Ö, null, 1, ²»Ðâ¸ÖÂÝË¨, 2026-10-03 14:31:35, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 4, 5, null, 1, SPU000004, Ö½Ïä, Ö½Ïä, 500*400*300mm, null, 1, Îå²ãÍßÀãÖ½Ïä, 2026-10-03 14:31:35, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 4
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@46befd95]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@faa4ab7] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@953374616 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE deleted=0 AND (status = ?) ORDER BY code ASC
+==> Parameters: 1(Integer)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 2, 1, 2, MAT000002, ÂÁºÏ½ð6061, ÂÁºÏ½ð, 1000*2000*2mm, , null, 0, 5, 28000.00, 32000.00, 35000.00, 50.00, 500.00, 1, ÂÁÃ¾¹èºÏ½ð, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 3, 4, 3, MAT000003, ÂÝË¨M8*20, ÂÝË¨, M8*20 304²»Ðâ¸Ö, , null, 0, 1, 0.50, 0.80, 1.00, 1000.00, 10000.00, 1, ²»Ðâ¸ÖÂÝË¨, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==        Row: 4, 5, 4, MAT000004, Ö½Ïä, Ö½Ïä, 500*400*300mm, , null, 0, 1, 5.00, 8.00, 10.00, 100.00, 1000.00, 1, Îå²ãÍßÀãÖ½Ïä, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 4
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@faa4ab7]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b6fd4c0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1198143804 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b6fd4c0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@255e8770] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1210374153 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,parent_id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material_category WHERE deleted=0 ORDER BY sort ASC,id ASC
+==> Parameters: 
+<==    Columns: id, parent_id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, MC000001, Ô­²ÄÁÏ, 1, 1, Éú²úÓÃÔ­²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==        Row: 2, 0, MC000002, °ë³ÉÆ·, 2, 1, Éú²ú¹ý³ÌÖÐµÄ°ë³ÉÆ·, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==        Row: 3, 0, MC000003, ³ÉÆ·, 3, 1, ×îÖÕ²úÆ·, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==        Row: 4, 0, MC000004, ¸¨ÁÏ, 4, 1, Éú²ú¸¨Öú²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==        Row: 5, 0, MC000005, °ü×°Îï, 5, 1, °ü×°ÓÃ²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@255e8770]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27b3b503] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1948691841 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE deleted=0 AND (status = ?) ORDER BY sort ASC,id ASC
+==> Parameters: 1(Integer)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, UNIT000001, ¸ö, 1, 1, Í¨ÓÃ¼ÆÊýµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 2, UNIT000002, Ì¨, 2, 1, Éè±¸Ààµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 3, UNIT000003, ¼þ, 3, 1, Í¨ÓÃ¼Æ¼þµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 4, UNIT000004, Ì×, 4, 1, ³ÉÌ×²úÆ·µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 6, UNIT000006, ¿Ë, 6, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 7, UNIT000007, ¶Ö, 7, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 8, UNIT000008, Ã×, 8, 1, ³¤¶Èµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 9, UNIT000009, ÀåÃ×, 9, 1, ³¤¶Èµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 10, UNIT000010, Æ½·½Ã×, 10, 1, Ãæ»ýµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 11, UNIT000011, Á¢·½Ã×, 11, 1, Ìå»ýµ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 12, UNIT000012, Éý, 12, 1, ÈÝÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 13, UNIT000013, Ïä, 13, 1, °ü×°µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 14, UNIT000014, °ü, 14, 1, °ü×°µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==        Row: 15, UNIT000015, ´ü, 15, 1, °ü×°µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 15
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@27b3b503]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@560abe23] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1477151282 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE deleted=0 AND (status = ?) ORDER BY is_default DESC,name ASC
+==> Parameters: 1(Integer)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, WH001, Ö÷²Ö¿â, ÕÅÈý, 13800138000, ±±¾©ÊÐ³¯ÑôÇøxxxÂ·xxxºÅ, 1, 1, ¹«Ë¾Ö÷²Ö¿â, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==        Row: 3, WH003, ·Ö²Ö¿âB, ÍõÎå, 13800138002, ¹ãÖÝÊÐÌìºÓÇøxxxÂ·xxxºÅ, 0, 1, ¹ãÖÝ·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==        Row: 4, WH000004, ¹ãÖÝ²Ö¿â, ÕÅÈý, null, null, 0, 1, ¹ãÖÝ²Ö¿â, 2026-10-01 19:48:07, 2026-10-01 19:48:07, system, system, 0
+<==      Total: 4
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@560abe23]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2d93071d] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1693514306 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,short_name,logo,status,sort,remark,create_time,update_time,create_by,update_by,deleted FROM base_brand WHERE deleted=0 AND (status = ?) ORDER BY sort ASC,id ASC
+==> Parameters: 1(Integer)
+<==    Columns: id, code, name, short_name, logo, status, sort, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, BRD000001, Æ»¹û, Apple, null, 1, 1, µç×Ó²úÆ·Æ·ÅÆ, 2026-08-01 19:23:34, 2026-08-01 19:23:34, null, null, 0
+<==        Row: 2, BRD000002, »ªÎª, Huawei, null, 1, 2, ¹ú²úÖ®¹â, 2026-08-01 19:23:34, 2026-08-01 19:23:34, null, null, 0
+<==        Row: 3, BRD000003, Ð¡Ã×, Xiaomi, null, 1, 3, ÐÔ¼Û±ÈÖ®Íõ, 2026-08-01 19:23:34, 2026-08-01 19:23:34, null, null, 0
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2d93071d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b5cc097] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@698985110 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,short_name,type,credit_level,contact_person,contact_phone,contact_email,address,website,settlement_method,payment_days,bank_name,bank_account,tax_number,status,sort,remark,create_time,update_time,create_by,update_by,deleted FROM base_supplier WHERE deleted=0 AND (status = ?) ORDER BY sort ASC,id ASC
+==> Parameters: 1(Integer)
+<==    Columns: id, code, name, short_name, type, credit_level, contact_person, contact_phone, contact_email, address, website, settlement_method, payment_days, bank_name, bank_account, tax_number, status, sort, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, SUP000001, ÉîÛÚÊÐ»ªÇ¿µç×ÓÓÐÏÞ¹«Ë¾, »ªÇ¿µç×Ó, 1, 1, ÕÅ¾­Àí, 0755-12345678, zhang@huaqiang.com, ÉîÛÚÊÐ¸£ÌïÇø»ªÇ¿±±Â·1ºÅ, null, 2, 30, null, null, null, 1, 1, Ö÷Òª¹©Ó¦ÉÌ, 2026-08-01 19:24:14, 2026-08-01 19:24:14, null, null, 0
+<==        Row: 2, SUP000002, ¹ãÖÝÊÐÌìºÓ»úÐµÉè±¸¹«Ë¾, ÌìºÓ»úÐµ, 2, 2, Àî¹¤, 020-87654321, li@tianhe.com, ¹ãÖÝÊÐÌìºÓÇøÌìºÓÂ·100ºÅ, null, 3, 90, null, null, null, 1, 2, Éè±¸¹©Ó¦ÉÌ, 2026-08-01 19:24:14, 2026-08-01 19:24:14, null, null, 0
+<==        Row: 3, SUP000003, ¶«Ý¸ÊÐ³¤°²ÎïÁ÷·þÎñ¹«Ë¾, ³¤°²ÎïÁ÷, 3, 3, ÍõÖ÷¹Ü, 0769-98765432, wang@changan.com, ¶«Ý¸ÊÐ³¤°²Õò³¤°²´óµÀ200ºÅ, null, 1, 0, null, null, null, 1, 3, ÎïÁ÷·þÎñÉÌ, 2026-08-01 19:24:14, 2026-08-01 19:24:14, null, null, 0
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b5cc097]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@392baa40] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1402947447 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,short_name,type,level,contact_person,contact_phone,contact_email,address,settlement_method,payment_days,status,sort,remark,create_time,update_time,create_by,update_by,deleted FROM base_customer WHERE deleted=0 AND (status = ?) ORDER BY sort ASC,id ASC
+==> Parameters: 1(Integer)
+<==    Columns: id, code, name, short_name, type, level, contact_person, contact_phone, contact_email, address, settlement_method, payment_days, status, sort, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, CUS000001, ±±¾©¾©¶«ÊÀ¼ÍÃ³Ò×ÓÐÏÞ¹«Ë¾, ¾©¶«, 3, 1, Áõ¾­Àí, 010-12345678, null, ±±¾©ÊÐ´óÐËÇøÒà×¯¾­¼Ã¼¼Êõ¿ª·¢Çø, 1, 0, 1, 1, ºËÐÄ·ÖÏúÉÌ, 2026-08-01 19:23:45, 2026-08-01 19:23:45, null, null, 0
+<==        Row: 2, CUS000002, °¢Àï°Í°Í£¨ÖÐ¹ú£©ÍøÂç¼¼ÊõÓÐÏÞ¹«Ë¾, °¢Àï, 3, 1, Âí¾­Àí, 0571-87654321, null, º¼ÖÝÊÐÓàº¼ÇøÎÄÒ»Î÷Â·969ºÅ, 1, 0, 1, 2, ºËÐÄ·ÖÏúÉÌ, 2026-08-01 19:23:45, 2026-08-01 19:23:45, null, null, 0
+<==        Row: 3, CUS000003, ÆÕÍ¨ÁãÊÛ¿Í»§A, ¿Í»§A, 1, 3, ÕÅÈý, 13800138000, null, ÉÏº£ÊÐÆÖ¶«ÐÂÇø, 1, 0, 1, 3, ÆÕÍ¨¿Í»§, 2026-08-01 19:23:45, 2026-08-01 19:23:45, null, null, 0
+<==      Total: 3
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@392baa40]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2da68ac5] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2096842610 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM purchase_order WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,code,sc_id,supplier_id,purchaser_id,expect_arrive_date,total_num,total_amount,status,description,approve_by,approve_time,refuse_reason,create_time,update_time,create_by,update_by,deleted FROM purchase_order WHERE deleted=0 ORDER BY create_time DESC LIMIT ?
+==> Parameters: 5(Long)
+<==    Columns: id, code, sc_id, supplier_id, purchaser_id, expect_arrive_date, total_num, total_amount, status, description, approve_by, approve_time, refuse_reason, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, PO202610010001, 2, 2, null, 2026-10-02, 100.0000, 11000.0000, 3, null, admin, 2026-10-01 22:44:14, null, 2026-10-01 22:44:05, 2026-10-01 22:44:05, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2da68ac5]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2117fc0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@41491225 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM purchase_receipt WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,code,order_id,order_code,sc_id,supplier_id,total_num,total_amount,status,description,create_time,update_time,create_by,update_by,deleted FROM purchase_receipt WHERE deleted=0 ORDER BY create_time DESC LIMIT ?
+==> Parameters: 5(Long)
+<==    Columns: id, code, order_id, order_code, sc_id, supplier_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, PR202610010001, 1, PO202610010001, 2, 2, 100.0000, 11000.0000, 1, null, 2026-10-01 22:44:38, 2026-10-01 22:44:38, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2117fc0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6cf049ae] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@763083540 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM purchase_return WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,code,receipt_id,receipt_code,sc_id,supplier_id,total_num,total_amount,status,description,create_time,update_time,create_by,update_by,deleted FROM purchase_return WHERE deleted=0 ORDER BY create_time DESC LIMIT ?
+==> Parameters: 5(Long)
+<==    Columns: id, code, receipt_id, receipt_code, sc_id, supplier_id, total_num, total_amount, status, description, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, PTH202610030001, 1, PR202610010001, 2, 2, 10.00, 1100.00, 1, null, 2026-10-03 13:49:45, 2026-10-03 13:49:45, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6cf049ae]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a0f588f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1322324454 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM sale_order WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a0f588f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b84dd6f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1212485815 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM sale_delivery WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2b84dd6f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@602e98ee] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1693659726 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM sale_return WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@602e98ee]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fa152c0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1955460831 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM retail_out_sheet WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@fa152c0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c0057a8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@964447036 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 ORDER BY id DESC LIMIT ?
+==> Parameters: 5(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c0057a8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49441269] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@305825238 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49441269]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@eaee7bd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1737517915 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@eaee7bd]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@427ce8f4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@999713801 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@427ce8f4]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20ed13aa] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@500051929 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock_log
+==> Parameters: 
+<==    Columns: total
+<==        Row: 2
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,ori_stock_num,cur_stock_num,stock_num,biz_id,biz_code,biz_type,create_by,create_time FROM product_stock_log ORDER BY create_time DESC,id DESC LIMIT ?
+==> Parameters: 5(Long)
+<==    Columns: id, sc_id, product_id, ori_stock_num, cur_stock_num, stock_num, biz_id, biz_code, biz_type, create_by, create_time
+<==        Row: 2, 2, 1, 100.0000, 90.0000, 10.0000, 1, PTH202610030001, 2, system, 2026-10-03 13:50:12
+<==        Row: 1, 2, 1, 0.0000, 100.0000, 100.0000, 1, PR202610010001, 1, system, 2026-10-01 22:44:47
+<==      Total: 2
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@20ed13aa]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@71fe2eac] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@497186733 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@71fe2eac]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b3fab] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@6351428 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b3fab]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3df9d927] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1689661268 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3df9d927]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f67f1] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1968273827 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM stock_adjust_sheet WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49f67f1]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56fd5fb4] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@11668348 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM stock_check WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56fd5fb4]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b030653] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1974189375 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM stock_transfer WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b030653]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7db355b8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@2060147220 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM settle_fee_sheet WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7db355b8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66e890ac] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@170986677 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM customer_fee_sheet WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66e890ac]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f5d6c55] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@457220180 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM product_stock WHERE deleted = 0
+==> Parameters: 
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,sc_id,product_id,stock_num,tax_price,tax_amount,create_time,update_time,create_by,update_by,deleted FROM product_stock WHERE deleted=0 ORDER BY id DESC LIMIT ?
+==> Parameters: 20(Long)
+<==    Columns: id, sc_id, product_id, stock_num, tax_price, tax_amount, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 2, 1, 90.0000, 110.0000, 9900.0000, 2026-10-01 22:44:47, 2026-10-01 22:44:47, system, system, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7f5d6c55]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5da34407] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1132400103 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,contact,phone,address,is_default,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_warehouse WHERE id=? AND deleted=0
+==> Parameters: 2(Long)
+<==    Columns: id, code, name, contact, phone, address, is_default, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 2, WH002, ·Ö²Ö¿âA, ÀîËÄ, 13800138001, ÉÏº£ÊÐÆÖ¶«ÐÂÇøxxxÂ·xxxºÅ, 0, 1, ÉÏº£·Ö²Ö, 2026-08-01 19:24:35, 2026-08-01 19:24:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5da34407]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55df98a0] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1861531593 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE id=? AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55df98a0]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4670472c] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@233962196 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4670472c]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a8e8828] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@164515440 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM base_material WHERE deleted = 0 AND (code LIKE ?)
+==> Parameters: %MAT000001%(String)
+<==    Columns: total
+<==        Row: 1
+<==      Total: 1
+==>  Preparing: SELECT id,category_id,spu_id,code,name,short_name,specification,sale_property_text,main_image,is_multi_code,unit_id,purchase_price,sale_price,retail_price,min_stock,max_stock,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material WHERE deleted=0 AND (code LIKE ?) ORDER BY create_time DESC LIMIT ?
+==> Parameters: %MAT000001%(String), 50(Long)
+<==    Columns: id, category_id, spu_id, code, name, short_name, specification, sale_property_text, main_image, is_multi_code, unit_id, purchase_price, sale_price, retail_price, min_stock, max_stock, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, 1, MAT000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, , null, 0, 5, 4500.00, 5000.00, 5500.00, 100.00, 1000.00, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-08-01 19:23:55, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a8e8828]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ede34e9] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@93866124 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,parent_id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_material_category WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, parent_id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 0, MC000001, Ô­²ÄÁÏ, 1, 1, Éú²úÓÃÔ­²ÄÁÏ, 2026-08-01 19:24:04, 2026-08-01 19:24:04, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ede34e9]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44016c0e] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1274503451 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,code,name,sort,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_unit WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 5(Long)
+<==    Columns: id, code, name, sort, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 5, UNIT000005, Ç§¿Ë, 5, 1, ÖØÁ¿µ¥Î», 2026-08-01 19:24:25, 2026-08-01 19:24:25, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44016c0e]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64dbe8c8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@341091057 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c46c512] will not be managed by Spring
+==>  Preparing: SELECT id,category_id,brand_id,unit_id,code,name,short_name,specification,main_image,status,remark,create_time,update_time,create_by,update_by,deleted FROM base_spu WHERE id IN ( ? ) AND deleted=0
+==> Parameters: 1(Long)
+<==    Columns: id, category_id, brand_id, unit_id, code, name, short_name, specification, main_image, status, remark, create_time, update_time, create_by, update_by, deleted
+<==        Row: 1, 1, null, 5, SPU000001, ¸Ö°åQ235, ¸Ö°å, 1200*2400*3mm, null, 1, ÆÕÍ¨Ì¼ËØ½á¹¹¸Ö°å, 2026-10-03 14:31:35, 2026-10-03 14:31:35, null, null, 0
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64dbe8c8]

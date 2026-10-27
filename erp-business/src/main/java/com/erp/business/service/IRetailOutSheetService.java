@@ -23,8 +23,13 @@ public interface IRetailOutSheetService extends IService<RetailOutSheet> {
 
     /**
      * 新增
+     * <p>
+     * 若零售配置开启了「零售出库单自动审核」，本方法会在保存明细后直接完成审核
+     * 并扣减库存；库存不足时抛业务异常，整单回滚不落库。
+     *
+     * @return 含 id / code / status / autoApproved 的结果，供前端提示用
      */
-    void add(Map<String, Object> data);
+    Map<String, Object> add(Map<String, Object> data);
 
     /**
      * 修改

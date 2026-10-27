@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.basedata.dto.WarehousePageParam;
 import com.erp.basedata.entity.BaseWarehouse;
@@ -31,6 +32,7 @@ public class BaseWarehouseController {
      * 分页查询仓库
      */
     @Operation(summary = "分页查询仓库", description = "根据条件分页查询仓库列表")
+    @SaCheckPermission("basedata:warehouse:list")
     @GetMapping("/page")
     public Result<Page<BaseWarehouse>> page(WarehousePageParam param) {
         Page<BaseWarehouse> page = warehouseService.getWarehousePage(param);
@@ -41,6 +43,7 @@ public class BaseWarehouseController {
      * 根据ID查询仓库
      */
     @Operation(summary = "查询仓库详情", description = "根据仓库ID查询仓库详细信息")
+    @SaCheckPermission("basedata:warehouse:list")
     @GetMapping("/{id}")
     public Result<BaseWarehouse> getById(
             @Parameter(description = "仓库ID", required = true) @PathVariable Long id) {
@@ -52,6 +55,7 @@ public class BaseWarehouseController {
      * 新增仓库
      */
     @Operation(summary = "新增仓库", description = "创建新仓库")
+    @SaCheckPermission("basedata:warehouse:add")
     @PostMapping
     public Result<Void> save(@RequestBody BaseWarehouse warehouse) {
         warehouseService.saveWarehouse(warehouse);
@@ -62,6 +66,7 @@ public class BaseWarehouseController {
      * 更新仓库
      */
     @Operation(summary = "更新仓库", description = "更新仓库信息")
+    @SaCheckPermission("basedata:warehouse:edit")
     @PutMapping
     public Result<Void> update(@RequestBody BaseWarehouse warehouse) {
         warehouseService.updateWarehouse(warehouse);
@@ -72,6 +77,7 @@ public class BaseWarehouseController {
      * 删除仓库
      */
     @Operation(summary = "删除仓库", description = "根据仓库ID删除仓库(逻辑删除)")
+    @SaCheckPermission("basedata:warehouse:delete")
     @DeleteMapping("/{id}")
     public Result<Void> delete(
             @Parameter(description = "仓库ID", required = true) @PathVariable Long id) {
@@ -83,6 +89,7 @@ public class BaseWarehouseController {
      * 设置默认仓库
      */
     @Operation(summary = "设置默认仓库", description = "将指定仓库设置为默认仓库")
+    @SaCheckPermission("basedata:warehouse:setDefault")
     @PostMapping("/{id}/set-default")
     public Result<Void> setDefault(
             @Parameter(description = "仓库ID", required = true) @PathVariable Long id) {

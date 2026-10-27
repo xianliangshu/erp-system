@@ -1,5 +1,6 @@
 package com.erp.web.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.erp.business.service.IProductStockService;
 import com.erp.business.vo.ProductStockVO;
@@ -23,6 +24,7 @@ public class StockController {
     /**
      * 分页查询库存（包含关联信息）
      */
+    @SaCheckPermission("business:stock:query")
     @GetMapping("/page")
     public Result<Page<ProductStockVO>> page(
             @RequestParam(defaultValue = "1") Long current,
